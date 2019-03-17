@@ -20,8 +20,7 @@ public class UserServicioImpl implements UserServicio {
 
 	@Override
 	public List<User> findAll() {
-		userRepository.findAll();
-		return null;
+		return userRepository.findAll();
 	}
 
 }

@@ -10,6 +10,7 @@ import ec.com.siga.entity.Canton;
 import ec.com.siga.entity.Direccion;
 import ec.com.siga.entity.DireccionTipo;
 import ec.com.siga.entity.ProvinciaEstado;
+import ec.com.siga.model.DireccionString;
 import ec.com.siga.entity.Pais;
 import ec.com.siga.entity.Parroquia;
 import ec.com.siga.repository.CantonJpaRepository;
@@ -82,6 +83,30 @@ public class AddressServiseImpl implements AddressService{
 	public List<Parroquia> findAllByCantonId(int cantonId) {
 		return parroquiaRepository.findAllByCantonId(cantonRepository.findById(cantonId).get());
 	}
+
+
+	@Override
+	public DireccionTipo findDireccionById(int direccionId) {
+		return direccionTipoRepository.findById(direccionId).get();
+	}
+
+
+	@Override
+	public Parroquia findParroquiaById(int parroquiaId) {
+		return parroquiaRepository.findById(parroquiaId).get();
+	}
+
+
+	@Override
+	public Direccion converterDireccionStringToDirection(DireccionString direccionString) {
+		Direccion dir=new Direccion();
+		dir.setDireccion1(direccionString.getAddress());
+		dir.setPostalCodigo(Integer.valueOf(direccionString.getPostalCode()));
+		dir.setDireccionTipoId(direccionTipoRepository.findById(Integer.valueOf(direccionString.getDireccionTipoId())).get());
+		dir.setParroquiaId(parroquiaRepository.findById(Integer.valueOf(direccionString.getParroquiaId())).get());
+		return dir;
+	}
+	
 
 
 

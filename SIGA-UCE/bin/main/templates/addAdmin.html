@@ -34,14 +34,9 @@
     
   </head>
 
-  <body class="bg-dark">
+  <body class="bg-secondary">
 
     <div class="container">
-      <div class="card card-register mx-auto mt-5">
-        <div class="card-header">Add Administrator</div>
-        <div class="card-body">
-          
-
            
            <!-- Add administrador-->
 
@@ -61,10 +56,12 @@
                   </div>
                 </div>
               </div>
+              
+              
             </div>
             <div class="form-group">
               <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control"  th:value="${correoElectronico}" placeholder="Email address">
+                <input type="email" id="inputEmail" class="form-control"  th:value="${correoElectronico}" placeholder="Email address" autofocus="autofocus">
                 <label for="inputEmail">Email address</label>
               </div>
             </div>
@@ -72,7 +69,7 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="text" id="inputAddress" class="form-control"  th:value="${direccionId}" placeholder="Address">
+                    <input type="text" id="inputAddress" class="form-control"  th:value="${direccionId}" placeholder="Address" autofocus="autofocus">
                    <label for="inputAddress">Address</label>
                   </div>
                 </div>
@@ -90,13 +87,13 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="number" id="inputPhone1" class="form-control" th:value="${numeroTelefono1}" placeholder="Phone 1" required="required">
+                    <input type="number" id="inputPhone1" class="form-control" th:value="${numeroTelefono1}" placeholder="Phone 1" required="required" autofocus="autofocus">
                     <label for="inputPhone1">Phone 1</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="number" id="inpumPhone2" class="form-control" th:value="${numeroTelefono2}"  placeholder="Phone 2" required="required">
+                    <input type="number" id="inpumPhone2" class="form-control" th:value="${numeroTelefono2}"  placeholder="Phone 2" required="required" autofocus="autofocus">
                     <label for="inputPhone2">Phone 2</label>
                   </div>
                 </div>
@@ -106,13 +103,13 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="text" id="inputPassword" class="form-control"  th:value="${usuario}" placeholder="User Name" required="required">
+                    <input type="text" id="inputUsername" class="form-control"  th:value="${usuario}" placeholder="User Name" required="required" autofocus="autofocus">
                     <label for="inputUsername">User Name</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="text" id="inputPassword" class="form-control" th:value="${clave}" placeholder="Password" required="required">
+                    <input type="text" id="inputPassword" class="form-control" th:value="${clave}" placeholder="Password" required="required" autofocus="autofocus">
                     <label for="inputPassword">Password</label>
                   </div>
                 </div>
@@ -129,25 +126,11 @@
     
     		</div>
      				<button class="btn btn-primary btn-block" type="submit">
-					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Add Administrator
-				</button>
+						<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Add Administrator
+					</button>
+				<button class="btn btn-primary btn-block" type="button" data-dismiss="modal">Cancel</button>
             </form>
-            <div class="form-group">
-					<a href="#" th:href="@{/cancel}">
-						<button class="btn btn-primary btn-block" type="submit">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-							Cancel
-						</button>
-					</a>
-				</div>
-     
 
-          <div class="text-center">
-            <a class="d-block small mt-3" href="login.html">Login Page</a>
-            <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
-          </div>
-        </div>
-      </div>
     </div>
 
 
@@ -156,16 +139,12 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
           <div class="modal-body"></div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" th:href="@{/login?logout}">Logout</a>
-          </div>
         </div>
       </div>
     </div>

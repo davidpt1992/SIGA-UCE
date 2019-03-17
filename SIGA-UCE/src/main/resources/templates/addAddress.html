@@ -22,13 +22,15 @@
 <!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
 
-  <script  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
   
 		<!-- Al seleccionar pais habilitar provincia-->
 		<script type="text/javascript">
 		$('#country').change(function(){
 			$('#provinciaList').removeAttr('disabled');
 	        $.getJSON('selectProvincia',"login="+$('#country').val(),function(obj) {
+	        	$(".provin select").append('<option value="0" disabled selected>Select Province</option>');
 	        	$.each(obj, function(arregloId, provincia){
 	        		 $(".provin select").append('<option value="'+provincia.provinciaId+'">'+provincia.provincia+'</option>');
 	        		     });
@@ -43,6 +45,7 @@
 		$('#provinciaList').change(function(){
 			$('#canton').removeAttr('disabled');
 	        $.getJSON('selectCanton',"login="+$('#provinciaList').val(),function(obj) {
+	        	$(".can select").append('<option value="0" disabled selected>Select Canton</option>');
 	        	$.each(obj, function(arregloId, canton){
 	        		 $(".can select").append('<option value="'+canton.cantonId+'">'+canton.canton+'</option>');
 	        		     });
@@ -57,6 +60,7 @@
 		$('#canton').change(function(){
 			$('#parish').removeAttr('disabled');
 	        $.getJSON('selectparish',"login="+$('#canton').val(),function(obj) {
+	        	$(".par select").append('<option value="0" disabled selected>Select Parish</option>');
 	        	$.each(obj, function(arregloId, parroquia){
 	        		 $(".par select").append('<option value="'+parroquia.parroquiaId+'">'+parroquia.parroquia+'</option>');
 	        		     });
@@ -64,34 +68,55 @@
 	        )
 	        
 	    } );
-			</script>
+		</script>
 			
+			
+			<!-- Guardar direccion-->
+		<script type="text/javascript">       
+		    $('#saveAddressButton').submit(function(evento) {
+		    	$.ajax({
+		            url: 'saveAddress',
+		            type: 'POST',
+		            data: JSON.stringify({direccionTipoId: $('#tipoDireccion').val(), parroquiaId: $('#parish').val(), postalCode: $('#postalCode').val(), address: $('#address').val()}),
+		            processData: false,
+		            contentType: "application/json"
+		    }).done( function() {
+
+		        alert( 'Success!!' );
+
+		    }).fail( function() {
+
+		        alert( 'Error!!' );
+
+		    })
+		       
+		    });
+		</script>
+		
+		
 </head>
 
-<body class="bg-dark">
+<body class="bg-secondary">
 
 	<div class="container">
-		<div class="card card-register mx-auto mt-5">
-			<div class="card-header">Add Address</div>
-			<div class="card-body">
-
-
 
 				<!-- Add address-->
 
-				<form action="#" th:action="@{/addAddress}" th:object="${parroquias}" method="post">
+				<form id="saveAddressButton" action="#">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					<div class="form-group">
 
 						<label>Address Tipe</label>
 						<div class="form-label-group">
-							<select class="form-control" name="TipoDireccion" required >
+							<select class="form-control" id="tipoDireccion" required="required" >
+							<option value="0" disabled selected>Select Address Tipe</option>
 								<option th:each="addressTipe : ${addressTipes}" th:value="${addressTipe.direccionTipoId}" th:text="${addressTipe.descripcionDireccionTipo}"/>
 							</select>
 						</div>
 
 						<label>Country</label>
 						<div class="form-label-group">
-							<select class="form-control" id="country" required>
+							<select class="form-control" id="country" required="required">
 								<option value="0" disabled selected>Select country</option>
 								<option th:each="pais : ${paices}" th:value="${pais.paisId}" th:text="${pais.pais}"/>
 							</select>
@@ -99,14 +124,14 @@
 						
 						<label>Province / State</label>
 						<div class="form-label-group provin">
-							<select class="form-control" id="provinciaList" disabled required>
+							<select class="form-control" id="provinciaList" disabled required="required">
 								
 							</select>
 						</div>
 						
 						<label>Canton</label>
 						<div class="form-label-group can">
-							<select class="form-control" id="canton" disabled required>
+							<select class="form-control" id="canton" disabled required="required">
 
 							</select>
 						</div>
@@ -116,32 +141,35 @@
 							<select class="form-control" id="parish" disabled>
 		
 							</select>
-						</div>						
+						</div>
+						
 
+							<label></label>
+							<div class="col-auto">
+								<div class="form-label-group">
+									<input type="text" id="postalCode" class="form-control"	placeholder="Postal Code" required="required"
+										autofocus="autofocus"> <label for="postalCode">Postal Code</label>
+								</div>
+							</div>
 
+						
+							<label></label>
+							<div class="col-auto">
+								<div class="form-label-group">
+									<input type="text" id="address" class="form-control" placeholder="Address" required="required"
+										autofocus="autofocus"> <label for="address">Address</label>
+								</div>
+							</div>
+
+		
 					</div>
 
-					<button class="btn btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-						Add Address
-					</button>
+					<input class="btn btn-primary btn-block" type="submit" value="Add Address"></input>
+					<button class="btn btn-primary btn-block" type="button" data-dismiss="modal" >Cancel</button>
+				
 				</form>
-				<div class="form-group">
-					<a href="#" th:href="@{/cancel}">
-						<button class="btn btn-primary btn-block" type="submit">
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-							Cancel
-						</button>
-					</a>
-				</div>
+					
 
-
-				<div class="text-center">
-					<a class="d-block small mt-3" href="login.html">Login Page</a> <a
-						class="d-block small" href="forgot-password.html">Forgot
-						Password?</a>
-				</div>
-			</div>
-		</div>
 	</div>
 
 
@@ -149,7 +177,7 @@
 
 
 	<!-- Bootstrap core JavaScript-->
-	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/jquery/jquery.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Core plugin JavaScript-->

@@ -21,8 +21,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	compile group: 'org.springframework', name: 'springloaded', version: '1.2.8.RELEASE'
-	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
-		
+	compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
+	
 	runtimeOnly 'mysql:mysql-connector-java'
 	
 	

@@ -7,20 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import ec.com.siga.repository.UserJpaRepository;
-//import ec.com.siga.service.UserServicio;
+import ec.com.siga.service.UserServicio;
 
 @Controller
 public class TableAdminController {
 	
 	@Autowired
-	@Qualifier("userRepository")
-	private UserJpaRepository userRepository;
+	@Qualifier("userService")
+	private UserServicio userService;
 
 	@GetMapping("/tableAdmin")
 	public ModelAndView showForm() {
 		ModelAndView mav = new ModelAndView("tableAdmin");
-		mav.addObject("contacts", userRepository.findAll());
+		mav.addObject("contacts", userService.findAll());
 		return mav;
 	}
 

@@ -25,7 +25,19 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
     
+    <script  src="https://code.jquery.com/jquery-3.3.1.js"></script>
     
+		    <script>
+			$(document).ready(function(){
+				$('#addAdmin').on('click',function(){
+				    $('.modal-body').load('addAddress',function(){
+				        $('#addAdminmodal').modal({show:true});
+				    });
+				});
+			});
+			</script>
+			
+			
   </head>
 
   <body id="page-top">
@@ -39,7 +51,7 @@
               
               </div>
               <div class="card-header">
-              <a href="#" th:href="@{/addAdmin}">
+              <a href="#" data-toggle="modal" data-target="#addAdminmodal" id="addAdmin">
               	<button type="button" class="btn btn-secondary fas fa-user-plus"></button>
               </a>
               </div>
@@ -109,8 +121,9 @@
     </div>
     
 
-   <!-- Add Administrador Modal-->
-    <div class="modal fade" id="AddAdministratorModal" tabindex="-1" role="dialog" aria-labelledby="Add administrator" aria-hidden="true">
+   
+    <!-- addAdmin Modal-->
+    <div class="modal fade" id="addAdminmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -119,86 +132,7 @@
               <span aria-hidden="true">×</span>
             </button>
           </div>
-           
-           <!-- Add administrador-->
-          <div class="container">
-      <div class="card card-register mx-auto mt-5">
-        <div class="card-body">
-          <form >
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
-                    <label for="firstName">First name</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input type="text" id="lastName" class="form-control" placeholder="Last name" required="required">
-                    <label for="lastName">Last name</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address">
-                <label for="inputEmail">Email address</label>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-label-group">
-                <input type="text" id="inputAddress" class="form-control" placeholder="Address">
-                <label for="inputAddress">Address</label>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input type="number" id="inputPhone1" class="form-control" placeholder="Phone 1" required="required">
-                    <label for="inputPhone1">Phone 1</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input type="number" id="inpumPhone2" class="form-control" placeholder="Phone2" required="required">
-                    <label for="inputPhone2">Phone 2</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
-                    <label for="inputPassword">Password</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-label-group">
-                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required">
-                    <label for="confirmPassword">Confirm password</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-auto my-1">
-      <div class="custom-control custom-checkbox mr-sm-2">
-        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-        <label class="custom-control-label" for="customControlAutosizing">Enabled</label>
-      </div>
-    </div>
-            <a class="btn btn-primary btn-block" href="login.html">Add</a>
-            </form>
-          
-        </div>
-      </div>
-    </div>
-          
-          
+          <div class="modal-body"></div>
         </div>
       </div>
     </div>
