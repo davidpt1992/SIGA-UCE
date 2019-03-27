@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ec.com.siga.entity.Canton;
-import ec.com.siga.entity.Direccion;
 import ec.com.siga.entity.Parroquia;
 import ec.com.siga.entity.ProvinciaEstado;
 import ec.com.siga.model.DireccionString;
@@ -40,16 +39,8 @@ public class AddAddressController {
 	}
 
 	@PostMapping("/saveAddress")
-	public String addAddress(@RequestBody  DireccionString dir) {
-		// addressService.saveDireccion(dir);
-		LOG.info(dir.getDireccionTipoId());
-		LOG.info(dir.getParroquiaId());
-		LOG.info(dir.getPostalCode());
-		LOG.info(dir.getAddress());
-		
+	public void addAddress(@RequestBody  DireccionString dir) {
 		addressService.saveDireccion(addressService.converterDireccionStringToDirection(dir));
-
-		return "/dashboardAdmin";
 	}
 	
 	@GetMapping("/selectProvincia")

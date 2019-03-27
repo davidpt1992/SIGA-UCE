@@ -12,7 +12,7 @@
     <title>SB Admin - Register</title>
 
     <!-- Bootstrap core CSS-->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,13 +20,13 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
     
-    <script  src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    
-		    <script>
+		  	<script>
 			$(document).ready(function(){
 				$('#addDir').on('click',function(){
+					$(this).closest('.modal').modal({show:false});
 				    $('.modal-body').load('addAddress',function(){
-				        $('#addressmodal').modal({show:true});
+				    	
+				    	$('#addressModal').modal({show:true});
 				    });
 				});
 			});
@@ -93,7 +93,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-label-group">
-                    <input type="number" id="inpumPhone2" class="form-control" th:value="${numeroTelefono2}"  placeholder="Phone 2" required="required" autofocus="autofocus">
+                    <input type="number" id="inputPhone2" class="form-control" th:value="${numeroTelefono2}"  placeholder="Phone 2" required="required" autofocus="autofocus">
                     <label for="inputPhone2">Phone 2</label>
                   </div>
                 </div>
@@ -135,11 +135,11 @@
 
 
 <!-- Logout Modal-->
-    <div class="modal fade" id="addressmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="modalIngresarAddress" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
+            <h5 class="modal-title" id="tittleAddresModal">Add Address</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>

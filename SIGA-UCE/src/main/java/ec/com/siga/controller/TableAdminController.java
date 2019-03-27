@@ -13,14 +13,19 @@ import ec.com.siga.service.UserServicio;
 public class TableAdminController {
 	
 	@Autowired
-	@Qualifier("userService")
-	private UserServicio userService;
+	@Qualifier("userServicio")
+	private UserServicio userServicio;
 
 	@GetMapping("/tableAdmin")
 	public ModelAndView showForm() {
 		ModelAndView mav = new ModelAndView("tableAdmin");
-		mav.addObject("contacts", userService.findAll());
+		mav.addObject("contacts", userServicio.findAll());
 		return mav;
+	}
+	
+	@GetMapping("/editAdmin")
+	public String showEditAdminForm() {
+		return "editAdmin";
 	}
 
 }

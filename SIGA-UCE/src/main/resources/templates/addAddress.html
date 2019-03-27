@@ -13,7 +13,7 @@
 <title>SB Admin - Register</title>
 
 <!-- Bootstrap core CSS-->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
 <!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -22,9 +22,7 @@
 <!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
 
-<script
-  src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  
+
 		<!-- Al seleccionar pais habilitar provincia-->
 		<script type="text/javascript">
 		$('#country').change(function(){
@@ -71,26 +69,23 @@
 		</script>
 			
 			
-			<!-- Guardar direccion-->
-		<script type="text/javascript">       
-		    $('#saveAddressButton').submit(function(evento) {
-		    	$.ajax({
-		            url: 'saveAddress',
-		            type: 'POST',
-		            data: JSON.stringify({direccionTipoId: $('#tipoDireccion').val(), parroquiaId: $('#parish').val(), postalCode: $('#postalCode').val(), address: $('#address').val()}),
-		            processData: false,
-		            contentType: "application/json"
-		    }).done( function() {
-
-		        alert( 'Success!!' );
-
-		    }).fail( function() {
-
-		        alert( 'Error!!' );
-
-		    })
-		       
-		    });
+		<!-- Guardar direccion-->
+		<script type="text/javascript">
+			$('#saveAddressButton').submit(function(evento) {
+				$.ajax({
+					url : 'saveAddress',
+					type : 'POST',
+					data : JSON.stringify({
+						direccionTipoId : $('#tipoDireccion').val(),
+						parroquiaId : $('#parish').val(),
+						postalCode : $('#postalCode').val(),
+						address : $('#address').val()
+					}),
+					processData : false,
+					contentType : "application/json",
+				})
+				evento.preventDefault();
+			});
 		</script>
 		
 		
@@ -164,7 +159,9 @@
 		
 					</div>
 
-					<input class="btn btn-primary btn-block" type="submit" value="Add Address"></input>
+					<button class="btn btn-primary btn-block" type="submit" id="saveAddressButton">
+						<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Add Address
+					</button>
 					<button class="btn btn-primary btn-block" type="button" data-dismiss="modal" >Cancel</button>
 				
 				</form>

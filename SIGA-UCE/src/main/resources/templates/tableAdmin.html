@@ -1,161 +1,127 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<!-- Custom modals create update delete -->
+	<script th:src="@{/js/modals.js}" src="../static/js/modals.js"></script>
 
-  <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<body id="page-top">
 
-    <title>SB Admin - Tables</title>
+	<div id="wrapper">
 
-    <!-- Bootstrap core CSS-->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- DataTable Admin -->
+		<div class="card mb-3">
 
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+			<div class="card-header">
+				<i class="fas fa-table"> Data Administrators</i> <br /> <a><button
+						class="btn btn-secondary fas fa-user-plus nBtn" id="nBtn"></button></a>
+			</div>
 
-    <!-- Page level plugin CSS-->
-    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Mail</th>
+								<th>Address</th>
+								<th>Phone 1</th>
+								<th>Phone 2</th>
+								<th>User Name</th>
+								<th>Password</th>
+								<th>Enabled</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Mail</th>
+								<th>Address</th>
+								<th>Phone 1</th>
+								<th>Phone 2</th>
+								<th>User Name</th>
+								<th>Password</th>
+								<th>Enabled</th>
+								<th>Actions</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr th:each="contact : ${contacts}">
+								<td th:text="${contact.nombre}"></td>
+								<td th:text="${contact.apellido}"></td>
+								<td th:text="${contact.correoElectronico}"></td>
+								<td th:text="${contact.direccionId}"></td>
+								<td th:text="${contact.numeroTelefono1}"></td>
+								<td th:text="${contact.numeroTelefono2}"></td>
+								<td th:text="${contact.usuario}"></td>
+								<td>*****</td>
+								<td th:text="${contact.enabled}"></td>
+								<td><a th:href="@{findAdmin/(id=${contact.userId})}"
+									class="btn btn-primary fas fa-pencil-alt eBtn">_</a> <a
+									th:href="@{/delete/(adminId=${contact.userId})}"
+									class="btn btn-danger fas fa-trash-alt dBtn"></a></td>
+							</tr>
 
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin.css" rel="stylesheet">
-    
-    <script  src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    
-		    <script>
-			$(document).ready(function(){
-				$('#addAdmin').on('click',function(){
-				    $('.modal-body').load('addAddress',function(){
-				        $('#addAdminmodal').modal({show:true});
-				    });
-				});
-			});
-			</script>
-			
-			
-  </head>
 
-  <body id="page-top">
+						</tbody>
+					</table>
+				</div>
+			</div>
 
-     <div id="wrapper">
+			<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+		</div>
 
-      <!-- DataTable Admin -->
-          <div class="card mb-3">
-            <div class="card-header">
-              <i class="fas fa-table"></i> Data Administrators
-              
-              </div>
-              <div class="card-header">
-              <a href="#" data-toggle="modal" data-target="#addAdminmodal" id="addAdmin">
-              	<button type="button" class="btn btn-secondary fas fa-user-plus"></button>
-              </a>
-              </div>
-              
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Mail</th>
-                      <th>Address</th>
-                      <th>Phone 1</th>
-                      <th>Phone 2</th>
-                      <th>User Name</th>
-                      <th>Password</th>
-                      <th>Enabled</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Mail</th>
-                      <th>Address</th>
-                      <th>Phone 1</th>
-                      <th>Phone 2</th>
-                      <th>User Name</th>
-                      <th>Password</th>
-                      <th>Enabled</th>
-                      <th>Actions</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    <tr th:each="contact : ${contacts}">
-                      <td th:text="${contact.nombre}"></td>
-                      <td th:text="${contact.apellido}"></td>
-                      <td th:text="${contact.correoElectronico}"></td>
-                      <td th:text="${contact.direccionId}"></td>
-                      <td th:text="${contact.numeroTelefono1}"></td>
-                      <td th:text="${contact.numeroTelefono2}"></td>
-                      <td th:text="${contact.usuario}"></td>
-                      <td >*****</td>
-                      <td th:text="${contact.enabled}"></td>
-                      <td>
-							<a href="#" th:href="@{/editAdmin?id=__${contact.userId}__}">
-								<button type="button" class="btn btn-default"><span class="fas fa-pencil-alt" aria-hidden="true"></span>
-								</button>
-							</a>
-							
-							<a href="#" >
-								<button type="button" class="btn btn-danger"><span class="fas fa-trash-alt" aria-hidden="true"></span></button>
-							</a>
-						</td>
-                    </tr>
-                    
-                    
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-          </div>
+	</div>
 
-    </div>
-    
+	<!-- add or editAdmin Modal-->
+	<div class="myForm">
+		<form th:action="@{/saveAdmin}" method="post">
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Add or Edit Administrator</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body"></div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<input type="submit" class="btn btn-primary" value="Save" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 
-   
-    <!-- addAdmin Modal-->
-    <div class="modal fade" id="addAdminmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Administrator</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body"></div>
-        </div>
-      </div>
-    </div>
-    
-    
+	<!-- deleteAdmin Modal-->
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="deleteModalLabel">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="alert alert-danger">Are you sure want to delete this
+						country?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<a type="button" href="" class="btn btn-danger" id="delHref">Delete</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-
-    <!-- Demo scripts for this page-->
-    <script src="js/demo/datatables-demo.js"></script>
-
-  </body>
-
-</html>

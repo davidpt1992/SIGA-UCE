@@ -5338,6 +5338,10 @@ button.close {
   -webkit-appearance: none;
 }
 
+.modal { overflow: visible; }
+.modal-body { overflow-y: visible !important; }
+
+
 .modal-open {
   overflow: hidden;
 }
