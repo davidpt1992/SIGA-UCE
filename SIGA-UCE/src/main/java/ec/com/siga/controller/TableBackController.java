@@ -3,47 +3,55 @@ package ec.com.siga.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import ec.com.siga.entity.User;
 import ec.com.siga.service.UserServicio;
 
 @Controller
-public class EditAdminController {
-	@Autowired 
-	@Qualifier("userServicio") 
-	private UserServicio userServicio;
+public class TableBackController {
 	
-	@PostMapping("/saveAdmin")
+	@Autowired
+	@Qualifier("userServicio")
+	private UserServicio userServicio;
+
+	@GetMapping("/tableBack")
+	public ModelAndView showForm() {
+		ModelAndView mav = new ModelAndView("tableBack");
+		mav.addObject("contacts", userServicio.findAllBack());
+		return mav;
+	}
+	
+	@GetMapping("/editBack")
+	public String showEditAdminForm() {
+		return "editAdmin";
+	}
+	
+	@PostMapping("/saveBack")
 	public String saveAdmin(User admin) {
 		userServicio.saveAdmin(admin);
 		return "redirect:/dashboardAdmin";
 	}
 
-	@GetMapping("/findAdmin")
+	@GetMapping("/findBack")
 	@ResponseBody
 	public User findOne(Integer id) {
 	return userServicio.findAdmin(id);
 	}
 	
-	@GetMapping("/cancel")
+	@GetMapping("/cancelBack")
 	public String cancel() {
 		return "redirect:/dashboardAdmin";
 	}
 	
-	@GetMapping("/delete")
+	@GetMapping("/deleteBack")
     public String deleteCountry(Integer adminId) {
 		userServicio.deletAdmin(userServicio.findAdmin(adminId));
         return "redirect:/dashboardAdmin";
     }
-	
-	@PostMapping("/addcontact")
-	public String addContact(@ModelAttribute(name = "contactModel") User contactModel, Model model) {
-		userServicio.saveAdmin(contactModel);
-		return "/dashboardAdmin";
-	}
+
+
 }

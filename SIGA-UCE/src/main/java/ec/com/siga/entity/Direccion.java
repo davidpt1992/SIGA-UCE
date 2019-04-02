@@ -43,8 +43,9 @@ public class Direccion implements Serializable {
 	@JoinColumn(name = "DIRECCION_TIPO_ID", referencedColumnName = "DIRECCION_TIPO_ID")
 	@ManyToOne
 	private DireccionTipo direccionTipoId;
-	@OneToMany(mappedBy = "direccionId")
-	private List<User> userList;
+	/*
+	 * @OneToMany(mappedBy = "direccionId") private List<User> userList;
+	 */
 
 	public Integer getDireccionId() {
 		return direccionId;
@@ -86,13 +87,12 @@ public class Direccion implements Serializable {
 		this.direccionTipoId = direccionTipoId;
 	}
 
-	public List<User> getUserList() {
-		return userList;
-	}
-
-	public void setUserList(List<User> userList) {
-		this.userList = userList;
-	}
+	/*
+	 * public List<User> getUserList() { return userList; }
+	 * 
+	 * public void setUserList(List<User> userList) { this.userList = userList;}
+	 */
+	
 
 	public Direccion(Integer direccionId, Integer postalCodigo, String direccion1, Parroquia parroquiaId,
 			DireccionTipo direccionTipoId, List<User> userList) {
@@ -102,7 +102,7 @@ public class Direccion implements Serializable {
 		this.direccion1 = direccion1;
 		this.parroquiaId = parroquiaId;
 		this.direccionTipoId = direccionTipoId;
-		this.userList = userList;
+		//this.userList = userList;
 	}
 
 	public Direccion() {

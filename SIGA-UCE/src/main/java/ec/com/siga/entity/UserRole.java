@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "user_role", uniqueConstraints = @UniqueConstraint(columnNames = { "role", "user_role_id" }))
+@Table(name = "user_role", uniqueConstraints = @UniqueConstraint(columnNames = { "role", "userId" }))
 public class UserRole {
 
 	@Id
@@ -25,20 +25,13 @@ public class UserRole {
 	private Integer userRoleId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "username", nullable = false)
+	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 
 	@Column(name = "role", nullable = false, length = 45)
 	private String role;
 
 	
-
-	public UserRole(User user, String role) {
-		super();
-		this.user = user;
-		this.role = role;
-	}
-
 	public Integer getUserRoleId() {
 		return userRoleId;
 	}
@@ -61,6 +54,15 @@ public class UserRole {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	
+	public UserRole(User user, String role) {
+		super();
+		this.user = user;
+		this.role = role;
+	}
+	
+	public UserRole() {
 	}
 
 }

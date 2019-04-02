@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,8 +19,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
@@ -49,6 +53,9 @@ public class User implements Serializable {
 	@Size(max = 60)
 	@Column(name = "CLAVE")
 	private String clave;
+	@Size(max = 60)
+	@Column(name = "DIRECCION")
+	private String direccion;
 	/*
 	 * @OneToMany(mappedBy = "userId") private List<Movil> movilList;
 	 * 
@@ -56,11 +63,13 @@ public class User implements Serializable {
 	 * 
 	 * @OneToMany(mappedBy = "userId") private List<Cliente> clienteList;
 	 */
-	@JoinColumn(name = "DIRECCION_ID", referencedColumnName = "DIRECCION_ID")
-	@ManyToOne
-	private Direccion direccionId;
+		
+	@JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID")
+	@OneToOne(cascade=CascadeType.ALL)
+	@JsonIgnore
+	private RoleSys roleId;
 
-	// roles de usuario
+	// habilita ingreso
 	@Column(name = "enabled", nullable = false)
 	private boolean enabled;
 
@@ -131,20 +140,28 @@ public class User implements Serializable {
 		this.clave = clave;
 	}
 
-	public Direccion getDireccionId() {
-		return direccionId;
-	}
-
-	public void setDireccionId(Direccion direccionId) {
-		this.direccionId = direccionId;
-	}
-
 	public boolean isEnabled() {
 		return enabled;
 	}
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public RoleSys getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(RoleSys roleId) {
+		this.roleId = roleId;
 	}
 
 	public Set<UserRole> getUserRole() {
@@ -154,9 +171,10 @@ public class User implements Serializable {
 	public void setUserRole(Set<UserRole> userRole) {
 		this.userRole = userRole;
 	}
+	
 
 	public User(Integer userId, String nombre, String apellido, String correoElectronico, Long numeroTelefono1,
-			Long numeroTelefono2, String usuario, String clave, Direccion direccionId, boolean enabled,
+			Long numeroTelefono2, String usuario, String clave,String direccion ,RoleSys roleId, boolean enabled,
 			Set<UserRole> userRole) {
 		super();
 		this.userId = userId;
@@ -167,13 +185,17 @@ public class User implements Serializable {
 		this.numeroTelefono2 = numeroTelefono2;
 		this.usuario = usuario;
 		this.clave = clave;
-		this.direccionId = direccionId;
+		this.direccion = direccion;
+		this.roleId = roleId;
 		this.enabled = enabled;
 		this.userRole = userRole;
 	}
 
-	public User(Integer userId, String nombre, String apellido, String correoElectronico, Long numeroTelefono1,
-			Long numeroTelefono2, String usuario, String clave, Direccion direccionId, boolean enabled) {
+
+
+	public User(Integer userId, String nombre, String apellido, String correoElectronico, Long numeroTelefono1, Long numeroTelefono2,
+			String usuario,  String clave, String direccion, RoleSys roleId,
+			boolean enabled) {
 		super();
 		this.userId = userId;
 		this.nombre = nombre;
@@ -183,7 +205,8 @@ public class User implements Serializable {
 		this.numeroTelefono2 = numeroTelefono2;
 		this.usuario = usuario;
 		this.clave = clave;
-		this.direccionId = direccionId;
+		this.direccion = direccion;
+		this.roleId = roleId;
 		this.enabled = enabled;
 	}
 

@@ -12,42 +12,42 @@ import ec.com.siga.entity.User;
 import ec.com.siga.service.UserServicio;
 
 @Controller
-public class TableAdminController {
+public class TableCustController {
 	
 	@Autowired
 	@Qualifier("userServicio")
 	private UserServicio userServicio;
 
-	@GetMapping("/tableAdmin")
+	@GetMapping("/tableCust")
 	public ModelAndView showForm() {
-		ModelAndView mav = new ModelAndView("tableAdmin");
-		mav.addObject("contacts", userServicio.findAllAdmin());
+		ModelAndView mav = new ModelAndView("tableCust");
+		mav.addObject("contacts", userServicio.findAllCust());
 		return mav;
 	}
 	
-	@GetMapping("/editAdmin")
+	@GetMapping("/editCust")
 	public String showEditAdminForm() {
 		return "editAdmin";
 	}
 	
-	@PostMapping("/saveAdmin")
+	@PostMapping("/saveCust")
 	public String saveAdmin(User admin) {
 		userServicio.saveAdmin(admin);
 		return "redirect:/dashboardAdmin";
 	}
 
-	@GetMapping("/findAdmin")
+	@GetMapping("/findCust")
 	@ResponseBody
 	public User findOne(Integer id) {
 	return userServicio.findAdmin(id);
 	}
 	
-	@GetMapping("/cancel")
+	@GetMapping("/cancelCust")
 	public String cancel() {
 		return "redirect:/dashboardAdmin";
 	}
 	
-	@GetMapping("/delete")
+	@GetMapping("/deleteCust")
     public String deleteCountry(Integer adminId) {
 		userServicio.deletAdmin(userServicio.findAdmin(adminId));
         return "redirect:/dashboardAdmin";

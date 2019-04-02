@@ -6,17 +6,13 @@
 package ec.com.siga.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -35,9 +31,6 @@ public class DireccionTipo implements Serializable {
 	@Size(max = 15)
 	@Column(name = "DESCRIPCION_DIRECCION_TIPO")
 	private String descripcionDireccionTipo;
-	@OneToMany(mappedBy = "direccionTipoId")
-	@JsonIgnore
-	private List<Direccion> direccionList;
 
 	public Integer getDireccionTipoId() {
 		return direccionTipoId;
@@ -55,19 +48,10 @@ public class DireccionTipo implements Serializable {
 		this.descripcionDireccionTipo = descripcionDireccionTipo;
 	}
 
-	public List<Direccion> getDireccionList() {
-		return direccionList;
-	}
-
-	public void setDireccionList(List<Direccion> direccionList) {
-		this.direccionList = direccionList;
-	}
-
-	public DireccionTipo(Integer direccionTipoId, String descripcionDireccionTipo, List<Direccion> direccionList) {
+	public DireccionTipo(Integer direccionTipoId, String descripcionDireccionTipo) {
 		super();
 		this.direccionTipoId = direccionTipoId;
 		this.descripcionDireccionTipo = descripcionDireccionTipo;
-		this.direccionList = direccionList;
 	}
 
 	public DireccionTipo() {

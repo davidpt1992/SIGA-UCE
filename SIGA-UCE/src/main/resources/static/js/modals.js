@@ -12,7 +12,9 @@ $(document).ready(function () {
             	$('.myForm #userId').val(user.userId);
                 $('.myForm #firstName').val(user.nombre);
                	$('.myForm #lastName').val(user.apellido);
+               	$('.myForm #role').val(user.roleId.rol);
 				$('.myForm #inputEmail').val(user.correoElectronico);
+				$('.myForm #inputAddress').val(user.direccion);
 				$('.myForm #inputPhone1').val(user.numeroTelefono1);
 				$('.myForm #inputPhone2').val(user.numeroTelefono2);
 				$('.myForm #inputUsername').val(user.usuario);

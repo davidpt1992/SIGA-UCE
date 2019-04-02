@@ -7,17 +7,22 @@ $(document).ready(function () {
 	
 	$('.tBackOfc').on('click',function(event){
 		event.preventDefault();
-   		$("#seccionRecargar").load("tableBackOfc");
+   		$("#seccionRecargar").load("tableBack");
     });
 	
-	$('.tAud').on('click',function(event){
+	$('.tAudi').on('click',function(event){
 		event.preventDefault();
-   		$("#seccionRecargar").load("tableAuditor");
+   		$("#seccionRecargar").load("tableAudi");
     });
 	
 	$('.tCust').on('click',function(event){
 		event.preventDefault();
-   		$("#seccionRecargar").load("tableCustomer");
+   		$("#seccionRecargar").load("tableCust");
+    });
+	
+	$('.tRole').on('click',function(event){
+		event.preventDefault();
+   		$("#seccionRecargar").load("tableRole");
     });
 
 });
