@@ -24,5 +24,10 @@ $(document).ready(function () {
 		event.preventDefault();
    		$("#seccionRecargar").load("tableRole");
     });
+	
+	$('.tQuest').on('click',function(event){
+		event.preventDefault();
+   		$("#seccionRecargar").load("tableQuest");
+    });
 
 });
