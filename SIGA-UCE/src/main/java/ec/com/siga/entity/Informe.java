@@ -32,6 +32,9 @@ public class Informe implements Serializable {
     @JoinColumn(name = "AUDITOR_ID", referencedColumnName = "AUDITOR_ID")
     @ManyToOne(optional = false)
     private Auditor auditorId;
+    @JoinColumn(name = "BACKOFFICE_ID", referencedColumnName = "BACKOFFICE_ID")
+    @ManyToOne(optional = false)
+    private BackOffice backOfficeId;
     @JoinColumn(name = "CLIENTE_ID", referencedColumnName = "CLIENTE_ID")
     @ManyToOne
     private Cliente clienteId;
@@ -55,6 +58,14 @@ public class Informe implements Serializable {
 		this.auditorId = auditorId;
 	}
 
+	public BackOffice getBackofficeId() {
+		return backOfficeId;
+	}
+
+	public void setBackofficeId(BackOffice backofficeId) {
+		this.backOfficeId = backofficeId;
+	}
+
 	public Cliente getClienteId() {
 		return clienteId;
 	}
@@ -71,10 +82,11 @@ public class Informe implements Serializable {
 		this.datoComunId = datoComunId;
 	}
 
-	public Informe(Integer informeId, Auditor auditorId, Cliente clienteId, DatoComun datoComunId) {
+	public Informe(Integer informeId, Auditor auditorId, BackOffice backofficeId, Cliente clienteId, DatoComun datoComunId) {
 		super();
 		this.informeId = informeId;
 		this.auditorId = auditorId;
+		this.backOfficeId =backofficeId;
 		this.clienteId = clienteId;
 		this.datoComunId = datoComunId;
 	}

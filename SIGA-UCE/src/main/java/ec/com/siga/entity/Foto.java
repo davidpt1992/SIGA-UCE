@@ -6,12 +6,12 @@
 package ec.com.siga.entity;
 
 import java.io.Serializable;
-import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,8 +33,6 @@ public class Foto implements Serializable {
     @Size(max = 254)
     @Column(name = "FOTO")
     private String foto;
-    @OneToMany(mappedBy = "fotoId")
-    private List<DatoEspecifico> datoEspecificoList;
 
     public Integer getFotoId() {
 		return fotoId;
@@ -52,19 +50,11 @@ public class Foto implements Serializable {
 		this.foto = foto;
 	}
 
-	public List<DatoEspecifico> getDatoEspecificoList() {
-		return datoEspecificoList;
-	}
 
-	public void setDatoEspecificoList(List<DatoEspecifico> datoEspecificoList) {
-		this.datoEspecificoList = datoEspecificoList;
-	}
-
-	public Foto(Integer fotoId, String foto, List<DatoEspecifico> datoEspecificoList) {
+	public Foto(Integer fotoId, String foto) {
 		super();
 		this.fotoId = fotoId;
 		this.foto = foto;
-		this.datoEspecificoList = datoEspecificoList;
 	}
 
 	public Foto() {

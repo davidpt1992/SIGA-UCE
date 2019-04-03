@@ -7,16 +7,20 @@ package ec.com.siga.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -48,7 +52,8 @@ public class DatoEspecifico implements Serializable {
     @OneToMany(mappedBy = "datoEspecificoId")
     private List<CheckList> checkListList;
     @JoinColumn(name = "FOTO_ID", referencedColumnName = "FOTO_ID")
-    @ManyToOne
+    @OneToOne(cascade=CascadeType.ALL)
+	@JsonIgnore
     private Foto fotoId;
 
     public Integer getDatoEspecificoId() {

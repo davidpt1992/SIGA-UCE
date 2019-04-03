@@ -29,5 +29,15 @@ $(document).ready(function () {
 		event.preventDefault();
    		$("#seccionRecargar").load("tableQuest");
     });
+	
+	$('.tAssig').on('click',function(event){
+		event.preventDefault();
+   		$("#seccionRecargar").load("tableAssig");
+    });
+	
+	$('.tSche').on('click',function(event){
+		event.preventDefault();
+   		$("#seccionRecargar").load("tableSche");
+    });
 
 });

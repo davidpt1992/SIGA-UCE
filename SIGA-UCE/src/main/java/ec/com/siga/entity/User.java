@@ -7,6 +7,7 @@ package ec.com.siga.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -57,11 +58,14 @@ public class User implements Serializable {
 	private String direccion;
 	/*
 	 * @OneToMany(mappedBy = "userId") private List<Movil> movilList;
-	 * 
-	 * @OneToMany(mappedBy = "userId") private List<Auditor> auditorList;
-	 * 
-	 * @OneToMany(mappedBy = "userId") private List<Cliente> clienteList;
 	 */
+	@OneToMany(mappedBy = "userId") 
+	private	List<Auditor> auditorList; 
+	@OneToMany(mappedBy = "userId") 
+	private List<Auditor> backOfficeList; 
+	@OneToMany(mappedBy = "userId") 
+	private List<Cliente> clienteList;
+	 
 		
 	@JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID")
 	@OneToOne(cascade=CascadeType.ALL)
