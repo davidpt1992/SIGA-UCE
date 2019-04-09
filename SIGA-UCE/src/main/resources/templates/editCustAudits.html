@@ -1,0 +1,83 @@
+
+<body class="bg-dark">
+
+	<!-- Edit administrador-->
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="form-label-group">
+					<input type="text" id="latitud" class="form-control" value=""
+						placeholder="Latitude" required="required" autofocus="autofocus"
+						name="latitud"> <label for="latitud">Latitude</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-label-group">
+					<input type="text" id="longitud" class="form-control" value=""
+						placeholder="Longitude" required="required" name="longitud">
+					<label for="longitud">Longitude</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="form-label-group">
+			<input type="text" id="compania" class="form-control" value=""
+				placeholder="Company name" name="nombreEmpresa"> <label
+				for="compania">Company name</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="form-label-group">
+			<input type="number" id="ruc" class="form-control" value=""
+				placeholder="Ruc" name="ruc"> <label for="ruc">Ruc</label>
+		</div>
+	</div>
+	<label>Client type</label>
+	<div class="form-label-group">
+		<select class="form-control" id="country" required="required" name="auxClienteTipoId">
+			<option value="0" disabled selected>Client type</option>
+			<option th:each="cust : ${tipCust}" th:value="${cust.clienteTipoId}" th:text="${cust.clienteTipoDescripcion}"/>
+		</select>
+	</div>
+	<label>Audit type</label>
+	<div class="form-label-group">
+		<select class="form-control" id="country" required="required" name="auxTipoAuditoriaId">
+			<option value="0" disabled selected>Select audit type</option>
+			<option th:each="aut : ${tipAudit}" th:value="${aut.tipoAuditoriaId}" th:text="${aut.tipoAuditoria}"/>
+		</select>
+	</div>
+
+
+	<label>Start audit</label>
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col-md-6">
+				<label>Date</label> 
+				<input id="dateStart" type="date" name="auxfechaInicio">
+			</div>
+			<div class="col-md-6">
+				<label>Time</label> 
+				<input id="timeStart" type="time" name="auxhoraInicio">
+			</div>
+		</div>
+	</div>
+	
+	<label>Finish audit</label>
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col-md-6">
+				<label>Date</label> 
+				<input id="dateFinish" type="date" name="auxfechaFinal">
+			</div>
+			<div class="col-md-6">
+				<label>Time</label> 
+				<input id="timeFinish" type="time" name="auxhoraFin">
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+

@@ -32,7 +32,7 @@ public class TableAudiController {
 	
 	@PostMapping("/saveAudi")
 	public String saveAdmin(User admin) {
-		userServicio.saveAdmin(admin);
+		userServicio.saveUser(admin);
 		return "redirect:/dashboardAdmin";
 	}
 

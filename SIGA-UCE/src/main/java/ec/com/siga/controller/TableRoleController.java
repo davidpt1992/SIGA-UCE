@@ -32,7 +32,7 @@ public class TableRoleController {
 	
 	@PostMapping("/saveRole")
 	public String saveAdmin(User admin) {
-		userServicio.saveAdmin(admin);
+		userServicio.saveUser(admin);
 		return "redirect:/dashboardAdmin";
 	}
 

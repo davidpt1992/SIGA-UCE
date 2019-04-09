@@ -37,9 +37,9 @@
 						<tbody>
 							<tr th:each="contact : ${contacts}">
 								<td><a th:href="@{/findQuest/(id=${contact.preguntasId})}"
-										class="btn btn-primary fas fa-pencil-alt eBtn">_</a> <a
+										class="btn btn-outline-primary fas fa-pencil-alt eBtn">_</a> <a
 										th:href="@{/deleteQuest/(adminId=${contact.preguntasId})}"
-										class="btn btn-danger fas fa-trash-alt dBtn"></a></td>
+										class="btn btn-outline-danger fas fa-trash-alt dBtn"></a></td>
 								<td th:text="${contact.tipoAuditoriaId.tipoAuditoria}"></td>
 								<td th:text="${contact.seccionId.seccion}"></td>
 								<td th:text="${contact.preguntas}"></td>

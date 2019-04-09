@@ -32,7 +32,7 @@ public class TableCustController {
 	
 	@PostMapping("/saveCust")
 	public String saveAdmin(User admin) {
-		userServicio.saveAdmin(admin);
+		userServicio.saveUser(admin);
 		return "redirect:/dashboardAdmin";
 	}
 

@@ -1,5 +1,6 @@
 	<!-- Custom modals create update delete -->
-	<script th:src="@{/js/modals.js}" src="../static/js/modals.js"></script>
+	<script th:src="@{/js/modalsCustAudits.js}" src="../static/js/modalsCustAudits.js"></script>
+	
 
 
 <body id="page-top">
@@ -10,8 +11,8 @@
 		<div class="card mb-3">
 
 			<div class="card-header">
-				<i class="fas fa-table"> Data Questionnaires</i> <br /> <a><button
-						class="btn btn-secondary fas fa-user-plus nBtn" id="nBtn"></button></a>
+				<a><button th:href="@{/editCustAudits/(usuario=${username})}" 
+				class="btn btn-outline-danger fas fa-calendar-plus nBtn"> Request an audit</button></a>
 			</div>
 
 			<div class="card-body">
@@ -20,29 +21,43 @@
 						<thead class="thead-light">
 							<tr>
 								<th>Actions</th>
-								<th>Audit type</th>
-								<th>Section</th>
-								<th>Question</th>
+								<th>Company name</th>
+								<th>Questionnaire type</th>
+								<th>Report #</th>
+								<th>Qualification</th>
+								<th>Start date audit</th>
+								<th>End date audit</th>
 							
 							</tr>
 						</thead>
 						<tfoot class="thead-light">
 							<tr>
 								<th>Actions</th>
-								<th>Audit type</th>
-								<th>Section</th>
-								<th>Question</th>
+								<th>Company name</th>
+								<th>Questionnaire type</th>
+								<th>Report #</th>
+								<th>Qualification</th>
+								<th>Audit start date</th>
+								<th>Audit end date</th>
 							</tr>
 						</tfoot>
 						<tbody>
 							<tr th:each="contact : ${contacts}">
-								<td><a th:href="@{/findQuest/(id=${contact.preguntasId})}"
-										class="btn btn-outline-primary fas fa-pencil-alt eBtn">_</a> <a
-										th:href="@{/deleteQuest/(adminId=${contact.preguntasId})}"
-										class="btn btn-outline-danger fas fa-trash-alt dBtn"></a></td>
-								<td th:text="${contact.tipoAuditoriaId.tipoAuditoria}"></td>
-								<td th:text="${contact.seccionId.seccion}"></td>
-								<td th:text="${contact.preguntas}"></td>
+								<td><a th:href="@{/deleteAssig/(adminId=${contact.informeId})}"
+										class="btn btn-outline-success fas fa-file-download report" title="Download"></a>
+									<a th:href="@{/deleteAssig/(adminId=${contact.informeId})}"
+										class="btn btn-outline-success fas fa-clipboard-list checkList" title="Check-questionnaire"></a>
+									<a th:href="@{/findAssig/(id=${contact.informeId})}"
+										class="btn btn-outline-primary fas fa-pencil-alt eBtn">_</a> 
+									<a th:href="@{/deleteAssig/(adminId=${contact.informeId})}"
+										class="btn btn-outline-danger fas fa-trash-alt dBtn"></a>
+									</td>
+								<td th:text="${contact.clienteId.nombreEmpresa}"></td>
+								<td th:text="${contact.datoComunId.solicitudAuditoriaId.tipoAuditoriaId.tipoAuditoria}"></td>
+								<td th:text="${contact.informeId}"></td>
+								<td th:text="${contact.datoComunId.calificacion}"></td>
+								<td th:text="${contact.datoComunId.solicitudAuditoriaId.fechaInicio}"></td>
+								<td th:text="${contact.datoComunId.solicitudAuditoriaId.fechaFinal}"></td>
 		
 							</tr>
 
@@ -59,13 +74,13 @@
 
 	<!-- add or editAdmin Modal-->
 	<div class="myForm">
-		<form th:action="@{/saveAdmin}" method="post">
+		<form th:action="@{/saveCustAudits}" method="post">
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Add or Edit Administrator</h5>
+							<h5 class="modal-title" id="exampleModalLabel">Request an audit</h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -75,7 +90,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">Close</button>
-							<input type="submit" class="btn btn-primary" value="Save" />
+							<input type="submit" class="btn btn-primary" value="Request" />
 						</div>
 					</div>
 				</div>

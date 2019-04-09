@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>SB Admin - Register</title>
+
+<!-- Bootstrap core CSS-->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom fonts for this template-->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+
+<!-- Custom styles for this template-->
+<link href="css/sb-admin.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<!-- Carga enabled-->
+<script type="text/javascript">
+	$(document).ready(function() {
+		var valorCheck = $('#enable').val();
+		if (valorCheck) {
+			$("#enabled").prop('checked', true);
+		} else
+			$("#enabled").prop('checked', false);
+
+	});
+</script>
+
+</head>
+
+<body class="bg-dark">
+
+	<!-- Edit administrador-->
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="form-label-group">
+					<input type="hidden" id="userId" class="form-control" value=""
+						placeholder="Id" required="required" autofocus="autofocus"
+						name="userId"> <label for="userId">Id</label>
+				</div>
+				<div class="form-label-group">
+					<input type="text" id="firstName" class="form-control" value=""
+						placeholder="First name" required="required" autofocus="autofocus"
+						name="nombre"> <label for="firstName">First name</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-label-group">
+					<input type="text" id="lastName" class="form-control" value=""
+						placeholder="Last name" required="required" name="apellido">
+					<label for="lastName">Last name</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="form-label-group">
+			<input type="email" id="inputEmail" class="form-control" value=""
+				placeholder="Email address" name="correoElectronico"> <label
+				for="inputEmail">Email address</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="form-label-group">
+			<input type="text" id="inputAddress" class="form-control" value=""
+				placeholder="Address"> <label for="inputAddress">Address</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="form-label-group">
+					<input type="number" id="inputPhone1" class="form-control" value=""
+						placeholder="Phone 1" required="required" name="numeroTelefono1">
+					<label for="inputPhone1">Phone 1</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-label-group">
+					<input type="number" id="inputPhone2" class="form-control" value=""
+						placeholder="Phone 2" required="required" name="numeroTelefono2">
+					<label for="inputPhone2">Phone 2</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="form-label-group">
+					<input type="text" id="inputUsername" class="form-control" value=""
+						placeholder="User Name" required="required" name="usuario">
+					<label for="inputUsername">User Name</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-label-group">
+					<input type="text" id="inputPassword" class="form-control" value=""
+						placeholder="Password" required="required" name="clave"> <label
+						for="inputPassword">Password</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-auto my-6">
+		<div class="form-group">
+			<label>Enabled</label> <select class="form-control" id="enabled"
+				name="enabled">
+				<option value="true">true</option>
+				<option value="false">false</option>
+			</select>
+		</div>
+	</div>
+
+
+
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+</body>
+
+</html>

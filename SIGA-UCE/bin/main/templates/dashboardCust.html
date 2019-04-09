@@ -15,6 +15,7 @@
 
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,7 +29,7 @@
     <script  src="https://code.jquery.com/jquery-3.3.1.js"></script>
   
     <!-- Load contenido-->
-	<script th:src="@{/js/dashboardAdmin.js}" src="../static/js/dashboardAdmin.js"></script>
+	<script th:src="@{/js/dashboardCust.js}" src="../static/js/dashboardCust.js"></script>
 	
   </head>
 
@@ -101,38 +102,24 @@
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="dashboardAdmin.html">
+          <a class="nav-link" href="dashboardCust.html">
             <i class="fas fa-user-circle fa-fw"></i>
-            <span>Hi administrator, <span th:text="${username}"></span></span>
-            <span>Role, <span th:text="${role}"></span></span>
+            <span>Hi customer, <span th:text="${username}"></span></span>
           </a>
         </li>
-        <!-- Cuestionarios -->
+        <!-- Cuenta del cliente -->
         <li class="nav-item">
-          <a class="nav-link tQuest" href="#">
-            <i class="fas fa-fw fa-question-circle"></i>
-            <span>Questionnaires</span></a>
+          <a class="nav-link profile" href="#">
+            <i class="fas fa-fw fa-user-astronaut" ></i>
+            <span>Profile</span></a>
         </li>
-        <!-- Asignaciones -->
+        <!-- consulta sus auditorias -->
         <li class="nav-item">
-          <a class="nav-link tAssig" href="#">
-            <i class="fas fa-fw fa-hand-point-up"></i>
-            <span>Assignments</span></a>
+          <a th:href="@{tableCustAudits/(usuario=${username})}" class="nav-link tAudits">
+            <i class="fas fa-fw fa-list-alt"></i>
+            <span>Audits</span></a>
         </li>
-        <!-- Calendarizacion -->
-        <li class="nav-item">
-          <a class="nav-link tSche" href="#">
-            <i class="fas fa-fw fa-calendar"></i>
-            <span>Scheduling</span></a>
-        </li>
-        
-       <!-- Cierre no conformidades -->
-        <li class="nav-item">
-          <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-exclamation-triangle"></i>
-            <span>Nonconformities</span></a>
-        </li>
-        
+              
              
         <!-- ROLES -->
         <li class="nav-item dropdown">
@@ -160,7 +147,7 @@
 
         <!-- Cargar contenido -->
         <div  class="container-fluid">
-        	<div id ="seccionRecargar"></div>
+        	<div id ="seccionRecargarCust"></div>
         </div>
 
         
@@ -170,6 +157,11 @@
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
               <span>Copyright © SIGA-UCE 2019</span>
+              <br/>
+              <br/>
+              <script>
+              document.write(new Date())
+            	</script>
             </div>
           </div>
         </footer>
@@ -207,6 +199,7 @@
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>

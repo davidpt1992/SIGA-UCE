@@ -39,9 +39,9 @@ public class UserServicioImpl implements UserServicio {
 	}
 
 	@Override
-	public void saveAdmin(User admin) {
-		admin.setClave(encriptar.encryptKey(admin.getClave()));
-		userRepository.save(admin);
+	public void saveUser(User user) {
+		user.setClave(encriptar.encryptKey(user.getClave()));
+		userRepository.save(user);
 				
 	}
 
@@ -74,6 +74,16 @@ public class UserServicioImpl implements UserServicio {
 	@Override
 	public List<RoleSys> findAllRole() {
 		return roleSysRepository.findAll();
+	}
+
+	@Override
+	public User findUserRole(String username) {
+		return userRepository.findByUsuario(username);
+	}
+
+	@Override
+	public RoleSys findRoleById(int roleId) {
+		return roleSysRepository.findById(roleId).get();
 	}
 
 }
