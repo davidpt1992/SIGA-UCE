@@ -34,6 +34,7 @@ $(document).ready(function () {
 		    });
            
         } else {
+
         	$('.modal-body').load(href,function(){
 		        $('.myForm #exampleModal').modal({show:true});
 		    });
@@ -48,6 +49,14 @@ $(document).ready(function () {
         $('#deleteModal').modal();
 
 
+    });
+    $('.lookReport').on('click',function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$.get(href, function (informe, status) {
+        	$('.myFormReport #userId').val(user.userId);
+            
+		 });
     });
     
 

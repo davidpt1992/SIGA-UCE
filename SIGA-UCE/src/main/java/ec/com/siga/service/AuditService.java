@@ -11,6 +11,6 @@ import ec.com.siga.model.SolucitudAuditoriaString;
 public interface AuditService {
 	public abstract List<TipoAuditoria> findAllTipoAuditoria();
 	public abstract List<ClienteTipo> findAllTipoCliente();
-	public abstract void solicitudAuditoria(Cliente cliente, DatoComun datoComun, SolucitudAuditoriaString sas);
+	public abstract void solicitudAuditoria(DatoComun datoComun, SolucitudAuditoriaString sas, String usuario)throws Exception;
 	
 }

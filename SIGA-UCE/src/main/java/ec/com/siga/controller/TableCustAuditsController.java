@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import ec.com.siga.entity.Cliente;
 import ec.com.siga.entity.DatoComun;
 import ec.com.siga.entity.Informe;
-import ec.com.siga.entity.User;
 import ec.com.siga.model.SolucitudAuditoriaString;
 import ec.com.siga.service.AuditService;
 import ec.com.siga.service.InformeService;
@@ -32,8 +30,7 @@ public class TableCustAuditsController {
 	public ModelAndView showForm(String usuario) {
 		ModelAndView mav = new ModelAndView("tableCustAudits");
 		mav.addObject("contacts", informeServicio.findAllCustAudits(usuario));
-		mav.addObject("username", usuario);
-		
+		mav.addObject("usuario", usuario);
 		return mav;
 	}
 	
@@ -42,22 +39,16 @@ public class TableCustAuditsController {
 	public ModelAndView showEditAdminForm(String usuario) {
 		ModelAndView mav = new ModelAndView("editCustAudits");
 		mav.addObject("tipAudit", auditService.findAllTipoAuditoria());
-		mav.addObject("tipCust", auditService.findAllTipoCliente());
-		System.out.println(usuario+" este es el usuario que quiere crear");
+		mav.addObject("usuario", usuario);
 		return mav;
 	}
 
 	@PostMapping("/saveCustAudits")
-	public String saveAdmin(Cliente cliente, DatoComun datoComun, SolucitudAuditoriaString sas, User user) {
-		//User user1 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//System.out.println(user1.getUsuario()+"coge del dash");
-		//auditService.solicitudAuditoria(cliente, datoComun, sas);
-		System.out.println(sas.getAuxfechaInicio());
-		System.out.println(sas.getAuxhoraInicio());
-		System.out.println(sas.getAuxfechaFinal());
-		System.out.println(sas.getAuxhoraFin());
-		System.out.println(user.getUsuario()+"coge de la tabla");
-		return "/dashboardCust";
+	public ModelAndView saveAdmin(DatoComun datoComun, SolucitudAuditoriaString sas, String usuario) throws Exception {
+		ModelAndView mav = new ModelAndView("/dashboardCust");
+		mav.addObject("username", usuario);
+		auditService.solicitudAuditoria(datoComun, sas, usuario);
+		return mav;
 	}
 
 	@GetMapping("/findCustAudits")

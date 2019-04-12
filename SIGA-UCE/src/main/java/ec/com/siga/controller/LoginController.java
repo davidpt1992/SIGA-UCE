@@ -49,9 +49,6 @@ public class LoginController {
 		default:
 			mav.setViewName("home");
 		}
-		 
-		
-		
 		mav.addObject("username", user.getUsername());
 		mav.addObject("role", role);
 		return mav;

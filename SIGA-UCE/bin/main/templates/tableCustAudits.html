@@ -1,20 +1,14 @@
 	<!-- Custom modals create update delete -->
 	<script th:src="@{/js/modalsCustAudits.js}" src="../static/js/modalsCustAudits.js"></script>
 	
-
-
 <body id="page-top">
-
-	
 
 		<!-- DataTable Admin -->
 		<div class="card mb-3">
-
 			<div class="card-header">
-				<a><button th:href="@{/editCustAudits/(usuario=${username})}" 
+				<a><button th:href="@{/editCustAudits/(usuario=${usuario})}" 
 				class="btn btn-outline-danger fas fa-calendar-plus nBtn"> Request an audit</button></a>
 			</div>
-
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table table-bordered ">
@@ -23,6 +17,7 @@
 								<th>Actions</th>
 								<th>Company name</th>
 								<th>Questionnaire type</th>
+								<th>Status</th>
 								<th>Report #</th>
 								<th>Qualification</th>
 								<th>Start date audit</th>
@@ -35,44 +30,35 @@
 								<th>Actions</th>
 								<th>Company name</th>
 								<th>Questionnaire type</th>
+								<th>Status</th>
 								<th>Report #</th>
 								<th>Qualification</th>
-								<th>Audit start date</th>
-								<th>Audit end date</th>
+								<th>Start date audit</th>
+								<th>End date audit</th>
 							</tr>
 						</tfoot>
 						<tbody>
 							<tr th:each="contact : ${contacts}">
 								<td><a th:href="@{/deleteAssig/(adminId=${contact.informeId})}"
 										class="btn btn-outline-success fas fa-file-download report" title="Download"></a>
-									<a th:href="@{/deleteAssig/(adminId=${contact.informeId})}"
-										class="btn btn-outline-success fas fa-clipboard-list checkList" title="Check-questionnaire"></a>
-									<a th:href="@{/findAssig/(id=${contact.informeId})}"
-										class="btn btn-outline-primary fas fa-pencil-alt eBtn">_</a> 
-									<a th:href="@{/deleteAssig/(adminId=${contact.informeId})}"
-										class="btn btn-outline-danger fas fa-trash-alt dBtn"></a>
-									</td>
+									<a th:href="@{findReport/(Id=${contact.informeId})}"
+										class="btn btn-outline-info fas fa-eye lookReport" title="Check-questionnaire"></a></td>
 								<td th:text="${contact.clienteId.nombreEmpresa}"></td>
 								<td th:text="${contact.datoComunId.solicitudAuditoriaId.tipoAuditoriaId.tipoAuditoria}"></td>
+								<td class="badge badge-pill badge-danger" th:text="${contact.datoComunId.solicitudAuditoriaId.estadoAuditoriaId.estadoAuditoria}"></td>
 								<td th:text="${contact.informeId}"></td>
 								<td th:text="${contact.datoComunId.calificacion}"></td>
 								<td th:text="${contact.datoComunId.solicitudAuditoriaId.fechaInicio}"></td>
 								<td th:text="${contact.datoComunId.solicitudAuditoriaId.fechaFinal}"></td>
-		
 							</tr>
-
-
 						</tbody>
 					</table>
 				</div>
 			</div>
-
 			<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
 		</div>
 
-	
-
-	<!-- add or editAdmin Modal-->
+	<!-- add or edit solicitud auditoria Modal-->
 	<div class="myForm">
 		<form th:action="@{/saveCustAudits}" method="post">
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -97,30 +83,28 @@
 			</div>
 		</form>
 	</div>
-
-	<!-- deleteAdmin Modal-->
-	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="deleteModalLabel">Modal title</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p class="alert alert-danger">Are you sure want to delete this
-						country?</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-					<a type="button" href="" class="btn btn-danger" id="delHref">Delete</a>
+	
+	<!-- view report-->
+	<div class="myFormReport">
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Request an audit</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body"></div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button> 
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
 	</div>
 </body>
 

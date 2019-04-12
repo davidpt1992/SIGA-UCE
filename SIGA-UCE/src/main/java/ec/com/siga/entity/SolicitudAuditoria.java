@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 
 /**
  *
@@ -41,9 +41,9 @@ public class SolicitudAuditoria implements Serializable {
     @Column(name = "FECHA_FINAL")
     @Temporal(TemporalType.DATE)
     private Date fechaFinal;
-    @Size(max = 10)
-    @Column(name = "SYSTATUS")
-    private String systatus;
+    @JoinColumn(name = "ESTADO_AUDITORIA_ID", referencedColumnName = "ESTADO_AUDITORIA_ID")
+    @ManyToOne
+    private EstadoAuditoria estadoAuditoriaId;
     @OneToMany(mappedBy = "solicitudAuditoriaId")
     private List<CheckList> checkListList;
     @OneToMany(mappedBy = "solicitudAuditoriaId")
@@ -52,69 +52,89 @@ public class SolicitudAuditoria implements Serializable {
     @ManyToOne
     private TipoAuditoria tipoAuditoriaId;
 
+	
     public Integer getSolicitudAuditoriaId() {
 		return solicitudAuditoriaId;
 	}
+
 
 	public void setSolicitudAuditoriaId(Integer solicitudAuditoriaId) {
 		this.solicitudAuditoriaId = solicitudAuditoriaId;
 	}
 
+
 	public Date getFechaInicio() {
 		return fechaInicio;
 	}
+
 
 	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
+
 	public Date getFechaFinal() {
 		return fechaFinal;
 	}
+
 
 	public void setFechaFinal(Date fechaFinal) {
 		this.fechaFinal = fechaFinal;
 	}
 
-	public String getSystatus() {
-		return systatus;
+
+	public EstadoAuditoria getEstadoAuditoriaId() {
+		return estadoAuditoriaId;
 	}
 
-	public void setSystatus(String systatus) {
-		this.systatus = systatus;
+
+	public void setEstadoAuditoriaId(EstadoAuditoria estadoAuditoriaId) {
+		this.estadoAuditoriaId = estadoAuditoriaId;
 	}
+
 
 	public List<CheckList> getCheckListList() {
 		return checkListList;
 	}
 
+
 	public void setCheckListList(List<CheckList> checkListList) {
 		this.checkListList = checkListList;
 	}
+
 
 	public List<DatoComun> getDatoComunList() {
 		return datoComunList;
 	}
 
+
 	public void setDatoComunList(List<DatoComun> datoComunList) {
 		this.datoComunList = datoComunList;
 	}
+
 
 	public TipoAuditoria getTipoAuditoriaId() {
 		return tipoAuditoriaId;
 	}
 
+
 	public void setTipoAuditoriaId(TipoAuditoria tipoAuditoriaId) {
 		this.tipoAuditoriaId = tipoAuditoriaId;
 	}
 
-	public SolicitudAuditoria(Integer solicitudAuditoriaId, Date fechaInicio, Date fechaFinal, String systatus,
-			List<CheckList> checkListList, List<DatoComun> datoComunList, TipoAuditoria tipoAuditoriaId) {
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public SolicitudAuditoria(Integer solicitudAuditoriaId, Date fechaInicio, Date fechaFinal,
+			EstadoAuditoria estadoAuditoriaId, List<CheckList> checkListList, List<DatoComun> datoComunList,
+			TipoAuditoria tipoAuditoriaId) {
 		super();
 		this.solicitudAuditoriaId = solicitudAuditoriaId;
 		this.fechaInicio = fechaInicio;
 		this.fechaFinal = fechaFinal;
-		this.systatus = systatus;
+		this.estadoAuditoriaId = estadoAuditoriaId;
 		this.checkListList = checkListList;
 		this.datoComunList = datoComunList;
 		this.tipoAuditoriaId = tipoAuditoriaId;

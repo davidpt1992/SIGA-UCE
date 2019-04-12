@@ -79,6 +79,35 @@ public class User implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<UserRole> userRole = new HashSet<UserRole>();
 
+	
+	public List<Auditor> getAuditorList() {
+		return auditorList;
+	}
+
+	public void setAuditorList(List<Auditor> auditorList) {
+		this.auditorList = auditorList;
+	}
+
+	public List<Auditor> getBackOfficeList() {
+		return backOfficeList;
+	}
+
+	public void setBackOfficeList(List<Auditor> backOfficeList) {
+		this.backOfficeList = backOfficeList;
+	}
+
+	public List<Cliente> getClienteList() {
+		return clienteList;
+	}
+
+	public void setClienteList(List<Cliente> clienteList) {
+		this.clienteList = clienteList;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public Integer getUserId() {
 		return userId;
 	}
