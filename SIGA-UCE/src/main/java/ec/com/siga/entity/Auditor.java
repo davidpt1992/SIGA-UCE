@@ -38,11 +38,15 @@ public class Auditor implements Serializable {
     private String tokenUnique;
     @OneToMany(mappedBy = "auditorId")
     private List<Movil> movilList;
+    
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     @ManyToOne
     private User userId;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "auditorId")
     private List<Informe> informeList;
+    
+    
     @OneToMany(mappedBy = "auditorId")
     private List<DeviceToken> deviceTokenList;
 	public Integer getAuditorId() {

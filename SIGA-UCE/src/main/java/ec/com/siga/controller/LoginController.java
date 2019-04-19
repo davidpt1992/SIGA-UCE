@@ -41,7 +41,7 @@ public class LoginController {
 			mav.setViewName("dashboardAdmin");
 			break;
 		case 3:
-			mav.setViewName("dashboardAdmin");
+			mav.setViewName("dashboardBack");
 			break;
 		case 4:
 			mav.setViewName("dashboardAdmin");

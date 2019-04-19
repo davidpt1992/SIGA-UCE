@@ -12,14 +12,15 @@ $(document).ready(function () {
             	$('.myForm #userId').val(user.userId);
                 $('.myForm #firstName').val(user.nombre);
                	$('.myForm #lastName').val(user.apellido);
-               	$('.myForm #inputEmail').val(user.correoElectronico);
+               	$('.myForm #role').val(user.roleId.rol);
+				$('.myForm #inputEmail').val(user.correoElectronico);
 				$('.myForm #inputAddress').val(user.direccion);
 				$('.myForm #inputPhone1').val(user.numeroTelefono1);
 				$('.myForm #inputPhone2').val(user.numeroTelefono2);
 				$('.myForm #inputUsername').val(user.usuario);
 				$('.myForm #inputPassword').val(user.clave);
 				$('.myForm #enabled').val(user.enabled);
-									
+					
 				if(user.enabled){
 					$("#enabled").prop('checked', true);
 					}
@@ -33,9 +34,8 @@ $(document).ready(function () {
 		    });
            
         } else {
-        	$('.myForm #firstName').val('');
 
-        	$('.modal-body').load('editAdmin',function(){
+        	$('.modal-body').load(href,function(){
 		        $('.myForm #exampleModal').modal({show:true});
 		    });
         }
@@ -50,5 +50,14 @@ $(document).ready(function () {
 
 
     });
+    
+    $('.assign').on('click',function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$('.modal-body').load(href,function(){
+	        $('.myFormAuditsRequests #exampleModal').modal({show:true});
+	    });
+    });
+    
 
 });

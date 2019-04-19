@@ -32,8 +32,9 @@ public class TableAdminController {
 	
 	@PostMapping("/saveAdmin")
 	public String saveAdmin(User admin) {
+		admin.setRoleId(userServicio.findRoleById(4));
 		userServicio.saveUser(admin);
-		return "redirect:/dashboardAdmin";
+		return "dashboardAdmin";
 	}
 
 	@GetMapping("/findAdmin")

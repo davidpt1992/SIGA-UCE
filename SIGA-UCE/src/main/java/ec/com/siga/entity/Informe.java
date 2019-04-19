@@ -29,12 +29,15 @@ public class Informe implements Serializable {
     @NotNull
     @Column(name = "INFORME_ID")
     private Integer informeId;
+    
     @JoinColumn(name = "AUDITOR_ID", referencedColumnName = "AUDITOR_ID")
     @ManyToOne(optional = false)
     private Auditor auditorId;
+    
     @JoinColumn(name = "BACKOFFICE_ID", referencedColumnName = "BACKOFFICE_ID")
     @ManyToOne(optional = false)
     private BackOffice backOfficeId;
+    
     @JoinColumn(name = "CLIENTE_ID", referencedColumnName = "CLIENTE_ID")
     @ManyToOne
     private Cliente clienteId;

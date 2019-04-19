@@ -33,9 +33,11 @@ public class BackOffice implements Serializable {
     @Size(max = 10)
     @Column(name = "CEDULA")
     private String cedula;
+    
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     @ManyToOne
     private User userId;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "backOfficeId")
     private List<Informe> informeList;
     
@@ -80,7 +82,7 @@ public class BackOffice implements Serializable {
 	}
 
 
-	public BackOffice(@NotNull Integer backOfficeId, @Size(max = 10) String cedula, User userId,
+	public BackOffice(Integer backOfficeId, String cedula, User userId,
 			List<Informe> informeList) {
 		super();
 		this.backOfficeId = backOfficeId;
