@@ -8996,7 +8996,23 @@ a.text-dark:hover, a.text-dark:focus {
   }
   body {
     min-width: 992px !important;
+    font-family: 'Cabin', sans-serif;
   }
+  #wizard {
+  top: 20px;
+  position: relative;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+#wzd-content {
+  font-size: 20px;
+}
+
+.btn-wzd {
+  font-size: 2em;
+  color: #000;
+}
   .container {
     min-width: 992px !important;
   }
