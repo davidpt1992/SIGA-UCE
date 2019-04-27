@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import ec.com.siga.entity.Auditor;
 import ec.com.siga.entity.Cliente;
 import ec.com.siga.entity.Informe;
 
@@ -13,5 +14,6 @@ import ec.com.siga.entity.Informe;
 public interface InformeRepository extends JpaRepository<Informe, Serializable> {
 	
 	public abstract List<Informe> findByClienteId(Cliente clienteId);
+	public abstract List<Informe> findByAuditorId(Auditor auditorId);
 
 }

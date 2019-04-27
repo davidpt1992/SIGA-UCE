@@ -29,6 +29,8 @@ public class CheckList implements Serializable {
     @JoinColumn(name = "PREGUNTAS_ID", referencedColumnName = "PREGUNTAS_ID")
     @ManyToOne
     private Preguntas preguntasId;
+    @Column(name = "CODIGO")
+	private Integer codigo;
     @JoinColumn(name = "DATO_ESPECIFICO_ID", referencedColumnName = "DATO_ESPECIFICO_ID")
     @ManyToOne
     private DatoEspecifico datoEspecificoId;
@@ -59,14 +61,29 @@ public class CheckList implements Serializable {
 	public void setSolicitudAuditoriaId(SolicitudAuditoria solicitudAuditoriaId) {
 		this.solicitudAuditoriaId = solicitudAuditoriaId;
 	}
-	public CheckList(Integer checkListId, Preguntas preguntasId, DatoEspecifico datoEspecificoId,
-			SolicitudAuditoria solicitudAuditoriaId) {
+	
+	
+	public Integer getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
+	public CheckList(Integer checkListId, Preguntas preguntasId, Integer codigo,
+			DatoEspecifico datoEspecificoId, SolicitudAuditoria solicitudAuditoriaId) {
 		super();
 		this.checkListId = checkListId;
 		this.preguntasId = preguntasId;
+		this.codigo = codigo;
 		this.datoEspecificoId = datoEspecificoId;
 		this.solicitudAuditoriaId = solicitudAuditoriaId;
 	}
+
 	public CheckList() {
 		
 	}
