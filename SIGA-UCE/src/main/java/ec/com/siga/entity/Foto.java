@@ -11,10 +11,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -30,32 +29,42 @@ public class Foto implements Serializable {
     @NotNull
     @Column(name = "FOTO_ID")
     private Integer fotoId;
-    @Size(max = 254)
+    @Lob
     @Column(name = "FOTO")
-    private String foto;
+    private byte[] foto;
 
-    public Integer getFotoId() {
+    
+	public Integer getFotoId() {
 		return fotoId;
 	}
+
 
 	public void setFotoId(Integer fotoId) {
 		this.fotoId = fotoId;
 	}
 
-	public String getFoto() {
+
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(String foto) {
+
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 
 
-	public Foto(Integer fotoId, String foto) {
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public Foto(Integer fotoId, byte[] foto) {
 		super();
 		this.fotoId = fotoId;
 		this.foto = foto;
 	}
+
 
 	public Foto() {
     }

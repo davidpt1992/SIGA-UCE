@@ -45,7 +45,7 @@
 								
 								<td th:text="${contact.clienteId.nombreEmpresa}"></td>
 								<td th:text="${contact.datoComunId.solicitudAuditoriaId.tipoAuditoriaId.tipoAuditoria}"></td>
-								<td th:text="${contact.auditorId.userId.nombre}"></td>
+								<td th:text="${contact.auditorId?.userId?.nombre}"></td>
 								<td class="badge badge-pill badge-danger" th:text="${contact.datoComunId.solicitudAuditoriaId.estadoAuditoriaId.estadoAuditoria}"></td>
 								<td th:text="${contact.informeId}"></td>
 								<td th:text="${contact.datoComunId.solicitudAuditoriaId.fechaInicio}"></td>

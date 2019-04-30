@@ -47,7 +47,7 @@ public class Cliente implements Serializable {
     @ManyToOne
     private ClienteTipo clienteTipoId;
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private User userId;
 	public Integer getClienteId() {
 		return clienteId;

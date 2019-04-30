@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ec.com.siga.entity;
 
 import java.io.Serializable;
@@ -15,37 +10,34 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-/**
- *
- * @author Stalin
- */
 @Entity
 @Table(name = "informe")
 public class Informe implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue
-    @NotNull
-    @Column(name = "INFORME_ID")
-    private Integer informeId;
-    
-    @JoinColumn(name = "AUDITOR_ID", referencedColumnName = "AUDITOR_ID")
-    @ManyToOne(optional = false)
-    private Auditor auditorId;
-    
-    @JoinColumn(name = "BACKOFFICE_ID", referencedColumnName = "BACKOFFICE_ID")
-    @ManyToOne(optional = false)
-    private BackOffice backOfficeId;
-    
-    @JoinColumn(name = "CLIENTE_ID", referencedColumnName = "CLIENTE_ID")
-    @ManyToOne
-    private Cliente clienteId;
-    @JoinColumn(name = "DATO_COMUN_ID", referencedColumnName = "DATO_COMUN_ID")
-    @ManyToOne
-    private DatoComun datoComunId;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue
+	@NotNull
+	@Column(name = "INFORME_ID")
+	private Integer informeId;
 
-    public Integer getInformeId() {
+	@JoinColumn(name = "AUDITOR_ID", referencedColumnName = "AUDITOR_ID")
+	@ManyToOne
+	private Auditor auditorId;
+
+	@JoinColumn(name = "BACKOFFICE_ID", referencedColumnName = "BACKOFFICE_ID")
+	@ManyToOne
+	private BackOffice backOfficeId;
+
+	@JoinColumn(name = "CLIENTE_ID", referencedColumnName = "CLIENTE_ID")
+	@ManyToOne(optional = false)
+	private Cliente clienteId;
+
+	@JoinColumn(name = "DATO_COMUN_ID", referencedColumnName = "DATO_COMUN_ID")
+	@ManyToOne(optional = false)
+	private DatoComun datoComunId;
+
+	public Integer getInformeId() {
 		return informeId;
 	}
 
@@ -85,17 +77,17 @@ public class Informe implements Serializable {
 		this.datoComunId = datoComunId;
 	}
 
-	public Informe(Integer informeId, Auditor auditorId, BackOffice backofficeId, Cliente clienteId, DatoComun datoComunId) {
+	public Informe(Integer informeId, Auditor auditorId, BackOffice backofficeId, Cliente clienteId,
+			DatoComun datoComunId) {
 		super();
 		this.informeId = informeId;
 		this.auditorId = auditorId;
-		this.backOfficeId =backofficeId;
+		this.backOfficeId = backofficeId;
 		this.clienteId = clienteId;
 		this.datoComunId = datoComunId;
 	}
 
 	public Informe() {
-    }
+	}
 
-    
 }

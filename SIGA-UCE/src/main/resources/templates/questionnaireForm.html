@@ -7,13 +7,13 @@
 <body id="page-top">
 	<div class="container">
 		<div class="form-label-group">
-			<input type="hidden" th:value="${usuario}" name="usuario">
+			<input type="hidden" th:value="${usuario}" name="usuario" id="usuario">
 		</div>
 		<div class="form-label-group">
-			<input type="hidden" th:value="${id}" name="id">
+			<input type="hidden" th:value="${id}" name="id" id="id">
 		</div>
 		<div class="form-label-group">
-			<input type="hidden" th:value="${codigoString}" name="codigo">
+			<input type="hidden" th:value="${codigoString}" name="codigo" id="codigo">
 		</div>
 
 		<div class="input-group mb-3">
@@ -31,40 +31,41 @@
 			<h3 class="text-center" th:text="${pregunta.preguntasId.preguntas}"></h3>
 		</div>
 		<div class="input-group mb-3">
-			<div class="text-center col-md-offset-1 col-md-10">
+			<div class="text-center  col-md-10">
 				<div class="radio">
 					<label> <input type="radio" name="respuesta"
-						id="optionsRadios1" value="true" checked> Yes
+						id="respuesta" value="true" checked> Yes
 					</label>
 				</div>
 				<div class="radio">
 					<label> <input type="radio" name="respuesta"
-						id="optionsRadios2" value="false"> No
+						id="respuesta" value="false"> No
 					</label>
 				</div>
 			</div>
 		</div>
-		<div class="input-group mb-3">
-			<div class="custom-file">
-				<input type="file" class="custom-file-input"
-					id="validatedCustomFile" required> <label
-					class="custom-file-label" for="validatedCustomFile">Choose
-					Pic...</label>
-				<div class="invalid-feedback">Invalid custom file feedback</div>
+
+		<form>
+			<div class="form-group mb-3">
+				<label for="foto">Choose Pic...</label> <input
+					type="file" class="form-control-file" id="foto" name="foto">
 			</div>
-		</div>
+		</form>
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<span class="input-group-text">Evidence</span>
 			</div>
-			<textarea class="form-control" aria-label="With textarea"></textarea>
+			<textarea class="form-control" aria-label="With textarea" th:text="${pregunta.datoEspecificoId?.evidencia}" name="evidencia" id="evidencia"></textarea>
 		</div>
 
 		<div class="input-group mb-3">
 			<a
-				th:href="@{continueQuestionnaire1/(id=${id},usuario=${usuario},codigo=${codigoString})}"
+				class="btn btn-secondary fa fa-angle-left previous1"></a> <a
+				class="btn btn-primary fa fa-angle-right next1"></a>
+			<a
+				th:href="@{previousQuestion/(id=${id},usuario=${usuario},codigo=${codigoString})}"
 				class="btn btn-secondary fa fa-angle-left previous"></a> <a
-				th:href="@{continueQuestionnaire1/(id=${id},usuario=${usuario},codigo=${codigoString})}"
+				th:href="@{nextQuestion/(id=${id},usuario=${usuario},codigo=${codigoString})}"
 				class="btn btn-primary fa fa-angle-right next"></a>
 
 		</div>

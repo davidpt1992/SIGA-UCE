@@ -43,15 +43,15 @@ public class TableAdminController {
 	return userServicio.findAdmin(id);
 	}
 	
-	@GetMapping("/cancel")
+	@GetMapping("/cancelAdmin")
 	public String cancel() {
-		return "redirect:/dashboardAdmin";
+		return "/dashboardAdmin";
 	}
 	
 	@GetMapping("/delete")
     public String deleteCountry(Integer adminId) {
 		userServicio.deletAdmin(userServicio.findAdmin(adminId));
-        return "redirect:/dashboardAdmin";
+        return "dashboardAdmin";
     }
 
 }

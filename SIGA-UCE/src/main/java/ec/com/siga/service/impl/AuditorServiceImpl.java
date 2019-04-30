@@ -1,13 +1,17 @@
 package ec.com.siga.service.impl;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import ec.com.siga.entity.CheckList;
 import ec.com.siga.entity.DatoComun;
+import ec.com.siga.entity.DatoEspecifico;
+import ec.com.siga.entity.Foto;
 import ec.com.siga.entity.Informe;
 import ec.com.siga.entity.Preguntas;
 import ec.com.siga.entity.SolicitudAuditoria;
@@ -15,6 +19,7 @@ import ec.com.siga.entity.TipoAuditoria;
 import ec.com.siga.repository.AuditorRepository;
 import ec.com.siga.repository.CheckListRepository;
 import ec.com.siga.repository.DatoComunRepository;
+import ec.com.siga.repository.DatoEspecificoRepository;
 import ec.com.siga.repository.EstadoAuditRepository;
 import ec.com.siga.repository.FotoRepository;
 import ec.com.siga.repository.InformeRepository;
@@ -51,6 +56,10 @@ public class AuditorServiceImpl implements AuditorService {
 	@Autowired
 	@Qualifier("dComunRepository")
 	private DatoComunRepository dComunRepository;
+	
+	@Autowired
+	@Qualifier("dEspecificoRepository")
+	private DatoEspecificoRepository dEspecificoRepository;
 
 	@Autowired
 	@Qualifier("auditorRepository")
@@ -71,7 +80,7 @@ public class AuditorServiceImpl implements AuditorService {
 	@Autowired
 	@Qualifier("checkListRepository")
 	private CheckListRepository checkListRepository;
-
+	
 	@Override
 	public List<Informe> findAllAssignedAudits(String auditor) {
 		return informeRepository.findByAuditorId(auditorRepository.findByUserId(userRepository.findByUsuario(auditor)));
@@ -121,15 +130,31 @@ public class AuditorServiceImpl implements AuditorService {
 	@Override
 	public CheckList replyPost(int informeId, String codigo, String accion) {
 		int cod = Integer.valueOf(codigo);
-		Informe informe = informeRepository.findById(informeId).get();
-		DatoComun dc = informe.getDatoComunId();
-		SolicitudAuditoria sa = dc.getSolicitudAuditoriaId();
-				
+						
 		if (accion.equals("+")) {
 			return checkListRepository.findByCodigo(cod+1);
 		}else {
 			return checkListRepository.findByCodigo(cod-1);
 		}
+	}
+
+	@Override
+	public void saveReply(MultipartFile f, String evidencia, boolean respuesta, String codigo) {
+       
+		Foto foto = new Foto();
+		try {
+			foto.setFoto(f.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		fotoRepository.save(foto);
+		DatoEspecifico de = new DatoEspecifico();
+		de.setFotoId(foto);
+		de.setEvidencia(evidencia);
+		de.setRespuesta(respuesta);
+		dEspecificoRepository.save(de);
+		CheckList cl = checkListRepository.findByCodigo(Integer.parseInt(codigo));
+		cl.setDatoEspecificoId(de);
 	}
 
 }

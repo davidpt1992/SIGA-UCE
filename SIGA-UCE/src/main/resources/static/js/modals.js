@@ -29,14 +29,14 @@ $(document).ready(function () {
 
             });
             $('.modal-body').load('editAdmin',function(){
-		        $('.myForm #exampleModal').modal({show:true});
+		        $('.myForm #exampleModal').modal('toggle');
 		    });
            
         } else {
         	$('.myForm #firstName').val('');
 
         	$('.modal-body').load('editAdmin',function(){
-		        $('.myForm #exampleModal').modal({show:true});
+		        $('.myForm #exampleModal').modal('toggle');
 		    });
         }
 
@@ -46,7 +46,7 @@ $(document).ready(function () {
         event.preventDefault();
         var href = $(this).attr('href');
         $('#deleteModal #delHref').attr('href', href);
-        $('#deleteModal').modal();
+        $('#deleteModal').modal('toggle');
 
 
     });

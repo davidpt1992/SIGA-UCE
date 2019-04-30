@@ -67,5 +67,66 @@ $(document).ready(function () {
 	    });
     });
     
+    $('.previous').on('click',function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$('.modal-body').load(href,function(){
+	        $('.myFormQuestionnaire #exampleModal').modal({show:true});
+	    });
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    $('.next1').on('click',function(event){
+		event.preventDefault();
+
+		
+		$.post("nextQuestionPost"
+				,{
+					id: $('#id').val(),
+					usuario: $('#usuario').val(),
+					codigo: $('#codigo').val(),
+					foto: $('#foto').val(),
+					evidencia: $('#evidencia').val(),
+					respuesta: $('#respuesta').val()
+				  }
+				,function(mav){
+					  $('.modal-body').html(mav ,function(){
+						  $('.myFormQuestionnaire #exampleModal').modal({show:true});
+					  });					  
+				  } 
+			);
+    });
+    
+
+
+    
+    $('.previous1').on('click',function(event){
+    	event.preventDefault();
+
+		$.post("previousQuestionPost"
+				,{
+					id: $('#id').val(),
+					usuario: $('#usuario').val(),
+					codigo: $('#codigo').val(),
+					foto: $('#foto').val(),
+					evidencia: $('#evidencia').val(),
+					respuesta: $('#respuesta').val()
+				  }
+				,function(mav){
+					  $('.modal-body').html(mav ,function(){
+						  $('.myFormQuestionnaire #exampleModal').modal({show:true});
+					  });					  
+				  } 
+			);
+		        
+	    });
+    
 
 });

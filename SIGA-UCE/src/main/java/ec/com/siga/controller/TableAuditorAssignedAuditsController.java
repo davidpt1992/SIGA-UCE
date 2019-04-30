@@ -6,12 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ec.com.siga.entity.CheckList;
-import ec.com.siga.entity.DatoComun;
 import ec.com.siga.entity.Informe;
-import ec.com.siga.model.SolucitudAuditoriaString;
 import ec.com.siga.service.AuditService;
 import ec.com.siga.service.AuditorService;
 import ec.com.siga.service.BackOfficeService;
@@ -48,7 +47,7 @@ public class TableAuditorAssignedAuditsController {
 	@GetMapping("/startQuestionnaire1")
 	@ResponseBody
 	public ModelAndView startquestionnaire1(int id, String usuario) {
-		ModelAndView mav = new ModelAndView("questionnaire1");
+		ModelAndView mav = new ModelAndView("questionnaireForm");
 		auditorService.createCkeckList(id);
 		CheckList cl= auditorService.reply(id);
 		mav.addObject("pregunta", cl);
@@ -58,11 +57,66 @@ public class TableAuditorAssignedAuditsController {
 		return mav;
 	}
 	
-	@GetMapping("/continueQuestionnaire1")
-	@ResponseBody
-	public ModelAndView continueQuest(int id, String usuario, String codigo)  {
-		ModelAndView mav = new ModelAndView("questionnaire1");
+	@PostMapping("/nextQuestionPost")
+	public ModelAndView nextQuestionPost(int id, String usuario, String codigo, MultipartFile foto, String evidencia, boolean respuesta){
+		ModelAndView mav = new ModelAndView("questionnaireForm");
 		String accion="+";
+		System.out.println("ingreso al post "+evidencia);
+		System.out.println("ingreso al post "+id);
+		System.out.println("ingreso al post "+usuario);
+		System.out.println("ingreso al post "+codigo);
+		System.out.println("ingreso al post "+foto);
+		System.out.println("ingreso al post "+respuesta);
+		//auditorService.saveReply(foto, evidencia, respuesta, codigo);
+		CheckList cl= auditorService.replyPost(id, codigo, accion);
+		mav.addObject("pregunta", cl);
+		mav.addObject("id", id);
+		mav.addObject("usuario", usuario);
+		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
+		return mav;
+	}
+	
+	@PostMapping("/previousQuestionPost")
+	public ModelAndView previousQuestionPost(int id, String usuario, String codigo, MultipartFile foto, String evidencia, boolean respuesta){
+		ModelAndView mav = new ModelAndView("questionnaireForm");
+		String accion="-";
+		//auditorService.saveReply(foto, evidencia, respuesta, codigo);
+		CheckList cl= auditorService.replyPost(id, codigo, accion);
+		mav.addObject("pregunta", cl);
+		mav.addObject("id", id);
+		mav.addObject("usuario", usuario);
+		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@GetMapping("/nextQuestion")
+	@ResponseBody
+	public ModelAndView nextQuest(int id, String usuario, String codigo, MultipartFile foto, String evidencia, boolean respuesta){
+		ModelAndView mav = new ModelAndView("questionnaireForm");
+		String accion="+";
+		auditorService.saveReply(foto, evidencia, respuesta, codigo);
+		CheckList cl= auditorService.replyPost(id, codigo, accion);
+		mav.addObject("pregunta", cl);
+		mav.addObject("id", id);
+		mav.addObject("username", usuario);
+		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
+		return mav;
+	}
+	
+	@GetMapping("/previousQuestion")
+	@ResponseBody
+	public ModelAndView preQuest(int id, String usuario, String codigo, MultipartFile foto, String evidencia, boolean respuesta){
+		ModelAndView mav = new ModelAndView("questionnaireForm");
+		String accion="-";
+		auditorService.saveReply(foto, evidencia, respuesta, codigo);
 		CheckList cl= auditorService.replyPost(id, codigo, accion);
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);
