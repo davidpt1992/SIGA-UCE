@@ -26,7 +26,7 @@ public class RegisterController {
 	@Qualifier("custService")
 	private CustService custService;
 	
-		@Autowired
+	@Autowired
 	@Qualifier("auditService")
 	private AuditService auditService;
 	

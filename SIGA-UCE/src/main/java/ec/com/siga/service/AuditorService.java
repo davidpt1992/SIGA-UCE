@@ -9,6 +9,7 @@ import ec.com.siga.entity.Informe;
 
 public interface AuditorService {
 	public abstract List<Informe> findAllAssignedAudits(String auditor);
+	public abstract List<Informe> findAllAuditsHistory(String auditor);
 	public abstract void createCkeckList(int informeId);
 	public abstract CheckList reply(int informeId);
 	public abstract CheckList replyPost(int informeId, String codigo, String accion);

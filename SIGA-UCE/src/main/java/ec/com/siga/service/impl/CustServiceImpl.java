@@ -32,5 +32,9 @@ public class CustServiceImpl implements CustService {
 		return tipoCustRepository.findById(tipoCLienteId).get();
 	}
 
+	@Override
+	public Cliente findCustById(int clienteId) {
+		return custRepository.findById(clienteId).get();
+	}
 	
 }

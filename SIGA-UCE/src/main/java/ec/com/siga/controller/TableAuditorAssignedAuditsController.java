@@ -14,27 +14,32 @@ import ec.com.siga.entity.Informe;
 import ec.com.siga.service.AuditService;
 import ec.com.siga.service.AuditorService;
 import ec.com.siga.service.BackOfficeService;
+import ec.com.siga.service.CustService;
 import ec.com.siga.service.InformeService;
 
 @Controller
 public class TableAuditorAssignedAuditsController {
-	
+
 	@Autowired
 	@Qualifier("informeServicio")
 	private InformeService informeServicio;
-	
+
 	@Autowired
 	@Qualifier("auditService")
 	private AuditService auditService;
-	
+
 	@Autowired
 	@Qualifier("auditorService")
 	private AuditorService auditorService;
-	
+
 	@Autowired
 	@Qualifier("backOfficeService")
 	private BackOfficeService backOfficeService;
-	
+
+	@Autowired
+	@Qualifier("custService")
+	private CustService custService;
+
 	@GetMapping("/tableAssignedAudits")
 	@ResponseBody
 	public ModelAndView showForm(String usuario) {
@@ -44,87 +49,92 @@ public class TableAuditorAssignedAuditsController {
 		return mav;
 	}
 	
+	@GetMapping("/tableAssignedAuditsH")
+	@ResponseBody
+	public ModelAndView showFormH(String usuario) {
+		ModelAndView mav = new ModelAndView("tableAssignedAudits");
+		mav.addObject("contacts", auditorService.findAllAuditsHistory(usuario));
+		mav.addObject("usuario", usuario);
+		return mav;
+	}
+
 	@GetMapping("/startQuestionnaire1")
 	@ResponseBody
 	public ModelAndView startquestionnaire1(int id, String usuario) {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
 		auditorService.createCkeckList(id);
-		CheckList cl= auditorService.reply(id);
+		CheckList cl = auditorService.reply(id);
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);
 		mav.addObject("usuario", usuario);
 		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
 		return mav;
 	}
-	
+
 	@PostMapping("/nextQuestionPost")
-	public ModelAndView nextQuestionPost(int id, String usuario, String codigo, MultipartFile foto, String evidencia, boolean respuesta){
+	public ModelAndView nextQuestionPost(int id, String usuario, String codigo, MultipartFile foto, String evidencia,
+			boolean respuesta) {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
-		String accion="+";
-		System.out.println("ingreso al post "+evidencia);
-		System.out.println("ingreso al post "+id);
-		System.out.println("ingreso al post "+usuario);
-		System.out.println("ingreso al post "+codigo);
-		System.out.println("ingreso al post "+foto);
-		System.out.println("ingreso al post "+respuesta);
-		//auditorService.saveReply(foto, evidencia, respuesta, codigo);
-		CheckList cl= auditorService.replyPost(id, codigo, accion);
+		String accion = "+";
+		System.out.println("ingreso al post " + evidencia);
+		System.out.println("ingreso al post " + id);
+		System.out.println("ingreso al post " + usuario);
+		System.out.println("ingreso al post " + codigo);
+		System.out.println("ingreso al post " + foto);
+		System.out.println("ingreso al post " + respuesta);
+		// auditorService.saveReply(foto, evidencia, respuesta, codigo);
+		CheckList cl = auditorService.replyPost(id, codigo, accion);
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);
 		mav.addObject("usuario", usuario);
 		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
 		return mav;
 	}
-	
+
 	@PostMapping("/previousQuestionPost")
-	public ModelAndView previousQuestionPost(int id, String usuario, String codigo, MultipartFile foto, String evidencia, boolean respuesta){
+	public ModelAndView previousQuestionPost(int id, String usuario, String codigo, MultipartFile foto,
+			String evidencia, boolean respuesta) {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
-		String accion="-";
-		//auditorService.saveReply(foto, evidencia, respuesta, codigo);
-		CheckList cl= auditorService.replyPost(id, codigo, accion);
+		String accion = "-";
+		// auditorService.saveReply(foto, evidencia, respuesta, codigo);
+		CheckList cl = auditorService.replyPost(id, codigo, accion);
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);
 		mav.addObject("usuario", usuario);
 		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
 		return mav;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@GetMapping("/nextQuestion")
 	@ResponseBody
-	public ModelAndView nextQuest(int id, String usuario, String codigo, MultipartFile foto, String evidencia, boolean respuesta){
+	public ModelAndView nextQuest(int id, String usuario, String codigo, MultipartFile foto, String evidencia,
+			boolean respuesta) {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
-		String accion="+";
+		String accion = "+";
 		auditorService.saveReply(foto, evidencia, respuesta, codigo);
-		CheckList cl= auditorService.replyPost(id, codigo, accion);
+		CheckList cl = auditorService.replyPost(id, codigo, accion);
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);
 		mav.addObject("username", usuario);
 		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
 		return mav;
 	}
-	
+
 	@GetMapping("/previousQuestion")
 	@ResponseBody
-	public ModelAndView preQuest(int id, String usuario, String codigo, MultipartFile foto, String evidencia, boolean respuesta){
+	public ModelAndView preQuest(int id, String usuario, String codigo, MultipartFile foto, String evidencia,
+			boolean respuesta) {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
-		String accion="-";
+		String accion = "-";
 		auditorService.saveReply(foto, evidencia, respuesta, codigo);
-		CheckList cl= auditorService.replyPost(id, codigo, accion);
+		CheckList cl = auditorService.replyPost(id, codigo, accion);
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);
 		mav.addObject("username", usuario);
 		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
 		return mav;
 	}
-	
+
 	@GetMapping("/editAssignedAudits")
 	@ResponseBody
 	public ModelAndView showEditAdminForm(Integer id, String usuario) {
@@ -156,7 +166,16 @@ public class TableAuditorAssignedAuditsController {
 
 	@GetMapping("/deleteAssignedAudits")
 	public void deleteCountry(Integer adminId) {
-		informeServicio.deleteReport(adminId);;
+		informeServicio.deleteReport(adminId);
+		;
+	}
+
+	@GetMapping("/viewCust")
+	@ResponseBody
+	public ModelAndView viewCust(int id) {
+		ModelAndView mav = new ModelAndView("viewCustomer");
+		mav.addObject("cliente", custService.findCustById(id));
+		return mav;
 	}
 
 }

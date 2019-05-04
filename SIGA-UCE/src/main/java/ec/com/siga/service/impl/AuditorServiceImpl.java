@@ -1,6 +1,7 @@
 package ec.com.siga.service.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,7 @@ public class AuditorServiceImpl implements AuditorService {
 	@Autowired
 	@Qualifier("dComunRepository")
 	private DatoComunRepository dComunRepository;
-	
+
 	@Autowired
 	@Qualifier("dEspecificoRepository")
 	private DatoEspecificoRepository dEspecificoRepository;
@@ -80,10 +81,17 @@ public class AuditorServiceImpl implements AuditorService {
 	@Autowired
 	@Qualifier("checkListRepository")
 	private CheckListRepository checkListRepository;
-	
+
 	@Override
 	public List<Informe> findAllAssignedAudits(String auditor) {
-		return informeRepository.findByAuditorId(auditorRepository.findByUserId(userRepository.findByUsuario(auditor)));
+		List<Informe> list, auxList = new ArrayList<Informe>();
+		list = informeRepository.findByAuditorId(auditorRepository.findByUserId(userRepository.findByUsuario(auditor)));
+		for (Informe info : list) {
+			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() == 2) {
+				auxList.add(info);
+			}
+		}
+		return auxList;
 	}
 
 	@Override
@@ -95,27 +103,26 @@ public class AuditorServiceImpl implements AuditorService {
 		String bId, res;
 		TipoAuditoria ta = sa.getTipoAuditoriaId();
 		List<Preguntas> pre = preguntasRepository.findByTipoAuditoriaId(ta);
-		
-		
+
 		if (checkListRepository.findAllBySolicitudAuditoriaId(sa).isEmpty()) {
-			int j=0;
-			for ( Preguntas i : pre ) { 
-				j=j+1;
+			int j = 0;
+			for (Preguntas i : pre) {
+				j = j + 1;
 				CheckList cl = new CheckList();
-					if (j > 9) {
-						bId = String.valueOf(j);
-					}else {
-						bId = "0"+String.valueOf(j);
-					}
-					res = aId + bId; 
+				if (j > 9) {
+					bId = String.valueOf(j);
+				} else {
+					bId = "0" + String.valueOf(j);
+				}
+				res = aId + bId;
 
 				cl.setCodigo(Integer.parseInt(res));
 				cl.setSolicitudAuditoriaId(sa);
 				cl.setPreguntasId(i);
-				checkListRepository.save(cl);            
+				checkListRepository.save(cl);
 			}
-		} 
-				
+		}
+
 	}
 
 	@Override
@@ -126,21 +133,21 @@ public class AuditorServiceImpl implements AuditorService {
 		List<CheckList> preguntas = checkListRepository.findAllBySolicitudAuditoriaId(sa);
 		return preguntas.get(0);
 	}
-	
+
 	@Override
 	public CheckList replyPost(int informeId, String codigo, String accion) {
 		int cod = Integer.valueOf(codigo);
-						
+
 		if (accion.equals("+")) {
-			return checkListRepository.findByCodigo(cod+1);
-		}else {
-			return checkListRepository.findByCodigo(cod-1);
+			return checkListRepository.findByCodigo(cod + 1);
+		} else {
+			return checkListRepository.findByCodigo(cod - 1);
 		}
 	}
 
 	@Override
 	public void saveReply(MultipartFile f, String evidencia, boolean respuesta, String codigo) {
-       
+
 		Foto foto = new Foto();
 		try {
 			foto.setFoto(f.getBytes());
@@ -155,6 +162,18 @@ public class AuditorServiceImpl implements AuditorService {
 		dEspecificoRepository.save(de);
 		CheckList cl = checkListRepository.findByCodigo(Integer.parseInt(codigo));
 		cl.setDatoEspecificoId(de);
+	}
+
+	@Override
+	public List<Informe> findAllAuditsHistory(String auditor) {
+		List<Informe> list, auxList = new ArrayList<Informe>();
+		list = informeRepository.findByAuditorId(auditorRepository.findByUserId(userRepository.findByUsuario(auditor)));
+		for (Informe info : list) {
+			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() > 2) {
+				auxList.add(info);
+			}
+		}
+		return auxList;
 	}
 
 }

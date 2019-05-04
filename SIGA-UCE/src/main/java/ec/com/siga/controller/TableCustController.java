@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import ec.com.siga.entity.Cliente;
 import ec.com.siga.entity.User;
+import ec.com.siga.service.CustService;
 import ec.com.siga.service.UserServicio;
 
 @Controller
@@ -17,6 +19,10 @@ public class TableCustController {
 	@Autowired
 	@Qualifier("userServicio")
 	private UserServicio userServicio;
+	
+	@Autowired
+	@Qualifier("custService")
+	private CustService custService;
 
 	@GetMapping("/tableCust")
 	public ModelAndView showForm() {
@@ -38,8 +44,8 @@ public class TableCustController {
 
 	@GetMapping("/findCust")
 	@ResponseBody
-	public User findOne(Integer id) {
-	return userServicio.findAdmin(id);
+	public Cliente findOne(Integer id) {
+	return custService.findCustById(id);
 	}
 	
 	@GetMapping("/cancelCust")

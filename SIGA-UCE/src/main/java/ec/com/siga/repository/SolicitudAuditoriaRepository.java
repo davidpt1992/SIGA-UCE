@@ -9,6 +9,6 @@ import ec.com.siga.entity.SolicitudAuditoria;
 
 @Repository("solicitudAuditoriaRepository")
 public interface SolicitudAuditoriaRepository extends JpaRepository<SolicitudAuditoria, Serializable>{
-	//public abstract Cliente findByUserId(User userId);
+	//public abstract List findByUserId(User userId);
 	
 }

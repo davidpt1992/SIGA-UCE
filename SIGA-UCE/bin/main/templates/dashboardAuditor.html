@@ -107,11 +107,17 @@
             <span>Hi auditor, <span th:text="${username}"></span></span>
           </a>
         </li>
-        <!-- Cuenta del cliente -->
+        <!-- tabla auditorias asignadas -->
         <li class="nav-item">
           <a th:href="@{tableAssignedAudits/(usuario=${username})}" class="nav-link tAAA" >
             <i class="fas fa-fw fa-list-alt" ></i>
             <span>Assigned audits</span></a>
+        </li>
+        <!-- tabla historial de auditorias -->
+        <li class="nav-item">
+          <a th:href="@{tableAssignedAuditsH/(usuario=${username})}" class="nav-link tAH" >
+            <i class="fas fa-fw fa-list-alt" ></i>
+            <span>Audit history</span></a>
         </li>
       </ul>
 

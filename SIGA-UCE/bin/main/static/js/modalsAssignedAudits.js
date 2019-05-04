@@ -51,6 +51,14 @@ $(document).ready(function () {
 
     });
     
+    $('.lookCust').on('click',function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$('.modal-body').load(href,function(){
+	        $('.myFormCust #exampleModal').modal({show:true});
+	    });
+    });
+    
     $('.startAudit').on('click',function(event){
 		event.preventDefault();
 		var href = $(this).attr('href');
@@ -102,6 +110,9 @@ $(document).ready(function () {
 					  });					  
 				  } 
 			);
+		
+		
+		
     });
     
 
