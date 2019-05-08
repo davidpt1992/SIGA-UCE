@@ -46,8 +46,8 @@ public class UserServicioImpl implements UserServicio {
 	}
 
 	@Override
-	public void deletAdmin(User admin) {
-		userRepository.delete(admin);
+	public void deletAdmin(int adminId) {
+		userRepository.deleteById(adminId);
 		
 	}
 

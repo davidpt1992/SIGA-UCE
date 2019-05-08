@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import ec.com.siga.entity.DatoComun;
 import ec.com.siga.entity.Informe;
 import ec.com.siga.model.SolucitudAuditoriaString;
 import ec.com.siga.service.AuditService;
@@ -32,9 +31,18 @@ public class TableAuditRequestsController {
 	
 	@GetMapping("/tableAuditsRequests")
 	@ResponseBody
-	public ModelAndView showForm(String usuario) {
+	public ModelAndView tableAuditsRequests(String usuario) {
 		ModelAndView mav = new ModelAndView("tableAuditsRequests");
-		mav.addObject("contacts", informeServicio.findAllReport());
+		mav.addObject("contacts", informeServicio.findAllReportRequests());
+		mav.addObject("usuario", usuario);
+		return mav;
+	}
+	
+	@GetMapping("/tableAuditsProsesing")
+	@ResponseBody
+	public ModelAndView tableAuditsProsesing(String usuario) {
+		ModelAndView mav = new ModelAndView("tableAuditsProsesing");
+		mav.addObject("contacts", informeServicio.findAllReportProsesing());
 		mav.addObject("usuario", usuario);
 		return mav;
 	}
@@ -50,9 +58,9 @@ public class TableAuditRequestsController {
 	}
 
 	@PostMapping("/saveAuditsRequests")
-	public ModelAndView saveAdmin(int informeId, String usuario, String auditorId) throws Exception {
+	public ModelAndView saveAdmin(int informeId, String usuario, String auditorId, SolucitudAuditoriaString sa) throws Exception {
 		ModelAndView mav = new ModelAndView("/dashboardBack");
-		backOfficeService.saveInforme(informeId, auditorId);
+		backOfficeService.saveInforme(informeId, auditorId, sa);
 		mav.addObject("username", usuario);
 		return mav;
 	}
@@ -71,6 +79,16 @@ public class TableAuditRequestsController {
 	@GetMapping("/deleteAuditsRequests")
 	public void deleteCountry(Integer adminId) {
 		informeServicio.deleteReport(adminId);;
+	}
+	
+	@GetMapping("/checkReports")
+	@ResponseBody
+	public ModelAndView showTableCheckReports(Integer id, String usuario) {
+		ModelAndView mav = new ModelAndView("tableCheckReports");
+		mav.addObject("checkList", backOfficeService.findAllCheckList(informeServicio.findReport(id).getDatoComunId().getSolicitudAuditoriaId()));
+		//mav.addObject("auditores", backOfficeService.findAllAudit());
+		mav.addObject("usuario", usuario);
+		return mav;
 	}
 
 }

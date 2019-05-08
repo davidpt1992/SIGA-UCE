@@ -1,15 +1,30 @@
 $(document).ready(function () {
 
-	$('.requests').on('click',function(event){
+	$('.tRequests').on('click',function(event){
 		event.preventDefault();
 		var href = $(this).attr('href');
    		$("#seccionRecargarBack").load(href);
     });
 	
-	$('.tAudits').on('click',function(event){
+	$('.tProsesing').on('click',function(event){
 		event.preventDefault();
 		var href = $(this).attr('href');
-   		$("#seccionRecargarCust").load(href);
+   		$("#seccionRecargarBack").load(href);
+    });
+	
+	$('.tAudi').on('click',function(event){
+		event.preventDefault();
+   		$("#seccionRecargarBack").load("tableAudi");
+    });
+	
+	$('.tCust').on('click',function(event){
+		event.preventDefault();
+   		$("#seccionRecargarBack").load("tableCust");
+    });
+	
+	$('.tRole').on('click',function(event){
+		event.preventDefault();
+   		$("#seccionRecargarBack").load("tableRole");
     });
 	
 });

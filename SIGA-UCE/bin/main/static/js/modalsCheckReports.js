@@ -51,19 +51,11 @@ $(document).ready(function () {
 
     });
     
-    $('.assign').on('click',function(event){
+    $('.tReports').on('click',function(event){
 		event.preventDefault();
 		var href = $(this).attr('href');
 		$('.modal-body').load(href,function(){
-	        $('.myFormAuditsRequests #exampleModal').modal({show:true});
-	    });
-    });
-    
-    $('.lookCust').on('click',function(event){
-		event.preventDefault();
-		var href = $(this).attr('href');
-		$('.modal-body').load(href,function(){
-	        $('.myFormCustomer #exampleModal').modal({show:true});
+	        $('.checkReport #checkReportModal').modal({show:true});
 	    });
     });
     

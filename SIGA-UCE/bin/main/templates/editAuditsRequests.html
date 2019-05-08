@@ -14,27 +14,60 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="quesType" class="col-sm col-form-label text-light bg-dark">Questionnaire type</label>
+		<label for="quesType" class="col-sm col-form-label text-light bg-dark">Questionnaire
+			type</label>
 		<div class="col-sm-7">
 			<input type="text" readonly class="form-control-plaintext"
-				id="quesType" th:value="${reporte.datoComunId.solicitudAuditoriaId.tipoAuditoriaId.tipoAuditoria}">
+				id="quesType"
+				th:value="${reporte.datoComunId.solicitudAuditoriaId.tipoAuditoriaId.tipoAuditoria}">
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="informeId" class="col-sm col-form-label text-light bg-dark">Report #</label>
+		<label for="informeId"
+			class="col-sm col-form-label text-light bg-dark">Report #</label>
 		<div class="col-sm-7">
 			<input type="text" readonly class="form-control-plaintext"
 				id="informeId" name="informeId" th:value="${reporte.informeId}">
 		</div>
 	</div>
-	<label>Auditors</label>
-	<div class="form-label-group">
+	<label class="text-light bg-dark">Auditors:</label>
+	<div class="form-group">
 		<select class="form-control" id="country" required="required"
 			name="auditorId">
 			<option value="0" disabled selected>Select auditor</option>
-			<option th:each="auditor : ${auditores}" th:value="${auditor.auditorId}"
-				th:text="${auditor.userId.nombre}+${auditor.userId.apellido}" />
+			<option th:each="auditor : ${auditores}"
+				th:value="${auditor.auditorId}"
+				th:text="${auditor.userId.nombre+'  '+auditor.userId.apellido}" />
 		</select>
+	</div>
+	<label class="text-light bg-dark">Start audit suggested by the client:</label>
+	<input type="text" readonly th:value="${reporte.datoComunId.solicitudAuditoriaId.fechaInicio+' / '+reporte.datoComunId.horaInicio}">
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col-md-6">
+				<label>Date</label> <input id="dateStart" type="date"
+					name="auxfechaInicio">
+			</div>
+			<div class="col-md-6">
+				<label>Time</label> <input id="timeStart" type="time"
+					name="auxhoraInicio">
+			</div>
+		</div>
+	</div>
+
+	<label class="text-light bg-dark">Finish audit suggested by the client:</label>
+	<input type="text" readonly th:value="${reporte.datoComunId.solicitudAuditoriaId.fechaFinal+' / '+reporte.datoComunId.horaFin}">
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col-md-6">
+				<label>Date</label> <input id="dateFinish" type="date"
+					name="auxfechaFinal">
+			</div>
+			<div class="col-md-6">
+				<label>Time</label> <input id="timeFinish" type="time"
+					name="auxhoraFin">
+			</div>
+		</div>
 	</div>
 
 

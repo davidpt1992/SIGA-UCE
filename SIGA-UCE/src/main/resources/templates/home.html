@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
 
 <!-- Required meta tags -->
 <meta charset="utf-8" />
@@ -20,27 +20,55 @@
 			<div class="inner">
 				<h3 class="masthead-brand">SIGA</h3>
 				<nav class="nav nav-masthead justify-content-center">
-					<a class="nav-link active" href="#">Home</a> 
-					<a class="nav-link"	href="#">Features</a> 
-					<a class="nav-link" href="#">Contact</a>
-					<a class="nav-link" th:href="@{/login}">Sing in</a>
+					<a class="nav-link active" href="#">Home</a> <a class="nav-link"
+						href="#">Features</a> <a class="nav-link" href="#">Contact</a> <a
+						class="nav-link" th:href="@{/login}">Sing in</a>
 				</nav>
 			</div>
 		</header>
 
 		<main role="main" class="inner cover">
 		<h1 class="cover-heading">Gestor de auditorias.</h1>
-		<p class="lead">Bienvenido al Sistema Informatico de Gestion de Auditorias, SIGA.</p>
-		<p class="lead">
-			<a href="#" class="btn btn-lg btn-secondary">Learn more</a>
-		</p>
+		<p class="lead">Bienvenido al Sistema Informatico de Gestion de
+			Auditorias, SIGA.</p>
+
+		<div id="carouselExampleControls" class="carousel slide"
+			data-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<div class="embed-responsive embed-responsive-16by9">
+						<iframe src="https://www.youtube.com/embed/zUzd9KyIDrM"></iframe>
+					</div>
+
+				</div>
+				<div class="carousel-item">
+					<div class="embed-responsive embed-responsive-16by9">
+						<iframe src="https://www.youtube.com/embed/x4oZphbQzXc"></iframe>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<div class="embed-responsive embed-responsive-16by9">
+						<iframe src="https://www.youtube.com/embed/ZkW-K5RQdzo"></iframe>
+					</div>
+
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleControls"
+				role="button" data-slide="prev"> <span
+				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="sr-only">Previous</span>
+			</a> <a class="carousel-control-next" href="#carouselExampleControls"
+				role="button" data-slide="next"> <span
+				class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="sr-only">Next</span>
+			</a>
+		</div>
 		</main>
 
 		<footer class="mastfoot mt-auto">
 			<div class="inner">
 				<p>
-					<a href="https://getbootstrap.com/">SIGA</a>,
-					by <a href="https://twitter.com/mdo">UCE</a>.
+					<a href="">SIGA</a>, by <a href="https://www.uce.edu.ec/">UCE</a>.
 				</p>
 			</div>
 		</footer>

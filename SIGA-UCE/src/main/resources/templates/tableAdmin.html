@@ -11,7 +11,7 @@
 
 			<div class="card-header">
 				<i class="fas fa-table"> Data Administrators</i> <br /> <a><button
-						class="btn btn-secondary fas fa-user-plus nBtn" id="nBtn"></button></a>
+						class="btn btn-secondary fas fa-user-plus nBtn" th:href="@{editAdmin/(username=${username})}" id="nBtn" title="New Administrator"></button></a>
 			</div>
 
 			<div class="card-body">
@@ -50,10 +50,10 @@
 						</tfoot>
 						<tbody>
 							<tr th:each="contact : ${contacts}">
-								<td><a th:href="@{findAdmin/(id=${contact.userId})}"
-										class="btn btn-primary fas fa-pencil-alt eBtn">_</a> <a
-										th:href="@{/delete/(adminId=${contact.userId})}"
-										class="btn btn-danger fas fa-trash-alt dBtn"></a></td>
+								<td><a th:href="@{findAdmin/(id=${contact.userId},username=${username})}"
+										class="btn btn-primary fas fa-pencil-alt eBtn" title="Edit">_</a> <a
+										th:href="@{/deleteAdmin/(adminId=${contact.userId},username=${username})}"
+										class="btn btn-danger fas fa-trash-alt dBtn" title="Delete"></a></td>
 								<td th:text="${contact.nombre}"></td>
 								<td th:text="${contact.apellido}"></td>
 								<td th:text="${contact.roleId.rol}"></td>
@@ -119,7 +119,7 @@
 				</div>
 				<div class="modal-body">
 					<p class="alert alert-danger">Are you sure want to delete this
-						country?</p>
+						Administrator?</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"

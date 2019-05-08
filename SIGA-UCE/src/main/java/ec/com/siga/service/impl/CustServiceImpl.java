@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import ec.com.siga.entity.Cliente;
 import ec.com.siga.entity.ClienteTipo;
+import ec.com.siga.entity.User;
 import ec.com.siga.repository.CustRepository;
 import ec.com.siga.repository.TipoCustRepository;
 import ec.com.siga.service.CustService;
+import ec.com.siga.service.UserServicio;
 
 @Service("custService")
 public class CustServiceImpl implements CustService {
@@ -22,11 +24,16 @@ public class CustServiceImpl implements CustService {
 	@Qualifier("tipoCustRepository")
 	private TipoCustRepository tipoCustRepository;
 	
+	@Autowired
+	@Qualifier("userServicio")
+	private UserServicio userServicio;
+	
+	
 	@Override
 	public void custSave(Cliente cliente) {
 		custRepository.save(cliente);
 	}
-
+	
 	@Override
 	public ClienteTipo findCustTipe(int tipoCLienteId) {
 		return tipoCustRepository.findById(tipoCLienteId).get();
@@ -35,6 +42,20 @@ public class CustServiceImpl implements CustService {
 	@Override
 	public Cliente findCustById(int clienteId) {
 		return custRepository.findById(clienteId).get();
+	}
+
+	@Override
+	public Cliente findCustByUser(User user) {
+		return custRepository.findByUserId(user);
+	}
+
+	@Override
+	public void custUpdate(String usuario, String longitud, String latitud) {
+		Cliente cl = findCustByUser(userServicio.findUserRole(usuario));
+		cl.setLatitud(latitud);
+		cl.setLongitud(longitud);
+		custSave(cl);
+		
 	}
 	
 }

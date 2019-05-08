@@ -14,7 +14,25 @@
 				th:text="${aut.tipoAuditoria}" />
 		</select>
 	</div>
-	<label>Start audit</label>
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="form-label-group">
+					<input type="text" id="latitud" class="form-control" value=""
+						placeholder="Latitude" required="required" autofocus="autofocus"
+						name="latitud"> <label for="latitud">Latitude</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-label-group">
+					<input type="text" id="longitud" class="form-control" value=""
+						placeholder="Longitude" required="required" name="longitud">
+					<label for="longitud">Longitude</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<label>Suggest start audit</label>
 	<div class="form-group">
 		<div class="form-row">
 			<div class="col-md-6">
@@ -28,7 +46,7 @@
 		</div>
 	</div>
 
-	<label>Finish audit</label>
+	<label>Suggest finish audit</label>
 	<div class="form-group">
 		<div class="form-row">
 			<div class="col-md-6">

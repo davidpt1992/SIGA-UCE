@@ -1,5 +1,6 @@
 package ec.com.siga.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,30 @@ public class InformeServiceImpl implements InformeService {
 	@Override
 	public List<Informe> findAllReport() {
 		return informeRepository.findAll();
+	}
+	
+	@Override
+	public List<Informe> findAllReportRequests() {
+		List<Informe> list, auxList = new ArrayList<Informe>();
+		list = informeRepository.findAll();
+		for (Informe info : list) {
+			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() == 1) {
+				auxList.add(info);
+			}
+		}
+		return auxList;
+	}
+	
+	@Override
+	public List<Informe> findAllReportProsesing() {
+		List<Informe> list, auxList = new ArrayList<Informe>();
+		list = informeRepository.findAll();
+		for (Informe info : list) {
+			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() > 1) {
+				auxList.add(info);
+			}
+		}
+		return auxList;
 	}
 
 	@Override

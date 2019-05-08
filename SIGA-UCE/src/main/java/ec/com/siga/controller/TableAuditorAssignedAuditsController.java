@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ec.com.siga.entity.CheckList;
 import ec.com.siga.entity.Informe;
+import ec.com.siga.model.SolucitudAuditoriaString;
 import ec.com.siga.service.AuditService;
 import ec.com.siga.service.AuditorService;
 import ec.com.siga.service.BackOfficeService;
@@ -148,7 +149,7 @@ public class TableAuditorAssignedAuditsController {
 	@PostMapping("/saveAssignedAudits")
 	public ModelAndView saveAdmin(int informeId, String usuario, String auditorId) throws Exception {
 		ModelAndView mav = new ModelAndView("/dashboardBack");
-		backOfficeService.saveInforme(informeId, auditorId);
+		//backOfficeService.saveInforme(informeId, auditorId, sa);
 		mav.addObject("username", usuario);
 		return mav;
 	}

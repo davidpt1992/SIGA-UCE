@@ -2,7 +2,8 @@ $(document).ready(function () {
 
 	$('.tAdmin').on('click',function(event){
 		event.preventDefault();
-   		$("#seccionRecargar").load("tableAdmin");
+		var href = $(this).attr('href');
+   		$("#seccionRecargar").load(href);
     });
 	
 	$('.tBackOfc').on('click',function(event){

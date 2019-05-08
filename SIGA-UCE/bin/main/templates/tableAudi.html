@@ -11,7 +11,7 @@
 
 			<div class="card-header">
 				<i class="fas fa-table"> Data Auditor</i> <br /> <a><button
-						class="btn btn-secondary fas fa-user-plus nBtn" id="nBtn"></button></a>
+						class="btn btn-secondary fas fa-user-plus nBtn" id="nBtn" title="New Auditor"></button></a>
 			</div>
 
 			<div class="card-body">
@@ -51,9 +51,9 @@
 						<tbody>
 							<tr th:each="contact : ${contacts}">
 								<td><a th:href="@{findAdmin/(id=${contact.userId})}"
-										class="btn btn-primary fas fa-pencil-alt eBtn">_</a> <a
+										class="btn btn-primary fas fa-pencil-alt eBtn" title="Edit">_</a> <a
 										th:href="@{/delete/(adminId=${contact.userId})}"
-										class="btn btn-danger fas fa-trash-alt dBtn"></a></td>
+										class="btn btn-danger fas fa-trash-alt dBtn" title="Delete"></a></td>
 								<td th:text="${contact.nombre}"></td>
 								<td th:text="${contact.apellido}"></td>
 								<td th:text="${contact.roleId.rol}"></td>

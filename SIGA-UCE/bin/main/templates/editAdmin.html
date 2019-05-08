@@ -9,8 +9,14 @@
 				<div class="form-label-group">
 					<input type="hidden" id="userId" class="form-control" value=""
 						placeholder="Id" required="required" autofocus="autofocus"
-						name="userId"> <label for="userId">Id</label>
+						name="userId"> <label for="userId"></label>
 				</div>
+				<div class="form-label-group">
+					<input type="hidden" id="userAdmin" class="form-control" th:value="${username}"
+						placeholder="user" required="required" autofocus="autofocus"
+						name="username"> <label for="userAdmin"></label>
+				</div>
+				
 				<div class="form-label-group">
 					<input type="text" id="firstName" class="form-control" value=""
 						placeholder="First name" required="required" autofocus="autofocus"

@@ -35,7 +35,7 @@ $(document).ready(function () {
         } else {
         	$('.myForm #firstName').val('');
 
-        	$('.modal-body').load('editAdmin',function(){
+        	$('.modal-body').load(href,function(){
 		        $('.myForm #exampleModal').modal('toggle');
 		    });
         }
@@ -46,7 +46,7 @@ $(document).ready(function () {
         event.preventDefault();
         var href = $(this).attr('href');
         $('#deleteModal #delHref').attr('href', href);
-        $('#deleteModal').modal('toggle');
+        $('#deleteModal').modal();
 
 
     });

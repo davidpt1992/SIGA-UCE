@@ -5,33 +5,33 @@
 	<div class="form-group">
 		<div class="form-row">
 			<div class="form-label-group">
-				<input type="hidden" id="userId" class="form-control"
+				<input type="hidden" id="userId" class="form-control bg-white"
 					th:value="${cliente.clienteId}" placeholder="Id"
-					required="required" autofocus="autofocus" name="userId"> <label
+					required="required" autofocus="autofocus" name="userId" readonly> <label
 					for="userId">Id</label>
 			</div>
 			<div class="col-md-6">
 				<div class="form-label-group">
-					<input type="text" id="nombreEmpresa" class="form-control"
+					<input type="text" id="nombreEmpresa" class="form-control bg-white"
 						th:value="${cliente.nombreEmpresa}" placeholder="Company Name"
-						required="required" autofocus="autofocus" name="nombre"> <label
+						required="required" autofocus="autofocus" name="nombre" readonly> <label
 						for="nombreEmpresa">Company Name</label>
 				</div>
 			</div>
 			
 				<div class="col-md-6">
 					<div class="form-label-group">
-						<input type="text" id="firstName" class="form-control"
+						<input type="text" id="firstName" class="form-control bg-white"
 							th:value="${cliente.userId.nombre}" placeholder="First name"
-							required="required" autofocus="autofocus" name="nombre">
+							required="required" autofocus="autofocus" name="nombre" readonly>
 						<label for="firstName">First name</label>
 					</div>
 
 
 					<div class="form-label-group">
-						<input type="text" id="lastName" class="form-control"
+						<input type="text" id="lastName" class="form-control bg-white"
 							th:value="${cliente.userId.apellido}" placeholder="Last name"
-							required="required" name="apellido"> <label
+							required="required" name="apellido" readonly> <label
 							for="lastName">Last name</label>
 					</div>
 				</div>
@@ -39,34 +39,54 @@
 	</div>
 	<div class="form-group">
 		<div class="form-label-group">
-			<input type="email" id="inputEmail" class="form-control"
+			<input type="email" id="inputEmail" class="form-control bg-white"
 				th:value="${cliente.userId.correoElectronico}"
-				placeholder="Email address" name="correoElectronico"> <label
+				placeholder="Email address" name="correoElectronico" readonly> <label
 				for="inputEmail">Email address</label>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="form-label-group">
-			<input type="text" id="inputAddress" class="form-control"
+			<input type="text" id="inputAddress" class="form-control bg-white"
 				th:value="${cliente.userId.direccion}" placeholder="Address"
-				name="direccion"> <label for="inputAddress">Address</label>
+				name="direccion" readonly> <label for="inputAddress">Address</label>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="form-row">
 			<div class="col-md-6">
 				<div class="form-label-group">
-					<input type="number" id="inputPhone1" class="form-control"
+					<input type="text" id="latitud" class="form-control bg-white"
+						th:value="${cliente.latitud}" placeholder="Latitude"
+						required="required" name="latitud" readonly> <label
+						for="latitud">Latitude</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-label-group">
+					<input type="text" id="longitud" class="form-control bg-white"
+						th:value="${cliente.longitud}" placeholder="Longitude"
+						required="required" name="longitud" readonly> <label
+						for="longitud">Longitude</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="form-label-group">
+					<input type="number" id="inputPhone1" class="form-control bg-white"
 						th:value="${cliente.userId.numeroTelefono1}" placeholder="Phone 1"
-						required="required" name="numeroTelefono1"> <label
+						required="required" name="numeroTelefono1" readonly> <label
 						for="inputPhone1">Phone 1</label>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="form-label-group">
-					<input type="number" id="inputPhone2" class="form-control"
+					<input type="number" id="inputPhone2" class="form-control bg-white"
 						th:value="${cliente.userId.numeroTelefono2}" placeholder="Phone 2"
-						required="required" name="numeroTelefono2"> <label
+						required="required" name="numeroTelefono2" readonly> <label
 						for="inputPhone2">Phone 2</label>
 				</div>
 			</div>

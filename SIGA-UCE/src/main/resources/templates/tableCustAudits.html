@@ -18,7 +18,7 @@
 								<th>Company name</th>
 								<th>Questionnaire type</th>
 								<th>Status</th>
-								<th>Report #</th>
+								<th>Auditor</th>
 								<th>Qualification</th>
 								<th>Start date audit</th>
 								<th>End date audit</th>
@@ -31,7 +31,7 @@
 								<th>Company name</th>
 								<th>Questionnaire type</th>
 								<th>Status</th>
-								<th>Report #</th>
+								<th>Auditor</th>
 								<th>Qualification</th>
 								<th>Start date audit</th>
 								<th>End date audit</th>
@@ -46,7 +46,7 @@
 								<td th:text="${contact.clienteId.nombreEmpresa}"></td>
 								<td th:text="${contact.datoComunId.solicitudAuditoriaId.tipoAuditoriaId.tipoAuditoria}"></td>
 								<td class="badge badge-pill badge-danger" th:text="${contact.datoComunId.solicitudAuditoriaId.estadoAuditoriaId.estadoAuditoria}"></td>
-								<td th:text="${contact.informeId}"></td>
+								<td th:text="${contact.auditorId?.userId?.nombre+' '+contact.auditorId?.userId?.apellido}"></td>
 								<td th:text="${contact.datoComunId.calificacion}"></td>
 								<td th:text="${contact.datoComunId.solicitudAuditoriaId.fechaInicio}"></td>
 								<td th:text="${contact.datoComunId.solicitudAuditoriaId.fechaFinal}"></td>

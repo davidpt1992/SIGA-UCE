@@ -55,7 +55,7 @@ public class TableCustController {
 	
 	@GetMapping("/deleteCust")
     public String deleteCountry(Integer adminId) {
-		userServicio.deletAdmin(userServicio.findAdmin(adminId));
+		//userServicio.deletAdmin(userServicio.findAdmin(adminId));
         return "redirect:/dashboardAdmin";
     }
 

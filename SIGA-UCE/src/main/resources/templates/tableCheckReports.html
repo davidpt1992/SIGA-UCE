@@ -1,0 +1,37 @@
+
+<!-- Custom modals create update delete -->
+<script th:src="@{/js/modalsAuditsRequests.js}"
+	src="../static/js/modalsAuditsRequests.js"></script>
+
+<body id="page-top">
+
+	<!-- DataTable Admin -->
+	<div class="table-responsive">
+		<table class="table table-bordered ">
+			<thead class="thead-light">
+				<tr>
+					<!-- <th>Actions</th> -->
+					<th>Quest</th>
+					<th>Reply</th>
+					<th>Evidence</th>
+					<th>Pic</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="quest : ${checkList}">
+					<td th:text="${quest.preguntasId.preguntas}"></td>
+					<td th:text="${quest.datoEspecificoId?.respuesta}"></td>
+					<td th:text="${quest.datoEspecificoId?.evidencia}"></td>
+					<td th:text="${quest.datoEspecificoId?.fotoId?.foto}"></td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="input-group mb-3">
+		<a class="btn btn-secondary text-white fa fa-backward previous1"> Return</a> <a
+			class="btn btn-primary  text-white fa fa-magic next1"> Create Report</a>
+	</div>
+</body>
+

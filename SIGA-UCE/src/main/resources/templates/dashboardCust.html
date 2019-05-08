@@ -26,7 +26,8 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
     
-    <script  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <!-- jquery-3.3.1.js -->
+    <script th:src="@{/js/jquery-3.3.1.js}" src="../static/js/jquery-3.3.1.js"></script>
   
     <!-- Load contenido-->
 	<script th:src="@{/js/dashboardCust.js}" src="../static/js/dashboardCust.js"></script>
@@ -119,28 +120,6 @@
             <i class="fas fa-fw fa-list-alt"></i>
             <span>Audits</span></a>
         </li>
-              
-             
-        <!-- ROLES -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Roles</span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <h6 class="dropdown-header">Manage:</h6>
-            <a class="dropdown-item tAdmin" href="#" >Administrators</a>
-            <a class="dropdown-item tBackOfc" href="#">Back-office</a>
-            <a class="dropdown-item tAudi" href="#">Auditors</a>
-            <a class="dropdown-item tCust" href="#">Customers</a>
-            <div class="dropdown-divider"></div>
-            <h6 class="dropdown-header">Other:</h6>
-            <a class="dropdown-item tRole" href="#">Roles</a>
-            <a class="dropdown-item" href="tableRoles.html">Prices</a>
-            <a class="dropdown-item" href="tableSettings.html">Settings</a>
-          </div>
-        </li>
-              
       </ul>
 
       <div id="content-wrapper">

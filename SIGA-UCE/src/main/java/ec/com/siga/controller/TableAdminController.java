@@ -19,22 +19,29 @@ public class TableAdminController {
 	private UserServicio userServicio;
 
 	@GetMapping("/tableAdmin")
-	public ModelAndView showForm() {
+	@ResponseBody
+	public ModelAndView showForm(String username) {
 		ModelAndView mav = new ModelAndView("tableAdmin");
 		mav.addObject("contacts", userServicio.findAllAdmin());
+		mav.addObject("username", username);		
 		return mav;
 	}
 	
 	@GetMapping("/editAdmin")
-	public String showEditAdminForm() {
-		return "editAdmin";
+	@ResponseBody
+	public ModelAndView showEditAdminForm(String username) {
+		ModelAndView mav = new ModelAndView("editAdmin");
+		mav.addObject("username", username);
+		return mav;
 	}
 	
 	@PostMapping("/saveAdmin")
-	public String saveAdmin(User admin) {
+	public ModelAndView saveAdmin(User admin, String user) {
+		ModelAndView mav = new ModelAndView("dashboardAdmin");
 		admin.setRoleId(userServicio.findRoleById(4));
 		userServicio.saveUser(admin);
-		return "dashboardAdmin";
+		mav.addObject("username", user);
+		return mav;
 	}
 
 	@GetMapping("/findAdmin")
@@ -45,12 +52,12 @@ public class TableAdminController {
 	
 	@GetMapping("/cancelAdmin")
 	public String cancel() {
-		return "/dashboardAdmin";
+		return "dashboardAdmin";
 	}
 	
-	@GetMapping("/delete")
-    public String deleteCountry(Integer adminId) {
-		userServicio.deletAdmin(userServicio.findAdmin(adminId));
+	@GetMapping("/deleteAdmin")
+    public String deleteCountry(int adminId) {
+		userServicio.deletAdmin(adminId);
         return "dashboardAdmin";
     }
 

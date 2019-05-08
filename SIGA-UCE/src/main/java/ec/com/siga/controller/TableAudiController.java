@@ -49,7 +49,7 @@ public class TableAudiController {
 	
 	@GetMapping("/deleteAudi")
     public String deleteCountry(Integer adminId) {
-		userServicio.deletAdmin(userServicio.findAdmin(adminId));
+		//userServicio.deletAdmin(userServicio.findAdmin(adminId));
         return "redirect:/dashboardAdmin";
     }
 

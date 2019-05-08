@@ -46,12 +46,12 @@ public class RegisterController {
 		cliente.setUserId(userServicio.findAdmin(user.getUserId()));
 		cliente.setClienteTipoId(custService.findCustTipe(Integer.parseInt(sas.getAuxClienteTipoId())));
 		custService.custSave(cliente);
-		return "redirect:/login";
+		return "login";
 	}
 	
 	@GetMapping("/cancelRegister")
 	public String cancel() {
-		return "redirect:/login";
+		return "login";
 	}
 
 

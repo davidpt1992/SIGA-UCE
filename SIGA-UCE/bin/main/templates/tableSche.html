@@ -47,11 +47,11 @@
 									<a th:href="@{/deleteSche/(adminId=${contact.informeId})}"
 										class="btn btn-outline-danger fas fa-trash-alt dBtn"></a>
 									</td>
-								<td th:text="${contact.datoComunId.solicitudAuditoriaId.fechaInicio}"></td>
+								<td th:text="${contact.datoComunId.solicitudAuditoriaId?.fechaInicio}"></td>
 								<td th:text="${contact.datoComunId.horaInicio}"></td>
 								<td th:text="${contact.datoComunId.horaFin}"></td>
-								<td th:text="${contact.auditorId.userId.apellido}"></td>
-								<td th:text="${contact.backofficeId.userId.apellido}"></td>
+								<td th:text="${contact.auditorId?.userId?.apellido}"></td>
+								<td th:text="${contact.backofficeId?.userId?.apellido}"></td>
 		
 							</tr>
 

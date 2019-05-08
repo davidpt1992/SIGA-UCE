@@ -59,5 +59,13 @@ $(document).ready(function () {
 	    });
     });
     
+    $('.lookCust').on('click',function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$('.modal-body').load(href,function(){
+	        $('.myFormCustomer #exampleModal').modal({show:true});
+	    });
+    });
+    
 
 });

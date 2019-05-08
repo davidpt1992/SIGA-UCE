@@ -40,8 +40,8 @@
 							<tr th:each="contact : ${contacts}">
 								<td><a th:href="@{editAuditsRequests/(id=${contact.informeId},usuario=${usuario})}"
 										class="btn btn-outline-success fas fa-compress assign" title="assign"></a>
-										<a th:href="@{findReport/(Id=${contact.informeId})}"
-										class="btn btn-outline-info fas fa-eye lookReport" title="info"></a></td>
+										<a th:href="@{viewCust/(id=${contact.clienteId.clienteId})}"
+										class="btn btn-outline-info fas fa-eye lookCust" title="info-customer"></a></td>
 								
 								<td th:text="${contact.clienteId.nombreEmpresa}"></td>
 								<td th:text="${contact.datoComunId.solicitudAuditoriaId.tipoAuditoriaId.tipoAuditoria}"></td>
@@ -84,14 +84,14 @@
 		</form>
 	</div>
 	
-	<!-- view report-->
-	<div class="myFormReport">
+	<!-- view customer-->
+	<div class="myFormCustomer">
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Request an audit</h5>
+							<h5 class="modal-title" id="exampleModalLabel">View Customer</h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>

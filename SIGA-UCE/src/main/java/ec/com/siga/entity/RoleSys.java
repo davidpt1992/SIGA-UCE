@@ -1,11 +1,13 @@
 package ec.com.siga.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,6 +26,9 @@ public class RoleSys implements Serializable {
 	@Size(max = 45)
 	@Column(name = "ROL")
 	private String rol;
+	
+	@OneToMany(mappedBy = "roleId")
+    private List<User> userList;
 
 	public Integer getRoleId() {
 		return roleId;
@@ -41,11 +46,24 @@ public class RoleSys implements Serializable {
 		this.rol = rol;
 	}
 
-	public RoleSys(Integer roleId, String rol) {
+	
+	public List<User> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public RoleSys(Integer roleId, String rol, List<User> userList) {
 		super();
 		this.roleId = roleId;
 		this.rol = rol;
-
+		this.userList = userList;
 	}
 
 	public RoleSys() {
@@ -54,7 +72,10 @@ public class RoleSys implements Serializable {
 
 	@Override
 	public String toString() {
-		return "RoleSys [roleId=" + roleId + ", rol=" + rol + ", ]";
+		return "RoleSys [roleId=" + roleId + ", rol=" + rol + ", userList=" + userList + "]";
 	}
+
+	
+
 
 }

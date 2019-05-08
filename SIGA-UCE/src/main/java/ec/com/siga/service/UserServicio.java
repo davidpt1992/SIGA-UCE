@@ -10,7 +10,7 @@ public interface UserServicio {
 	public abstract User findAdmin(int adminId);
 	public abstract User findUserRole(String username);
 	public abstract void saveUser(User admin);
-	public abstract void deletAdmin(User admin);
+	public abstract void deletAdmin(int adminId);
 	public abstract List<User> findAllAdmin();
 	public abstract List<User> findAllBack();
 	public abstract List<User> findAllAudi();

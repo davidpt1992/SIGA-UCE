@@ -26,7 +26,8 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
     
-    <script  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <!-- jquery-3.3.1.js -->
+    <script th:src="@{/js/jquery-3.3.1.js}" src="../static/js/jquery-3.3.1.js"></script>
   
     <!-- Load contenido-->
 	<script th:src="@{/js/dashboardBack.js}" src="../static/js/dashboardBack.js"></script>
@@ -109,16 +110,18 @@
         </li>
         <!-- Cuenta del cliente -->
         <li class="nav-item">
-          <a th:href="@{tableAuditsRequests/(usuario=${username})}" class="nav-link requests" >
+          <a th:href="@{tableAuditsRequests/(usuario=${username})}" class="nav-link tRequests" >
             <i class="fas fa-fw fa-list-alt" ></i>
             <span>Audit requests</span></a>
         </li>
         <!-- consulta sus auditorias -->
         <li class="nav-item">
-          <a th:href="@{tableCustAudits/(usuario=${username})}" class="nav-link tAudits">
+          <a th:href="@{tableAuditsProsesing/(usuario=${username})}" class="nav-link tProsesing">
             <i class="fas fa-fw fa-list-alt"></i>
             <span>Audits</span></a>
         </li>
+        
+
               
              
         <!-- ROLES -->
@@ -129,8 +132,6 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <h6 class="dropdown-header">Manage:</h6>
-            <a class="dropdown-item tAdmin" href="#" >Administrators</a>
-            <a class="dropdown-item tBackOfc" href="#">Back-office</a>
             <a class="dropdown-item tAudi" href="#">Auditors</a>
             <a class="dropdown-item tCust" href="#">Customers</a>
             <div class="dropdown-divider"></div>

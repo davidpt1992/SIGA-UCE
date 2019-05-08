@@ -12,7 +12,9 @@ import ec.com.siga.entity.DatoComun;
 import ec.com.siga.entity.Informe;
 import ec.com.siga.model.SolucitudAuditoriaString;
 import ec.com.siga.service.AuditService;
+import ec.com.siga.service.CustService;
 import ec.com.siga.service.InformeService;
+import ec.com.siga.service.UserServicio;
 
 @Controller
 public class TableCustAuditsController {
@@ -24,6 +26,14 @@ public class TableCustAuditsController {
 	@Autowired
 	@Qualifier("auditService")
 	private AuditService auditService;
+	
+	@Autowired
+	@Qualifier("userServicio")
+	private UserServicio userServicio;
+	
+	@Autowired
+	@Qualifier("custService")
+	private CustService custService;
 	
 	@GetMapping("/tableCustAudits")
 	@ResponseBody
@@ -44,9 +54,10 @@ public class TableCustAuditsController {
 	}
 
 	@PostMapping("/saveCustAudits")
-	public ModelAndView saveAdmin(DatoComun datoComun, SolucitudAuditoriaString sas, String usuario) throws Exception {
+	public ModelAndView saveAdmin(DatoComun datoComun, SolucitudAuditoriaString sas, String usuario, String latitud, String longitud) throws Exception {
 		ModelAndView mav = new ModelAndView("/dashboardCust");
 		mav.addObject("username", usuario);
+		custService.custUpdate(usuario, longitud, latitud);
 		auditService.solicitudAuditoria(datoComun, sas, usuario);
 		return mav;
 	}
