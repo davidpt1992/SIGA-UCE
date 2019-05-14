@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -151,6 +152,7 @@ public class AuditorServiceImpl implements AuditorService {
 		Foto foto = new Foto();
 		try {
 			foto.setFoto(f.getBytes());
+			//foto.setFileName(Base64.encodeBase64String(f.getBytes()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -162,6 +164,7 @@ public class AuditorServiceImpl implements AuditorService {
 		dEspecificoRepository.save(de);
 		CheckList cl = checkListRepository.findByCodigo(Integer.parseInt(codigo));
 		cl.setDatoEspecificoId(de);
+		checkListRepository.save(cl);
 	}
 
 	@Override

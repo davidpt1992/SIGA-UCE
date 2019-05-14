@@ -29,6 +29,10 @@ public class Foto implements Serializable {
     @NotNull
     @Column(name = "FOTO_ID")
     private Integer fotoId;
+    @Column(name = "NOMBRE_FOTO")
+    private String fileName;
+    @Column(name = "TIPO_FOTO")
+    private String fileType;
     @Lob
     @Column(name = "FOTO")
     private byte[] foto;
@@ -38,33 +42,45 @@ public class Foto implements Serializable {
 		return fotoId;
 	}
 
-
 	public void setFotoId(Integer fotoId) {
 		this.fotoId = fotoId;
 	}
 
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
 
 	public byte[] getFoto() {
 		return foto;
 	}
 
-
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
-
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-
-	public Foto(Integer fotoId, byte[] foto) {
+	public Foto(Integer fotoId, String fileName, String fileType, byte[] foto) {
 		super();
 		this.fotoId = fotoId;
+		this.fileName = fileName;
+		this.fileType = fileType;
 		this.foto = foto;
 	}
-
 
 	public Foto() {
     }

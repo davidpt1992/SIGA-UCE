@@ -23,7 +23,7 @@
 					<td th:text="${quest.preguntasId.preguntas}"></td>
 					<td th:text="${quest.datoEspecificoId?.respuesta}"></td>
 					<td th:text="${quest.datoEspecificoId?.evidencia}"></td>
-					<td th:text="${quest.datoEspecificoId?.fotoId?.foto}"></td>
+					<td><img  th:src="@{'data:image/jpeg;base64,'+${imagen}}" /></td>
 
 				</tr>
 			</tbody>

@@ -93,9 +93,12 @@ $(document).ready(function () {
     
     $('.next1').on('click',function(event){
 		event.preventDefault();
-
 		
-		$.post("nextQuestionPost"
+		var form = $('#fileUploadForm')[0];
+
+	    var data = new FormData(form);
+		
+		/*$.post("nextQuestionPost"
 				,{
 					id: $('#id').val(),
 					usuario: $('#usuario').val(),
@@ -109,7 +112,27 @@ $(document).ready(function () {
 						  $('.myFormQuestionnaire #exampleModal').modal({show:true});
 					  });					  
 				  } 
-			);
+			);*/
+		
+		$.ajax({
+			  type: "POST",
+			  url: "nextQuestionPost",
+			  data: {
+					id: $('#id').val(),
+					usuario: $('#usuario').val(),
+					codigo: $('#codigo').val(),
+					foto: $('#foto').val(),
+					evidencia: $('#evidencia').val(),
+					respuesta: $('#respuesta').val()
+				  },
+			  success: function(mav){
+				  $('.modal-body').html(mav ,function(){
+					  $('.myFormQuestionnaire #exampleModal').modal({show:true});
+				  });					  
+			  },
+			  enctype: 'multipart/form-data',
+			  dataType: false
+			});
 		
 		
 		
@@ -136,6 +159,8 @@ $(document).ready(function () {
 					  });					  
 				  } 
 			);
+		
+		
 		        
 	    });
     

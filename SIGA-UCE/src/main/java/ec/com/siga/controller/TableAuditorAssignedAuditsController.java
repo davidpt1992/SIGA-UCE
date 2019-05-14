@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ec.com.siga.entity.CheckList;
 import ec.com.siga.entity.Informe;
-import ec.com.siga.model.SolucitudAuditoriaString;
 import ec.com.siga.service.AuditService;
 import ec.com.siga.service.AuditorService;
 import ec.com.siga.service.BackOfficeService;
@@ -40,6 +39,8 @@ public class TableAuditorAssignedAuditsController {
 	@Autowired
 	@Qualifier("custService")
 	private CustService custService;
+	
+	
 
 	@GetMapping("/tableAssignedAudits")
 	@ResponseBody
@@ -83,7 +84,7 @@ public class TableAuditorAssignedAuditsController {
 		System.out.println("ingreso al post " + codigo);
 		System.out.println("ingreso al post " + foto);
 		System.out.println("ingreso al post " + respuesta);
-		// auditorService.saveReply(foto, evidencia, respuesta, codigo);
+		auditorService.saveReply(foto, evidencia, respuesta, codigo);
 		CheckList cl = auditorService.replyPost(id, codigo, accion);
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);
@@ -91,7 +92,7 @@ public class TableAuditorAssignedAuditsController {
 		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
 		return mav;
 	}
-
+	
 	@PostMapping("/previousQuestionPost")
 	public ModelAndView previousQuestionPost(int id, String usuario, String codigo, MultipartFile foto,
 			String evidencia, boolean respuesta) {
@@ -168,7 +169,7 @@ public class TableAuditorAssignedAuditsController {
 	@GetMapping("/deleteAssignedAudits")
 	public void deleteCountry(Integer adminId) {
 		informeServicio.deleteReport(adminId);
-		;
+		
 	}
 
 	@GetMapping("/viewCust")
@@ -178,5 +179,6 @@ public class TableAuditorAssignedAuditsController {
 		mav.addObject("cliente", custService.findCustById(id));
 		return mav;
 	}
+	
 
 }

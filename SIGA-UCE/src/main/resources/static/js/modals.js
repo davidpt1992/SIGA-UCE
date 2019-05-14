@@ -46,9 +46,11 @@ $(document).ready(function () {
         event.preventDefault();
         var href = $(this).attr('href');
         $('#deleteModal #delHref').attr('href', href);
-        $('#deleteModal').modal();
+        $('#deleteModal').modal('toggle');
 
 
     });
+    
+    
 
 });

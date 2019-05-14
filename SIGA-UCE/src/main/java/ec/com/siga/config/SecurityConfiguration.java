@@ -27,7 +27,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	//private static final Log LOG = LogFactory.getLog(AuthenticationController.class);
@@ -53,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and()
 				.logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout")
 				.permitAll();
-		http.authorizeRequests().antMatchers(HttpMethod.POST).authenticated();
+		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST).authenticated();
 
 	}
 	/**@Bean

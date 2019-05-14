@@ -60,5 +60,5 @@ public class TableAdminController {
 		userServicio.deletAdmin(adminId);
         return "dashboardAdmin";
     }
-
+	
 }
