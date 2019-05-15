@@ -64,8 +64,8 @@ public class TableAuditorAssignedAuditsController {
 	@ResponseBody
 	public ModelAndView startquestionnaire1(int id, String usuario) {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
-		auditorService.createCkeckList(id);
-		CheckList cl = auditorService.reply(id);
+		auditorService.createCkeckList(id);  //crea las preguntas del cuestionario solicitado con el id de la solicitud
+		CheckList cl = auditorService.reply(id);   //consulta la primera pregunta del cuestionario 
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);
 		mav.addObject("usuario", usuario);
@@ -73,8 +73,28 @@ public class TableAuditorAssignedAuditsController {
 		return mav;
 	}
 
-	@PostMapping("/nextQuestionPost")
+	@PostMapping("/QuestionSave")
 	public ModelAndView nextQuestionPost(int id, String usuario, String codigo, MultipartFile foto, String evidencia,
+			boolean respuesta) {
+		ModelAndView mav = new ModelAndView("save");
+		String accion = "+";
+		System.out.println("ingreso al post " + evidencia);
+		System.out.println("ingreso al post " + id);
+		System.out.println("ingreso al post " + usuario);
+		System.out.println("ingreso al post " + codigo);
+		System.out.println("ingreso al post " + foto);
+		System.out.println("ingreso al post " + respuesta);
+		auditorService.saveReply(foto, evidencia, respuesta, codigo);
+		CheckList cl = auditorService.replyPost(id, codigo, accion);
+		mav.addObject("pregunta", cl);
+		mav.addObject("id", id);
+		mav.addObject("usuario", usuario);
+		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
+		return mav;
+	}
+	
+	@PostMapping("/nextQuestionPostNext")
+	public ModelAndView nextQuestionPostNext(int id, String usuario, String codigo, MultipartFile foto, String evidencia,
 			boolean respuesta) {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
 		String accion = "+";
@@ -84,7 +104,7 @@ public class TableAuditorAssignedAuditsController {
 		System.out.println("ingreso al post " + codigo);
 		System.out.println("ingreso al post " + foto);
 		System.out.println("ingreso al post " + respuesta);
-		auditorService.saveReply(foto, evidencia, respuesta, codigo);
+		//auditorService.saveReply(foto, evidencia, respuesta, codigo);
 		CheckList cl = auditorService.replyPost(id, codigo, accion);
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);

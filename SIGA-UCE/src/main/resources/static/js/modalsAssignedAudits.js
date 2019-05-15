@@ -94,46 +94,39 @@ $(document).ready(function () {
     $('.next1').on('click',function(event){
 		event.preventDefault();
 		
-		var form = $('#fileUploadForm')[0];
-
-	    var data = new FormData(form);
-		
-		/*$.post("nextQuestionPost"
-				,{
-					id: $('#id').val(),
-					usuario: $('#usuario').val(),
-					codigo: $('#codigo').val(),
-					foto: $('#foto').val(),
-					evidencia: $('#evidencia').val(),
-					respuesta: $('#respuesta').val()
-				  }
-				,function(mav){
-					  $('.modal-body').html(mav ,function(){
-						  $('.myFormQuestionnaire #exampleModal').modal({show:true});
-					  });					  
-				  } 
-			);*/
+		//var form = $('#fileUploadForm')[0];
+	    //var data = new FormData(form);
+		//var formData = new FormData($("#fileUploadForm")[0]);
+		//var foto = document.getElementById("foto");
+		/*var formData = new FormData();
+		formData.append("id", $('#id').val());
+		formData.append("usuario", $('#usuario').val()); 
+		formData.append("codigo", $('#codigo').val()); 
+		//formData.append('foto', $('#foto')[0].files[0]);
+		formData.append("evidencia", $('#evidencia').val());
+		formData.append("respuesta", $('#respuesta').val()); 
+*/
 		
 		$.ajax({
 			  type: "POST",
-			  url: "nextQuestionPost",
+			  url: "nextQuestionPostNext",
 			  data: {
 					id: $('#id').val(),
 					usuario: $('#usuario').val(),
 					codigo: $('#codigo').val(),
-					foto: $('#foto').val(),
+					//foto: $('#foto')[0].files[0],
 					evidencia: $('#evidencia').val(),
 					respuesta: $('#respuesta').val()
 				  },
+			  enctype: 'multipart/form-data',
+			  dataType: false,
 			  success: function(mav){
 				  $('.modal-body').html(mav ,function(){
 					  $('.myFormQuestionnaire #exampleModal').modal({show:true});
 				  });					  
-			  },
-			  enctype: 'multipart/form-data',
-			  dataType: false
+			  }
+			  
 			});
-		
 		
 		
     });
@@ -163,6 +156,8 @@ $(document).ready(function () {
 		
 		        
 	    });
+    
+    
     
 
 });

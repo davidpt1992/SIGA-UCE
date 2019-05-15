@@ -8,7 +8,9 @@ $(document).ready(function () {
 	$('.tAH').on('click',function(event){
 		event.preventDefault();
 		var href = $(this).attr('href');
+		$("#startAudit").prop('disabled', false);
    		$("#seccionRecargarAuditoriasAsignadas").load(href);
+   		
     });
 	
 });
