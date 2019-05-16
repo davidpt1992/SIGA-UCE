@@ -109,10 +109,17 @@
           </a>
         </li>
         <!-- Cuestionarios -->
-        <li class="nav-item">
-          <a class="nav-link tQuest" href="#">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-question-circle"></i>
-            <span>Questionnaires</span></a>
+            <span>Questionnaires</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <h6 class="dropdown-header">Manage:</h6>
+            <a class="dropdown-item tTypeQ" th:href="@{tableTypeQuestionnaire/(username=${username})}" >Type questionnaires</a>
+            <a class="dropdown-item tSect" th:href="@{tableSection/(username=${username})}">Sections</a>
+            <a class="dropdown-item tQuest" th:href="@{tableQuest/(username=${username})}">Questions</a>
+          </div>
         </li>
         <!-- Asignaciones -->
         <li class="nav-item">
@@ -150,8 +157,8 @@
             <div class="dropdown-divider"></div>
             <h6 class="dropdown-header">Other:</h6>
             <a class="dropdown-item tRole" href="#">Roles</a>
-            <a class="dropdown-item" href="tableRoles.html">Prices</a>
-            <a class="dropdown-item" href="tableSettings.html">Settings</a>
+            <a class="dropdown-item" href="#">Prices</a>
+            <a class="dropdown-item" href="#">Settings</a>
           </div>
         </li>
               

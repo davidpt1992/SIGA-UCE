@@ -9,12 +9,15 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -33,7 +36,8 @@ public class Seccion implements Serializable {
     @Size(max = 45)
     @Column(name = "SECCION")
     private String seccion;
-    @OneToMany(mappedBy = "seccionId")
+    @OneToMany(mappedBy = "seccionId", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Preguntas> preguntasList;
 
     public Integer getSeccionId() {
@@ -58,6 +62,10 @@ public class Seccion implements Serializable {
 
 	public void setPreguntasList(List<Preguntas> preguntasList) {
 		this.preguntasList = preguntasList;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public Seccion(Integer seccionId, String seccion, List<Preguntas> preguntasList) {

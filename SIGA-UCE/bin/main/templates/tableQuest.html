@@ -1,61 +1,87 @@
-	<!-- Custom modals create update delete -->
-	<script th:src="@{/js/modals.js}" src="../static/js/modals.js"></script>
+
+<!-- Custom modals create update delete -->
+<script th:src="@{/js/modals.js}" src="../static/js/modals.js"></script>
 
 
 <body id="page-top">
 
-	
-
-		<!-- DataTable Admin -->
-		<div class="card mb-3">
-
-			<div class="card-header">
-				<i class="fas fa-table"> Data Questionnaires</i> <br /> <a><button
-						class="btn btn-secondary fas fa-user-plus nBtn" id="nBtn"></button></a>
-			</div>
-
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table table-bordered ">
-						<thead class="thead-light">
-							<tr>
-								<th>Actions</th>
-								<th>Audit type</th>
-								<th>Section</th>
-								<th>Question</th>
-							
-							</tr>
-						</thead>
-						<tfoot class="thead-light">
-							<tr>
-								<th>Actions</th>
-								<th>Audit type</th>
-								<th>Section</th>
-								<th>Question</th>
-							</tr>
-						</tfoot>
-						<tbody>
-							<tr th:each="contact : ${contacts}">
-								<td><a th:href="@{/findQuest/(id=${contact.preguntasId})}"
-										class="btn btn-outline-primary fas fa-pencil-alt eBtn">_</a> <a
-										th:href="@{/deleteQuest/(adminId=${contact.preguntasId})}"
-										class="btn btn-outline-danger fas fa-trash-alt dBtn"></a></td>
-								<td th:text="${contact.tipoAuditoriaId.tipoAuditoria}"></td>
-								<td th:text="${contact.seccionId.seccion}"></td>
-								<td th:text="${contact.preguntas}"></td>
-		
-							</tr>
 
 
-						</tbody>
-					</table>
-				</div>
-			</div>
+	<!-- DataTable Admin -->
+	<div class="card mb-3">
 
-			<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+		<div class="card-header">
+			<i class="fas fa-table"> Data Questionnaires</i> <br /> <a><button
+					class="btn btn-secondary fa fa-plus-circle nBtn">New
+					Question</button></a>
 		</div>
 
-	
+		<div class="card-body">
+
+			<!-- Choose Type Questionnaire-->
+			<label>Questionnaire Type</label>
+			<div class="form-label-group provin">
+				<select class="form-control" id="tipoAuditoria" required="required">
+								<option value="0" disabled selected>Select Questionnaire Type</option>
+								<option th:each="tQuest : ${tQuests}" th:value="${tQuest.tipoAuditoriaId}" th:text="${tQuest.tipoAuditoria}"/>
+							</select>
+
+				</select>
+			</div>
+
+			<!-- Choose Section-->
+			<label>Section</label>
+			<div class="form-label-group section">
+				<select class="form-control" id="tipoAuditoria" required="required">
+								<option value="0" disabled selected>Select Questionnaire Type</option>
+								<option th:each="section : ${sections}" th:value="${section.seccionId}" th:text="${section.seccion}"/>
+							</select>
+
+				</select>
+			</div>
+
+			<div class="table-responsive">
+				<table class="table table-bordered ">
+					<thead class="thead-light">
+						<tr>
+							<th>Actions</th>
+							<th>Audit type</th>
+							<th>Section</th>
+							<th>Question</th>
+
+						</tr>
+					</thead>
+					<tfoot class="thead-light">
+						<tr>
+							<th>Actions</th>
+							<th>Audit type</th>
+							<th>Section</th>
+							<th>Question</th>
+						</tr>
+					</tfoot>
+					<tbody>
+						<tr th:each="contact : ${contacts}">
+							<td><a th:href="@{/findQuest/(id=${contact.preguntasId})}"
+								class="btn btn-outline-primary fas fa-pencil-alt eBtn">_</a> <a
+								th:href="@{/deleteQuest/(adminId=${contact.preguntasId})}"
+								class="btn btn-outline-danger fas fa-trash-alt dBtn"></a></td>
+							<td th:text="${contact.tipoAuditoriaId.tipoAuditoria}"></td>
+							<td th:text="${contact.seccionId.seccion}"></td>
+							<td th:text="${contact.preguntas}"></td>
+
+						</tr>
+
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="card-footer small text-muted">Updated yesterday at
+			11:59 PM</div>
+	</div>
+
+
 
 	<!-- add or editAdmin Modal-->
 	<div class="myForm">
@@ -65,7 +91,8 @@
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Add or Edit Administrator</h5>
+							<h5 class="modal-title" id="exampleModalLabel">Add or Edit
+								Administrator</h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>

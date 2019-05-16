@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ec.com.siga.entity.CheckList;
+import ec.com.siga.entity.DatoEspecifico;
 import ec.com.siga.entity.Foto;
 import ec.com.siga.entity.Informe;
 import ec.com.siga.model.SolucitudAuditoriaString;
@@ -106,12 +107,22 @@ public class TableAuditRequestsController {
 	@ResponseBody
 	public ModelAndView showTableCheckReports(Integer id, String usuario) {
 		ModelAndView mav = new ModelAndView("tableCheckReports");
+		System.out.println(id);
 		List<CheckList> ckl = backOfficeService.findAllCheckList(informeServicio.findReport(id).getDatoComunId().getSolicitudAuditoriaId());
+		
+		for(CheckList ck : ckl){
+			DatoEspecifico des = ck.getDatoEspecificoId();
+			Foto foto = des.getFotoId();
+			String imagen64 =  Base64.encodeBase64String(foto.getFoto());
+			foto.setFileName(imagen64);
+			des.setFotoId(foto);
+			ck.setDatoEspecificoId(des);
+		}
+		
 		mav.addObject("checkList", ckl);
-
-		String encodedImage = Base64.encodeBase64String(ckl.get(0).getDatoEspecificoId().getFotoId().getFoto());
+		//String encodedImage = Base64.encodeBase64String(ckl.get(0).getDatoEspecificoId().getFotoId().getFoto());
 		// mav.addObject("auditores", backOfficeService.findAllAudit());
-		mav.addObject("imagen", encodedImage);
+		//mav.addObject("imagen", encodedImage);
 		mav.addObject("usuario", usuario);
 		return mav;
 	}

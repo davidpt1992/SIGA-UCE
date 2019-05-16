@@ -9,12 +9,15 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -30,12 +33,14 @@ public class TipoAuditoria implements Serializable {
     @NotNull
     @Column(name = "TIPO_AUDITORIA_ID")
     private Integer tipoAuditoriaId;
-    @Size(max = 20)
+    @Size(max = 40)
     @Column(name = "TIPO_AUDITORIA")
     private String tipoAuditoria;
-    @OneToMany(mappedBy = "tipoAuditoriaId")
+    @OneToMany(mappedBy = "tipoAuditoriaId", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<SolicitudAuditoria> solicitudAuditoriaList;
     @OneToMany(mappedBy = "tipoAuditoriaId")
+    @JsonIgnore
     private List<Preguntas> preguntasList;
 
     public Integer getTipoAuditoriaId() {
@@ -68,6 +73,10 @@ public class TipoAuditoria implements Serializable {
 
 	public void setPreguntasList(List<Preguntas> preguntasList) {
 		this.preguntasList = preguntasList;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public TipoAuditoria(Integer tipoAuditoriaId, String tipoAuditoria, List<SolicitudAuditoria> solicitudAuditoriaList,

@@ -1,0 +1,110 @@
+	<!-- Custom modals create update delete -->
+	<script th:src="@{/js/modalsTypeQuestionnaire.js}" src="../static/js/modalsTypeQuestionnaire.js"></script>
+
+
+<body id="page-top">
+
+	<div id="wrapper">
+
+		<!-- DataTable Admin -->
+		<div class="card mb-3">
+
+			<div class="card-header">
+				<i class="fas fa-table"> Data Type Questionnaires</i> <br /> <a><button
+						class="btn btn-secondary fa fa-plus-circle nBtn"> New Questionnaire type</button></a>
+			</div>
+			
+			<div class="form-label-group">
+				<input type="hidden" th:value="${usuario}" name="usuario"
+					id="usuario">
+			</div>
+
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<thead class="thead-light">
+							<tr>
+								<th>Actions</th>
+								<th>Questionnaire type</th>							
+							</tr>
+						</thead>
+						<tfoot class="thead-light">
+							<tr>
+								<th>Actions</th>
+								<th>Questionnaire type</th>							
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr th:each="contact : ${contacts}">
+								<td><a th:href="@{findTypeQuestionnaire/(id=${contact.tipoAuditoriaId})}"
+										class="btn btn-primary fas fa-pencil-alt eBtn">_</a> <a
+										th:href="@{deleteTypeQuestionnaire/(id=${contact.tipoAuditoriaId})}"
+										class="btn btn-danger fas fa-trash-alt dBtn"></a></td>
+								<td th:text="${contact.tipoAuditoria}"></td>
+															
+								
+							</tr>
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+		</div>
+
+	</div>
+
+	<!-- add or editAdmin Modal-->
+	<div class="myForm">
+		<form th:action="@{/saveTypeQuestionnaire}" method="post">
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Add or Edit Questionnaire Type</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body"></div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<input type="submit" class="btn btn-primary" value="Save" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- deleteAdmin Modal-->
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="deleteModalLabel">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="alert alert-danger">Are you sure want to delete this
+						role?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<a type="button" href="" class="btn btn-danger" id="delHref">Delete</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+

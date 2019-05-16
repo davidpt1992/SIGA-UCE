@@ -1,5 +1,23 @@
 $(document).ready(function () {
 
+	$('.tTypeQ').on('click',function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+   		$("#seccionRecargar").load(href);
+    });
+	
+	$('.tSect').on('click',function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+   		$("#seccionRecargar").load(href);
+    });
+	
+	$('.tQuest').on('click',function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+   		$("#seccionRecargar").load(href);
+    });
+		
 	$('.tAdmin').on('click',function(event){
 		event.preventDefault();
 		var href = $(this).attr('href');
@@ -24,11 +42,6 @@ $(document).ready(function () {
 	$('.tRole').on('click',function(event){
 		event.preventDefault();
    		$("#seccionRecargar").load("tableRole");
-    });
-	
-	$('.tQuest').on('click',function(event){
-		event.preventDefault();
-   		$("#seccionRecargar").load("tableQuest");
     });
 	
 	$('.tAssig').on('click',function(event){
