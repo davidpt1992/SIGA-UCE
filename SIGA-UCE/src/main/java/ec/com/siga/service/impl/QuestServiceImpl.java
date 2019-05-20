@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import ec.com.siga.entity.Preguntas;
+import ec.com.siga.entity.Seccion;
+import ec.com.siga.entity.TipoAuditoria;
 import ec.com.siga.repository.QuestJpaRepository;
+import ec.com.siga.repository.SectionRepository;
 import ec.com.siga.repository.TipoAudiRepository;
 import ec.com.siga.service.QuestService;
 
@@ -21,6 +24,10 @@ public class QuestServiceImpl implements QuestService {
 	@Autowired
 	@Qualifier("tipoAudiRepository")
 	private TipoAudiRepository tipoAudiRepository;
+	
+	@Autowired
+	@Qualifier("sectionRepository")
+	private SectionRepository sectionRepository;
 
 	@Override
 	public List<Preguntas> findAllQuest() {
@@ -37,6 +44,13 @@ public class QuestServiceImpl implements QuestService {
 	@Override
 	public void deleteQuestion(int idQuestion) {
 		questRepository.deleteById(idQuestion);
+	}
+
+	@Override
+	public List<Preguntas> findAllByTipoAuditoriaAndSeccion(Integer tipoAuditoria, Integer seccion) {
+		TipoAuditoria tAu = tipoAudiRepository.findById(tipoAuditoria).get();
+		Seccion secc = sectionRepository.findById(seccion).get();
+		return questRepository.findAllByTipoAuditoriaIdAndSeccionId(tAu, secc);
 	}
 
 }

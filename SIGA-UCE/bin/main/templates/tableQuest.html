@@ -1,6 +1,6 @@
 
 <!-- Custom modals create update delete -->
-<script th:src="@{/js/modals.js}" src="../static/js/modals.js"></script>
+<script th:src="@{/js/tableQuest.js}" src="../static/js/tableQuest.js"></script>
 
 
 <body id="page-top">
@@ -18,35 +18,36 @@
 
 		<div class="card-body">
 
+
+			<div class="form-label-group">
+				<input type="hidden" th:value="${usuario}" name="usuario" id="usuario">
+			</div>
+
 			<!-- Choose Type Questionnaire-->
 			<label>Questionnaire Type</label>
 			<div class="form-label-group provin">
 				<select class="form-control" id="tipoAuditoria" required="required">
-								<option value="0" disabled selected>Select Questionnaire Type</option>
-								<option th:each="tQuest : ${tQuests}" th:value="${tQuest.tipoAuditoriaId}" th:text="${tQuest.tipoAuditoria}"/>
-							</select>
-
-				</select>
+					<option value="0" disabled selected>Select Questionnaire
+						Type</option>
+					<option th:each="tQuest : ${tQuests}"
+						th:value="${tQuest.tipoAuditoriaId}"
+						th:text="${tQuest.tipoAuditoria}" />
+				</select> </select>
 			</div>
 
 			<!-- Choose Section-->
 			<label>Section</label>
 			<div class="form-label-group section">
-				<select class="form-control" id="tipoAuditoria" required="required">
-								<option value="0" disabled selected>Select Questionnaire Type</option>
-								<option th:each="section : ${sections}" th:value="${section.seccionId}" th:text="${section.seccion}"/>
-							</select>
-
-				</select>
+				<select class="form-control" id="seccion" 
+					required="required">
+				</select> 
 			</div>
 
 			<div class="table-responsive">
-				<table class="table table-bordered ">
+				<table class="table table-bordered tQuestions">
 					<thead class="thead-light">
 						<tr>
 							<th>Actions</th>
-							<th>Audit type</th>
-							<th>Section</th>
 							<th>Question</th>
 
 						</tr>
@@ -54,24 +55,10 @@
 					<tfoot class="thead-light">
 						<tr>
 							<th>Actions</th>
-							<th>Audit type</th>
-							<th>Section</th>
 							<th>Question</th>
 						</tr>
 					</tfoot>
 					<tbody>
-						<tr th:each="contact : ${contacts}">
-							<td><a th:href="@{/findQuest/(id=${contact.preguntasId})}"
-								class="btn btn-outline-primary fas fa-pencil-alt eBtn">_</a> <a
-								th:href="@{/deleteQuest/(adminId=${contact.preguntasId})}"
-								class="btn btn-outline-danger fas fa-trash-alt dBtn"></a></td>
-							<td th:text="${contact.tipoAuditoriaId.tipoAuditoria}"></td>
-							<td th:text="${contact.seccionId.seccion}"></td>
-							<td th:text="${contact.preguntas}"></td>
-
-						</tr>
-
-
 					</tbody>
 				</table>
 			</div>

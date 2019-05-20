@@ -51,5 +51,29 @@ $(document).ready(function () {
 
     });
     
+    
+    $('#tipoAuditoria').change(function(){
+		$('#tipoAuditoria').removeAttr('disabled');
+        $.get('sectionQuest',{tipoAuditoria : $('#tipoAuditoria').val()},function(obj) {
+        	$(".section select").empty();
+        	$(".section select").append('<option value="0" disabled selected>Select Questionnaire Type</option>');
+        	$.each(obj, function(arregloId, seccion){
+        		 $(".section select").append('<option value="'+seccion.seccionId+'">'+seccion.seccion+'</option>');
+        		     });
+                  }
+        )
+        
+    } );
+    
+    $('#seccion').change(function(){
+		$.get('questions',{tipoAuditoria : $('#tipoAuditoria').val(), seccion : $('#seccion').val()},function(obj) {
+			$(".tQuestions tbody").empty();
+        	$.each(obj, function(arregloId, quest){
+        		$(".tQuestions tbody").append('<tr><td><a class="btn btn-outline-primary fas fa-pencil-alt eBtn" href="/findQuest/(id=${'+quest.preguntasId+'})">_</a><a href="/deleteQuest/(adminId=${'+quest.preguntasId+'})" class="btn btn-outline-danger fas fa-trash-alt dBtn"></a></td><td>'+quest.preguntas+'</td></tr>');
+        		     });
+                  }
+        )
+        
+    } );
 
 });

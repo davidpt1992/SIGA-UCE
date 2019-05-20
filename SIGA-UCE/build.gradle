@@ -5,6 +5,7 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
+
 group = 'ec.com.siga'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
@@ -28,6 +29,5 @@ dependencies {
 	compile group: 'commons-io', name: 'commons-io', version: '2.6'
 	
 	
-	
-	
 }
+

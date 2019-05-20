@@ -45,16 +45,21 @@
 								class="btn btn-outline-danger fa fa-play startAudit"
 								title="start audit" id="startAudit"></a> <a
 								th:href="@{viewCust/(id=${contact.clienteId.clienteId})}"
-								class="btn btn-outline-info fas fa-eye lookCust" title="info"></a></td>
+								class="btn btn-outline-info fas fa-eye lookCust" title="info"></a>
+								<a th:href="@{sendNC/(id=${contact.informeId},usuario=${usuario})}"
+								class="btn btn-outline-secondary fa fa-paper-plane sendNC" title="send non conformities"></a></td>
 
 							<td th:text="${contact.clienteId.nombreEmpresa}"></td>
-							<td	th:text="${contact.datoComunId.solicitudAuditoriaId.tipoAuditoriaId.tipoAuditoria}"></td>
+							<td
+								th:text="${contact.datoComunId.solicitudAuditoriaId.tipoAuditoriaId.tipoAuditoria}"></td>
 							<td th:text="${contact.auditorId.userId.nombre}"></td>
-							<td class="badge badge-pill badge-danger" 
+							<td class="badge badge-pill badge-danger"
 								th:text="${contact.datoComunId.solicitudAuditoriaId.estadoAuditoriaId.estadoAuditoria}"></td>
 							<td th:text="${contact.informeId}"></td>
-							<td	th:text="${contact.datoComunId.solicitudAuditoriaId.fechaInicio}"></td>
-							<td	th:text="${contact.datoComunId.solicitudAuditoriaId.fechaFinal}"></td>
+							<td
+								th:text="${contact.datoComunId.solicitudAuditoriaId.fechaInicio}"></td>
+							<td
+								th:text="${contact.datoComunId.solicitudAuditoriaId.fechaFinal}"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -91,7 +96,8 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Customer Information</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Customer
+							Information</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -102,6 +108,20 @@
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Close</button>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- send non conformities-->
+	<div class="myFormConformities">
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header"></div>
+					<div class="modal-body"><p class="alert alert-danger"></p></div>
+					<div class="modal-footer"><a class="btn btn-primary" th:href="@{/loginsuccess}">OK</a></div>
 				</div>
 			</div>
 		</div>

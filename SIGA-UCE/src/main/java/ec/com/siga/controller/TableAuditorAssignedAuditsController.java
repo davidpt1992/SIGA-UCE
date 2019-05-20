@@ -77,63 +77,14 @@ public class TableAuditorAssignedAuditsController {
 	public ModelAndView nextQuestionPost(int id, String usuario, String codigo, MultipartFile foto, String evidencia,
 			boolean respuesta) {
 		ModelAndView mav = new ModelAndView("save");
-		String accion = "+";
-		System.out.println("ingreso al post " + evidencia);
-		System.out.println("ingreso al post " + id);
-		System.out.println("ingreso al post " + usuario);
-		System.out.println("ingreso al post " + codigo);
-		System.out.println("ingreso al post " + foto);
-		System.out.println("ingreso al post " + respuesta);
-		auditorService.saveReply(foto, evidencia, respuesta, codigo);
-		CheckList cl = auditorService.replyPost(id, codigo, accion);
-		mav.addObject("pregunta", cl);
-		mav.addObject("id", id);
-		mav.addObject("usuario", usuario);
-		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
+		auditorService.saveReply(foto, evidencia, respuesta, codigo);		
 		return mav;
 	}
 	
-	@PostMapping("/nextQuestionPostNext")
-	public ModelAndView nextQuestionPostNext(int id, String usuario, String codigo, MultipartFile foto, String evidencia,
-			boolean respuesta) {
+	@PostMapping("/nextQuestion")
+	public ModelAndView nextQuest(int id, String usuario, String codigo) {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
 		String accion = "+";
-		System.out.println("ingreso al post " + evidencia);
-		System.out.println("ingreso al post " + id);
-		System.out.println("ingreso al post " + usuario);
-		System.out.println("ingreso al post " + codigo);
-		System.out.println("ingreso al post " + foto);
-		System.out.println("ingreso al post " + respuesta);
-		//auditorService.saveReply(foto, evidencia, respuesta, codigo);
-		CheckList cl = auditorService.replyPost(id, codigo, accion);
-		mav.addObject("pregunta", cl);
-		mav.addObject("id", id);
-		mav.addObject("usuario", usuario);
-		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
-		return mav;
-	}
-	
-	@PostMapping("/previousQuestionPost")
-	public ModelAndView previousQuestionPost(int id, String usuario, String codigo, MultipartFile foto,
-			String evidencia, boolean respuesta) {
-		ModelAndView mav = new ModelAndView("questionnaireForm");
-		String accion = "-";
-		// auditorService.saveReply(foto, evidencia, respuesta, codigo);
-		CheckList cl = auditorService.replyPost(id, codigo, accion);
-		mav.addObject("pregunta", cl);
-		mav.addObject("id", id);
-		mav.addObject("usuario", usuario);
-		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
-		return mav;
-	}
-
-	@GetMapping("/nextQuestion")
-	@ResponseBody
-	public ModelAndView nextQuest(int id, String usuario, String codigo, MultipartFile foto, String evidencia,
-			boolean respuesta) {
-		ModelAndView mav = new ModelAndView("questionnaireForm");
-		String accion = "+";
-		auditorService.saveReply(foto, evidencia, respuesta, codigo);
 		CheckList cl = auditorService.replyPost(id, codigo, accion);
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);
@@ -142,13 +93,10 @@ public class TableAuditorAssignedAuditsController {
 		return mav;
 	}
 
-	@GetMapping("/previousQuestion")
-	@ResponseBody
-	public ModelAndView preQuest(int id, String usuario, String codigo, MultipartFile foto, String evidencia,
-			boolean respuesta) {
+	@PostMapping("/previousQuestion")
+	public ModelAndView preQuest(int id, String usuario, String codigo) {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
 		String accion = "-";
-		auditorService.saveReply(foto, evidencia, respuesta, codigo);
 		CheckList cl = auditorService.replyPost(id, codigo, accion);
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);

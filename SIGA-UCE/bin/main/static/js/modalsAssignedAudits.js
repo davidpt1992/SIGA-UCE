@@ -69,54 +69,33 @@ $(document).ready(function () {
     
     $('.next').on('click',function(event){
 		event.preventDefault();
-		var href = $(this).attr('href');
-		$('.modal-body').load(href,function(){
-	        $('.myFormQuestionnaire #exampleModal').modal({show:true});
-	    });
+		$.ajax({
+			  type: "POST",
+			  url: "nextQuestion",
+			  data: {
+					id: $('#id').val(),
+					usuario: $('#usuario').val(),
+					codigo: $('#codigo').val()
+				  },
+			  enctype: 'multipart/form-data',
+			  dataType: false,
+			  success: function(mav){
+				  $('.modal-body').html(mav ,function(){
+					  $('.myFormQuestionnaire #exampleModal').modal({show:true});
+				  });					  
+			  }
+			});		
     });
     
     $('.previous').on('click',function(event){
 		event.preventDefault();
-		var href = $(this).attr('href');
-		$('.modal-body').load(href,function(){
-	        $('.myFormQuestionnaire #exampleModal').modal({show:true});
-	    });
-    });
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    $('.next1').on('click',function(event){
-		event.preventDefault();
-		
-		//var form = $('#fileUploadForm')[0];
-	    //var data = new FormData(form);
-		//var formData = new FormData($("#fileUploadForm")[0]);
-		//var foto = document.getElementById("foto");
-		/*var formData = new FormData();
-		formData.append("id", $('#id').val());
-		formData.append("usuario", $('#usuario').val()); 
-		formData.append("codigo", $('#codigo').val()); 
-		//formData.append('foto', $('#foto')[0].files[0]);
-		formData.append("evidencia", $('#evidencia').val());
-		formData.append("respuesta", $('#respuesta').val()); 
-*/
-		
 		$.ajax({
 			  type: "POST",
-			  url: "nextQuestionPostNext",
+			  url: "previousQuestion",
 			  data: {
 					id: $('#id').val(),
 					usuario: $('#usuario').val(),
-					codigo: $('#codigo').val(),
-					//foto: $('#foto')[0].files[0],
-					evidencia: $('#evidencia').val(),
-					respuesta: $('#respuesta').val()
+					codigo: $('#codigo').val()
 				  },
 			  enctype: 'multipart/form-data',
 			  dataType: false,
@@ -127,37 +106,5 @@ $(document).ready(function () {
 			  }
 			  
 			});
-		
-		
     });
-    
-
-
-    
-    $('.previous1').on('click',function(event){
-    	event.preventDefault();
-
-		$.post("previousQuestionPost"
-				,{
-					id: $('#id').val(),
-					usuario: $('#usuario').val(),
-					codigo: $('#codigo').val(),
-					foto: $('#foto').val(),
-					evidencia: $('#evidencia').val(),
-					respuesta: $('#respuesta').val()
-				  }
-				,function(mav){
-					  $('.modal-body').html(mav ,function(){
-						  $('.myFormQuestionnaire #exampleModal').modal({show:true});
-					  });					  
-				  } 
-			);
-		
-		
-		        
-	    });
-    
-    
-    
-
 });
