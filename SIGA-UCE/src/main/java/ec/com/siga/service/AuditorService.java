@@ -9,10 +9,16 @@ import ec.com.siga.entity.Informe;
 
 public interface AuditorService {
 	public abstract List<Informe> findAllAssignedAudits(String auditor);
+	public abstract List<Informe> findAllAuditsSendNC(String auditor);
+	public abstract List<Informe> findAllAuditsToCheck(String auditor);
 	public abstract List<Informe> findAllAuditsHistory(String auditor);
 	public abstract void createCkeckList(int informeId);
 	public abstract CheckList reply(int informeId);
+	public abstract CheckList replyUploadFile(int informeId);
 	public abstract CheckList replyPost(int informeId, String codigo, String accion);
+	public abstract CheckList replyPostUploadFile(int informeId, String codigo, String accion);
 	public abstract void saveReply(MultipartFile f, String evidencia, boolean respuesta, String codigo);
 	public abstract String sendNonConformities(Integer informeId);
+	public abstract String sendToCheck(Integer informeId);
+	public abstract Integer firstQualification(Informe inf);
 }

@@ -97,19 +97,6 @@ public class AuditServiceImpl implements AuditService {
 		informeRepository.save(informe);
 		System.out.println("id informe: "+informe.getInformeId());
 
-		/*
-		 * System.out.println("FechaInicio: " + soliAud.getFechaInicio());
-		 * System.out.println("FechaFin: " + soliAud.getFechaFinal());
-		 * System.out.println("HoraInicio: " + datoComun.getHoraInicio());
-		 * System.out.println("HoraFin: " + datoComun.getHoraFin());
-		 * System.out.println("tipo audi: " +
-		 * soliAud.getTipoAuditoriaId().getTipoAuditoria());
-		 * System.out.println("tipo cliente: " +
-		 * cliente.getClienteTipoId().getClienteTipoDescripcion());
-		 * System.out.println("usuario Direccion: " +
-		 * cliente.getUserId().getDireccion());
-		 */
-
 	}
 
 }

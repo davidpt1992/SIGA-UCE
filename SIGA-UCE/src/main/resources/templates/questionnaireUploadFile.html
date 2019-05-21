@@ -1,0 +1,72 @@
+
+<!-- Custom modals create update delete -->
+<script th:src="@{/js/modalsAssignedAudits.js}"
+	src="../static/js/modalsAssignedAudits.js"></script>
+
+
+<body id="page-top">
+	<form method="POST" enctype="multipart/form-data" id="fileUploadForm"
+		th:action="@{/QuestionSave}" target="request">
+		<div class="container">
+			<div class="form-label-group">
+				<input type="hidden" th:value="${usuario}" name="usuario"
+					id="usuario">
+			</div>
+			<div class="form-label-group">
+				<input type="hidden" th:value="${id}" name="id" id="id">
+			</div>
+			<div class="form-label-group">
+				<input type="hidden" th:value="${codigoString}" name="codigo"
+					id="codigo">
+			</div>
+
+			<div class="input-group mb-3">
+				<h3 class="text-center" th:text="${pregunta.preguntasId.preguntas}"></h3>
+			</div>
+			<div class="input-group mb-3">
+				<div class="text-center  col-md-10">
+					<br />
+					<p class="text-danger">
+						You have an answer <span
+							th:if="${pregunta.datoEspecificoId?.respuesta}">YES</span> <span
+							th:unless="${pregunta.datoEspecificoId?.respuesta}">NO</span>
+					</p>
+					<div class="form-label-group">
+						<input type="hidden" th:value="${pregunta.datoEspecificoId?.respuesta}" name="respuesta"
+							id="respuesta">
+					</div>
+				</div>
+			</div>
+
+			<!-- <form> -->
+			<div class="form-group mb-3">
+				<label for="foto">Choose File...</label> <input type="file"
+					class="form-control-file" id="foto" name="foto" required>
+			</div>
+			<!-- </form> -->
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Evidence</span>
+				</div>
+				<textarea class="form-control" aria-label="With textarea"
+					th:text="${pregunta.datoEspecificoId?.evidencia}" name="evidencia"
+					id="evidencia" readonly></textarea>
+			</div>
+			<div class="input-group mb-3">
+				<button class="btn btn-lg btn-primary btn-block" type="submit">SAVE</button>
+			</div>
+
+			<div class="input-group mb-3">
+				<button
+					class="btn btn-lg btn-secondary fa fa-angle-left previousUploadFile">Previous</button>
+				<button
+					class="btn btn-lg btn-primary fa fa-angle-right nextUploadFile">Next</button>
+
+
+			</div>
+		</div>
+	</form>
+	<iframe style="width: 0; height: 0; border: 0; border: none"
+		id="request"></iframe>
+</body>
+

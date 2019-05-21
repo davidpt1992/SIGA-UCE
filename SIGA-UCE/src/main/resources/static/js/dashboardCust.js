@@ -11,4 +11,10 @@ $(document).ready(function () {
    		$("#seccionRecargarCust").load(href);
     });
 	
+	$('.sendEvidenceCust').on('click',function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+   		$("#seccionRecargarCust").load(href);
+    });
+	
 });

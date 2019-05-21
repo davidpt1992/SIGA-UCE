@@ -51,6 +51,24 @@ public class TableAuditorAssignedAuditsController {
 		return mav;
 	}
 	
+	@GetMapping("/tableAuditsSendNC")
+	@ResponseBody
+	public ModelAndView showFormNoNC(String usuario) {
+		ModelAndView mav = new ModelAndView("tableAuditsSendNC");
+		mav.addObject("contacts", auditorService.findAllAuditsSendNC(usuario));
+		mav.addObject("usuario", usuario);
+		return mav;
+	}
+	
+	@GetMapping("/tableAssignedAuditsCheck")
+	@ResponseBody
+	public ModelAndView showFormCheck(String usuario) {
+		ModelAndView mav = new ModelAndView("tableAuditsToCheck");
+		mav.addObject("contacts", auditorService.findAllAuditsToCheck(usuario));
+		mav.addObject("usuario", usuario);
+		return mav;
+	}
+	
 	@GetMapping("/tableAssignedAuditsH")
 	@ResponseBody
 	public ModelAndView showFormH(String usuario) {
@@ -109,7 +127,6 @@ public class TableAuditorAssignedAuditsController {
 	@ResponseBody
 	public String sendNonConformities(Integer id, String usuario) {
 		String msg = auditorService.sendNonConformities(id);
-		System.out.println(msg);
 		return msg;
 	}
 

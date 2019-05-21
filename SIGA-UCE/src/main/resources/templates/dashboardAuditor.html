@@ -116,6 +116,18 @@
             <i class="fas fa-fw fa-list-alt" ></i>
             <span>Assigned audits</span></a>
         </li>
+        <!-- tabla auditorias enviadas con no conformidades -->
+        <li class="nav-item">
+          <a th:href="@{tableAuditsSendNC/(usuario=${username})}" class="nav-link tANC" >
+            <i class="fas fa-fw fa-list-alt" ></i>
+            <span>Audit sent with NC</span></a>
+        </li>
+        <!-- tabla auditorias para checkear los archivos -->
+        <li class="nav-item">
+          <a th:href="@{tableAssignedAuditsCheck/(usuario=${username})}" class="nav-link tACH" >
+            <i class="fas fa-fw fa-list-alt" ></i>
+            <span>Audit to check files</span></a>
+        </li>
         <!-- tabla historial de auditorias -->
         <li class="nav-item">
           <a th:href="@{tableAssignedAuditsH/(usuario=${username})}" class="nav-link tAH" >

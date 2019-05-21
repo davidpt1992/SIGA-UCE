@@ -6,12 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import ec.com.siga.entity.CheckList;
 import ec.com.siga.entity.DatoComun;
 import ec.com.siga.entity.Informe;
 import ec.com.siga.model.SolucitudAuditoriaString;
 import ec.com.siga.service.AuditService;
+import ec.com.siga.service.AuditorService;
 import ec.com.siga.service.CustService;
 import ec.com.siga.service.InformeService;
 import ec.com.siga.service.UserServicio;
@@ -35,12 +38,77 @@ public class TableCustAuditsController {
 	@Qualifier("custService")
 	private CustService custService;
 	
+	@Autowired
+	@Qualifier("auditorService")
+	private AuditorService auditorService;
+	
 	@GetMapping("/tableCustAudits")
 	@ResponseBody
 	public ModelAndView showForm(String usuario) {
 		ModelAndView mav = new ModelAndView("tableCustAudits");
 		mav.addObject("contacts", informeServicio.findAllCustAudits(usuario));
 		mav.addObject("usuario", usuario);
+		return mav;
+	}
+	
+	@GetMapping("/tableCustAuditsNC")
+	@ResponseBody
+	public ModelAndView showFormToSend(String usuario) {
+		ModelAndView mav = new ModelAndView("tableCustAuditsToSend");
+		mav.addObject("contacts", informeServicio.findAllCustAuditsNC(usuario));
+		mav.addObject("usuario", usuario);
+		return mav;
+	}
+	
+	@GetMapping("/startUploadFiles")
+	@ResponseBody
+	public ModelAndView startquestionnaire1(int id, String usuario) {
+		ModelAndView mav = new ModelAndView("questionnaireUploadFile");
+		CheckList cl = auditorService.replyUploadFile(id); 
+		mav.addObject("pregunta", cl);
+		mav.addObject("id", id);
+		mav.addObject("usuario", usuario);
+		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
+		return mav;
+	}
+	
+	@PostMapping("/filesSave")
+	public ModelAndView nextQuestionPost(int id, String usuario, String codigo, MultipartFile foto, String evidencia,
+			boolean respuesta) {
+		ModelAndView mav = new ModelAndView("save");
+		auditorService.saveReply(foto, evidencia, respuesta, codigo);		
+		return mav;
+	}
+	
+	@GetMapping("/sendToCheck")
+	@ResponseBody
+	public String sendNonConformities(Integer id, String usuario) {
+		String msg = auditorService.sendToCheck(id);
+		System.out.println(msg);
+		return msg;
+	}
+	
+	@PostMapping("/nextQuestionUploadFile")
+	public ModelAndView nextQuest(int id, String usuario, String codigo) {
+		ModelAndView mav = new ModelAndView("questionnaireUploadFile");
+		String accion = "+";
+		CheckList cl = auditorService.replyPostUploadFile(id, codigo, accion);
+		mav.addObject("pregunta", cl);
+		mav.addObject("id", id);
+		mav.addObject("username", usuario);
+		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
+		return mav;
+	}
+
+	@PostMapping("/previousQuestionUploadFile")
+	public ModelAndView preQuest(int id, String usuario, String codigo) {
+		ModelAndView mav = new ModelAndView("questionnaireUploadFile");
+		String accion = "-";
+		CheckList cl = auditorService.replyPostUploadFile(id, codigo, accion);
+		mav.addObject("pregunta", cl);
+		mav.addObject("id", id);
+		mav.addObject("username", usuario);
+		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
 		return mav;
 	}
 	

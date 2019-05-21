@@ -67,6 +67,23 @@ $(document).ready(function () {
 	    });
     });
     
+    $('.upFile').on('click',function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$('.modal-body').load(href,function(){
+	        $('.myFormQuestionnaire #exampleModal').modal({show:true});
+	    });
+    });
+    
+    $('.sendToCheck').on('click',function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$.get(href, function (msg, status) {
+			$('.modal-body').append('<p class="alert alert-danger">'+msg+'</p>');
+		});
+		$('.myFormSend #exampleModal').modal({show:true});
+    });
+    
     $('.next').on('click',function(event){
 		event.preventDefault();
 		$.ajax({
@@ -92,6 +109,46 @@ $(document).ready(function () {
 		$.ajax({
 			  type: "POST",
 			  url: "previousQuestion",
+			  data: {
+					id: $('#id').val(),
+					usuario: $('#usuario').val(),
+					codigo: $('#codigo').val()
+				  },
+			  enctype: 'multipart/form-data',
+			  dataType: false,
+			  success: function(mav){
+				  $('.modal-body').html(mav ,function(){
+					  $('.myFormQuestionnaire #exampleModal').modal({show:true});
+				  });					  
+			  }  
+			});
+    });
+    
+    $('.nextUploadFile').on('click',function(event){
+		event.preventDefault();
+		$.ajax({
+			  type: "POST",
+			  url: "nextQuestionUploadFile",
+			  data: {
+					id: $('#id').val(),
+					usuario: $('#usuario').val(),
+					codigo: $('#codigo').val()
+				  },
+			  enctype: 'multipart/form-data',
+			  dataType: false,
+			  success: function(mav){
+				  $('.modal-body').html(mav ,function(){
+					  $('.myFormQuestionnaire #exampleModal').modal({show:true});
+				  });					  
+			  }
+			});		
+    });
+    
+    $('.previousUploadFile').on('click',function(event){
+		event.preventDefault();
+		$.ajax({
+			  type: "POST",
+			  url: "previousQuestionUploadFile",
 			  data: {
 					id: $('#id').val(),
 					usuario: $('#usuario').val(),

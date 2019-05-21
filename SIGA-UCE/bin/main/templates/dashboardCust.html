@@ -120,6 +120,12 @@
             <i class="fas fa-fw fa-list-alt"></i>
             <span>Audits</span></a>
         </li>
+        <!-- enviar evidencia -->
+        <li class="nav-item">
+          <a th:href="@{tableCustAuditsNC/(usuario=${username})}" class="nav-link sendEvidenceCust">
+            <i class="fas fa-fw fa fa-paper-plane"></i>
+            <span>Send Evidence</span></a>
+        </li>
       </ul>
 
       <div id="content-wrapper">

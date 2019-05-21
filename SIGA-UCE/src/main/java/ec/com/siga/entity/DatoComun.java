@@ -48,7 +48,9 @@ public class DatoComun implements Serializable {
     @Column(name = "LONGITUD")
     private String longitud;
     @Column(name = "CALIFICACION")
-    private Short calificacion;
+    private Integer calificacion;
+    @Column(name = "CALIFICACION_FINAL")
+    private Integer calificacionFinal;
     @OneToMany(mappedBy = "datoComunId")
     private List<Informe> informeList;
     @JoinColumn(name = "SOLICITUD_AUDITORIA_ID", referencedColumnName = "SOLICITUD_AUDITORIA_ID")
@@ -95,12 +97,24 @@ public class DatoComun implements Serializable {
 		this.longitud = longitud;
 	}
 
-	public Short getCalificacion() {
+	public Integer getCalificacion() {
 		return calificacion;
 	}
 
-	public void setCalificacion(Short calificacion) {
+	public void setCalificacion(Integer calificacion) {
 		this.calificacion = calificacion;
+	}
+
+	public Integer getCalificacionFinal() {
+		return calificacionFinal;
+	}
+
+	public void setCalificacionFinal(Integer calificacionFinal) {
+		this.calificacionFinal = calificacionFinal;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public List<Informe> getInformeList() {
@@ -119,8 +133,9 @@ public class DatoComun implements Serializable {
 		this.solicitudAuditoriaId = solicitudAuditoriaId;
 	}
 
-	public DatoComun(Integer datoComunId, Date horaInicio, Date horaFin, String latitud, String longitud,
-			Short calificacion, List<Informe> informeList, SolicitudAuditoria solicitudAuditoriaId) {
+	public DatoComun(Integer datoComunId, Date horaInicio, Date horaFin, String latitud,
+			String longitud, Integer calificacion, Integer calificacionFinal, List<Informe> informeList,
+			SolicitudAuditoria solicitudAuditoriaId) {
 		super();
 		this.datoComunId = datoComunId;
 		this.horaInicio = horaInicio;
@@ -128,6 +143,7 @@ public class DatoComun implements Serializable {
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.calificacion = calificacion;
+		this.calificacionFinal = calificacionFinal;
 		this.informeList = informeList;
 		this.solicitudAuditoriaId = solicitudAuditoriaId;
 	}

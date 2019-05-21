@@ -128,10 +128,21 @@ public class AuditorServiceImpl implements AuditorService {
 	@Override
 	public CheckList reply(int informeId) {
 		Informe informe = informeRepository.findById(informeId).get();
-		DatoComun dc = informe.getDatoComunId();
-		SolicitudAuditoria sa = dc.getSolicitudAuditoriaId();
-		List<CheckList> preguntas = checkListRepository.findAllBySolicitudAuditoriaId(sa);
+		List<CheckList> preguntas = checkListRepository.findAllBySolicitudAuditoriaId(informe.getDatoComunId().getSolicitudAuditoriaId());
 		return preguntas.get(0);
+	}
+	
+	@Override
+	public CheckList replyUploadFile(int informeId) {
+		Informe informe = informeRepository.findById(informeId).get();
+		List<CheckList> preguntas = checkListRepository.findAllBySolicitudAuditoriaId(informe.getDatoComunId().getSolicitudAuditoriaId());
+		for (CheckList pre : preguntas) 
+		{ 
+		    if (pre.getDatoEspecificoId().isRespuesta()==false) {
+				return pre;
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -142,6 +153,25 @@ public class AuditorServiceImpl implements AuditorService {
 			return checkListRepository.findByCodigo(cod + 1);
 		} else {
 			return checkListRepository.findByCodigo(cod - 1);
+		}
+	}
+	
+	@Override
+	public CheckList replyPostUploadFile(int informeId, String codigo, String accion) {
+		int cod = Integer.valueOf(codigo);
+
+		if (accion.equals("+")) {
+			cod=cod+1; 
+			while (checkListRepository.findByCodigo(cod).getDatoEspecificoId().isRespuesta()==true) {
+				cod=cod+1;
+			}
+			return checkListRepository.findByCodigo(cod);
+		} else {
+			cod=cod-1; 
+			while (checkListRepository.findByCodigo(cod).getDatoEspecificoId().isRespuesta()==true) {
+				cod=cod-1;
+			}
+			return checkListRepository.findByCodigo(cod);
 		}
 	}
 
@@ -171,7 +201,7 @@ public class AuditorServiceImpl implements AuditorService {
 		List<Informe> list, auxList = new ArrayList<Informe>();
 		list = informeRepository.findByAuditorId(auditorRepository.findByUserId(userRepository.findByUsuario(auditor)));
 		for (Informe info : list) {
-			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() > 2) {
+			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() == 5) {
 				auxList.add(info);
 			}
 		}
@@ -197,13 +227,64 @@ public class AuditorServiceImpl implements AuditorService {
 		if (finishAux == 1) {
 	    	finish = "Have questions whitout reply";
 		}else {
-			finish = "Request for evidence sent";
+			finish = "Request for evidence sent and first qualification sent";
 			sa.setEstadoAuditoriaId(estadoAuditRepository.findById(3).get());
 			dc.setSolicitudAuditoriaId(sa);
+			dc.setCalificacion(firstQualification(inf));
 			inf.setDatoComunId(dc);
 			informeRepository.save(inf);
 		}
 		return finish;
+	}
+	
+	@Override
+	public String sendToCheck(Integer informeId) {
+		Informe inf = informeRepository.findById(informeId).get();
+		DatoComun dc = inf.getDatoComunId();
+		SolicitudAuditoria sa = dc.getSolicitudAuditoriaId();
+		sa.setEstadoAuditoriaId(estadoAuditRepository.findById(4).get());
+		dc.setSolicitudAuditoriaId(sa);
+		inf.setDatoComunId(dc);
+		informeRepository.save(inf);
+		return "Request for evidence sent";
+	}
+
+	@Override
+	public List<Informe> findAllAuditsSendNC(String auditor) {
+		List<Informe> list, auxList = new ArrayList<Informe>();
+		list = informeRepository.findByAuditorId(auditorRepository.findByUserId(userRepository.findByUsuario(auditor)));
+		for (Informe info : list) {
+			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() == 3) {
+				auxList.add(info);
+			}
+		}
+		return auxList;
+	}
+
+	@Override
+	public List<Informe> findAllAuditsToCheck(String auditor) {
+		List<Informe> list, auxList = new ArrayList<Informe>();
+		list = informeRepository.findByAuditorId(auditorRepository.findByUserId(userRepository.findByUsuario(auditor)));
+		for (Informe info : list) {
+			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() == 4) {
+				auxList.add(info);
+			}
+		}
+		return auxList;
+	}
+
+	@Override
+	public Integer firstQualification(Informe inf) {
+		List<CheckList> listChck = checkListRepository.findAllBySolicitudAuditoriaId(inf.getDatoComunId().getSolicitudAuditoriaId());
+		int numPreguntas = 0;
+		int numSi=0;
+		for (CheckList cl : listChck) {
+			numPreguntas=numPreguntas+1;
+			if (cl.getDatoEspecificoId().isRespuesta()==true) {
+				numSi=numSi+1;
+			}
+		}
+		return (numSi*100)/numPreguntas;
 	}
 
 }

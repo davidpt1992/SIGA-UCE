@@ -19,11 +19,11 @@ public class InformeServiceImpl implements InformeService {
 	@Autowired
 	@Qualifier("informeRepository")
 	private InformeRepository informeRepository;
-	
+
 	@Autowired
 	@Qualifier("userRepository")
 	private UserJpaRepository userRepository;
-	
+
 	@Autowired
 	@Qualifier("custRepository")
 	private CustRepository custRepository;
@@ -32,7 +32,7 @@ public class InformeServiceImpl implements InformeService {
 	public List<Informe> findAllReport() {
 		return informeRepository.findAll();
 	}
-	
+
 	@Override
 	public List<Informe> findAllReportRequests() {
 		List<Informe> list, auxList = new ArrayList<Informe>();
@@ -44,7 +44,7 @@ public class InformeServiceImpl implements InformeService {
 		}
 		return auxList;
 	}
-	
+
 	@Override
 	public List<Informe> findAllReportProsesing() {
 		List<Informe> list, auxList = new ArrayList<Informe>();
@@ -70,7 +70,26 @@ public class InformeServiceImpl implements InformeService {
 
 	@Override
 	public List<Informe> findAllCustAudits(String username) {
-		return informeRepository.findByClienteId(custRepository.findByUserId(userRepository.findByUsuario(username)));
+		List<Informe> list, auxList = new ArrayList<Informe>();
+		list = informeRepository.findByClienteId(custRepository.findByUserId(userRepository.findByUsuario(username)));
+		for (Informe info : list) {
+			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() != 3) {
+				auxList.add(info);
+			}
+		}
+		return auxList;
+	}
+
+	@Override
+	public List<Informe> findAllCustAuditsNC(String username) {
+		List<Informe> list, auxList = new ArrayList<Informe>();
+		list = informeRepository.findByClienteId(custRepository.findByUserId(userRepository.findByUsuario(username)));
+		for (Informe info : list) {
+			if (info.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId() == 3) {
+				auxList.add(info);
+			}
+		}
+		return auxList;
 	}
 
 }
