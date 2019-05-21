@@ -14,4 +14,5 @@ public interface AuditorService {
 	public abstract CheckList reply(int informeId);
 	public abstract CheckList replyPost(int informeId, String codigo, String accion);
 	public abstract void saveReply(MultipartFile f, String evidencia, boolean respuesta, String codigo);
+	public abstract String sendNonConformities(Integer informeId);
 }

@@ -60,7 +60,7 @@ public class TableAuditorAssignedAuditsController {
 		return mav;
 	}
 
-	@GetMapping("/startQuestionnaire1")
+	@GetMapping("/startQuestionnaire")
 	@ResponseBody
 	public ModelAndView startquestionnaire1(int id, String usuario) {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
@@ -103,6 +103,14 @@ public class TableAuditorAssignedAuditsController {
 		mav.addObject("username", usuario);
 		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
 		return mav;
+	}
+	
+	@GetMapping("/sendNC")
+	@ResponseBody
+	public String sendNonConformities(Integer id, String usuario) {
+		String msg = auditorService.sendNonConformities(id);
+		System.out.println(msg);
+		return msg;
 	}
 
 	@GetMapping("/editAssignedAudits")

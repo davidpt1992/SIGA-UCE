@@ -103,8 +103,17 @@ $(document).ready(function () {
 				  $('.modal-body').html(mav ,function(){
 					  $('.myFormQuestionnaire #exampleModal').modal({show:true});
 				  });					  
-			  }
-			  
+			  }  
 			});
     });
+    
+    $('.sendNC').on('click',function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$.get(href, function (msg, status) {
+			$('.modal-body').append('<p class="alert alert-danger">'+msg+'</p>');
+		});
+		$('.myFormConformities #exampleModal').modal({show:true});
+    });
+    
 });

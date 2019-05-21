@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -177,6 +176,34 @@ public class AuditorServiceImpl implements AuditorService {
 			}
 		}
 		return auxList;
+	}
+
+	@Override
+	public String sendNonConformities(Integer informeId) {
+		Informe inf = informeRepository.findById(informeId).get();
+		DatoComun dc = inf.getDatoComunId();
+		SolicitudAuditoria sa = dc.getSolicitudAuditoriaId();
+		
+		List<CheckList> listChck = checkListRepository.findAllBySolicitudAuditoriaId(inf.getDatoComunId().getSolicitudAuditoriaId());
+		String finish = null;
+		int finishAux = 0;
+		for (CheckList lChck : listChck) 
+		{ 
+		    if (lChck.getDatoEspecificoId()== null) {
+		    	finishAux = 1;
+		    	System.out.println("si hay nulo"+finishAux);
+			}
+		}
+		if (finishAux == 1) {
+	    	finish = "Have questions whitout reply";
+		}else {
+			finish = "Request for evidence sent";
+			sa.setEstadoAuditoriaId(estadoAuditRepository.findById(3).get());
+			dc.setSolicitudAuditoriaId(sa);
+			inf.setDatoComunId(dc);
+			informeRepository.save(inf);
+		}
+		return finish;
 	}
 
 }
