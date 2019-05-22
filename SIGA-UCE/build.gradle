@@ -28,6 +28,9 @@ dependencies {
 	
 	compile group: 'commons-io', name: 'commons-io', version: '2.6'
 	
+	compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13'
+	
+	
 	
 }
 
