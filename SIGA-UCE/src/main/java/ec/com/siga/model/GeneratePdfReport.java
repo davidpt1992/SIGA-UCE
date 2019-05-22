@@ -18,10 +18,11 @@ import java.util.Date;
 import java.util.List;
 
 import ec.com.siga.entity.CheckList;
+import ec.com.siga.entity.Entregable;
 import ec.com.siga.entity.Informe;
 
 public class GeneratePdfReport {
-	public static byte[] auditoriesReport(Informe inf, List<CheckList> preguntas) {
+	public static byte[] auditoriesReport(Informe inf, List<CheckList> preguntas, Entregable en) {
 		// variable data
 		int numPregunta = 0;
 		String respuestaPre;
@@ -57,7 +58,7 @@ public class GeneratePdfReport {
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tData.addCell(hcell);
 
-			hcell = new PdfPCell(new Phrase("Foto", headFont));
+			hcell = new PdfPCell(new Phrase("Soporte", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tData.addCell(hcell);
 
@@ -95,7 +96,7 @@ public class GeneratePdfReport {
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tData.addCell(cell);
-				
+
 				try {
 					Image image = Image.getInstance(pregunta.getDatoEspecificoId().getFotoId().getFoto());
 					tData.addCell(image);
@@ -106,10 +107,8 @@ public class GeneratePdfReport {
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 					tData.addCell(cell);
-					
-				}
 
-				
+				}
 
 			}
 			// end data table
@@ -125,6 +124,20 @@ public class GeneratePdfReport {
 			hcellTitle.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tTitle.addCell(hcellTitle);
 			// end title table
+
+			// picHead table
+			PdfPTable picHead = new PdfPTable(1);
+			picHead.setWidthPercentage(90);
+
+
+			Image image;
+			try {
+				image = Image.getInstance(en.getInforme());
+				picHead.addCell(image);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			// end picHead table
 
 			// header table
 			PdfPTable tHeader = new PdfPTable(2);
@@ -142,7 +155,7 @@ public class GeneratePdfReport {
 			hcellHeader = new PdfPCell(new Phrase(inf.getClienteId().getNombreEmpresa(), fontHeaderR));
 			hcellHeader.setHorizontalAlignment(Element.ALIGN_LEFT);
 			tHeader.addCell(hcellHeader);
-			
+
 			hcellHeader = new PdfPCell(new Phrase("Dirección Oficina Principal  ", fontHeaderL));
 			hcellHeader.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			tHeader.addCell(hcellHeader);
@@ -150,20 +163,22 @@ public class GeneratePdfReport {
 			hcellHeader = new PdfPCell(new Phrase(inf.getClienteId().getUserId().getDireccion(), fontHeaderR));
 			hcellHeader.setHorizontalAlignment(Element.ALIGN_LEFT);
 			tHeader.addCell(hcellHeader);
-			
+
 			hcellHeader = new PdfPCell(new Phrase("Cuestionario  ", fontHeaderL));
 			hcellHeader.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			tHeader.addCell(hcellHeader);
 
-			hcellHeader = new PdfPCell(new Phrase(cl.getPreguntasId().getTipoAuditoriaId().getTipoAuditoria(), fontHeaderR));
+			hcellHeader = new PdfPCell(
+					new Phrase(cl.getPreguntasId().getTipoAuditoriaId().getTipoAuditoria(), fontHeaderR));
 			hcellHeader.setHorizontalAlignment(Element.ALIGN_LEFT);
 			tHeader.addCell(hcellHeader);
-			
+
 			hcellHeader = new PdfPCell(new Phrase("Teléfono  ", fontHeaderL));
 			hcellHeader.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			tHeader.addCell(hcellHeader);
 
-			hcellHeader = new PdfPCell(new Phrase(String.valueOf(inf.getClienteId().getUserId().getNumeroTelefono1()), fontHeaderR));
+			hcellHeader = new PdfPCell(
+					new Phrase(String.valueOf(inf.getClienteId().getUserId().getNumeroTelefono1()), fontHeaderR));
 			hcellHeader.setHorizontalAlignment(Element.ALIGN_LEFT);
 			tHeader.addCell(hcellHeader);
 
@@ -174,20 +189,23 @@ public class GeneratePdfReport {
 			hcellHeader = new PdfPCell(new Phrase(inf.getClienteId().getUserId().getCorreoElectronico(), fontHeaderR));
 			hcellHeader.setHorizontalAlignment(Element.ALIGN_LEFT);
 			tHeader.addCell(hcellHeader);
-			
+
 			hcellHeader = new PdfPCell(new Phrase("Nombre de Inspector  ", fontHeaderL));
 			hcellHeader.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			tHeader.addCell(hcellHeader);
 
-			hcellHeader = new PdfPCell(new Phrase(inf.getAuditorId().getUserId().getNombre()+" "+inf.getAuditorId().getUserId().getApellido(), fontHeaderR));
+			hcellHeader = new PdfPCell(new Phrase(
+					inf.getAuditorId().getUserId().getNombre() + " " + inf.getAuditorId().getUserId().getApellido(),
+					fontHeaderR));
 			hcellHeader.setHorizontalAlignment(Element.ALIGN_LEFT);
 			tHeader.addCell(hcellHeader);
-			
+
 			hcellHeader = new PdfPCell(new Phrase("Fecha de Visita  ", fontHeaderL));
 			hcellHeader.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			tHeader.addCell(hcellHeader);
 
-			hcellHeader = new PdfPCell(new Phrase(inf.getDatoComunId().getSolicitudAuditoriaId().getFechaInicio().toString(), fontHeaderR));
+			hcellHeader = new PdfPCell(new Phrase(
+					inf.getDatoComunId().getSolicitudAuditoriaId().getFechaInicio().toString(), fontHeaderR));
 			hcellHeader.setHorizontalAlignment(Element.ALIGN_LEFT);
 			tHeader.addCell(hcellHeader);
 
@@ -207,6 +225,8 @@ public class GeneratePdfReport {
 
 			// get document
 			document.open();
+			document.add(picHead);
+			document.add(new Phrase("-"));
 			document.add(tTitle);
 			document.add(new Phrase("	INFORMACIÓN GENERAL"));
 			document.add(tHeader);

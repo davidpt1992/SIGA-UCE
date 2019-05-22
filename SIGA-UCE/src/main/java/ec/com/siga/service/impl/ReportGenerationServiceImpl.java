@@ -40,10 +40,11 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
 		inf.setDatoComunId(dc);
 		List<CheckList> cl = checkListRepository
 				.findAllBySolicitudAuditoriaId(inf.getDatoComunId().getSolicitudAuditoriaId());
+		Entregable en = entregableRepository.findById(1).get();
 
 		Entregable ent = new Entregable();
-		ent.setInforme(GeneratePdfReport.auditoriesReport(inf, cl));
-		ent.setCertificado(GeneratePdfCertificado.auditoriesCertificate(inf));
+		ent.setInforme(GeneratePdfReport.auditoriesReport(inf, cl, en));
+		ent.setCertificado(GeneratePdfCertificado.auditoriesCertificate(inf, en));
 		entregableRepository.save(ent);
 
 		inf.setEntregableId(ent);
@@ -57,10 +58,11 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
 		Informe inf = informeRepository.findById(informeId).get();
 		List<CheckList> cl = checkListRepository
 				.findAllBySolicitudAuditoriaId(inf.getDatoComunId().getSolicitudAuditoriaId());
+		Entregable en = entregableRepository.findById(1).get();
 
 		Entregable ent = new Entregable();
-		ent.setInforme(GeneratePdfReport.auditoriesReport(inf, cl));
-		ent.setCertificado(GeneratePdfCertificado.auditoriesCertificate(inf));
+		ent.setInforme(GeneratePdfReport.auditoriesReport(inf, cl, en));
+		ent.setCertificado(GeneratePdfCertificado.auditoriesCertificate(inf, en));
 		entregableRepository.save(ent);
 
 		inf.setEntregableId(ent);

@@ -6,21 +6,24 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Date;
 
+import ec.com.siga.entity.Entregable;
 import ec.com.siga.entity.Informe;
 
 public class GeneratePdfCertificado {
-	public static byte[] auditoriesCertificate(Informe inf) {
+	public static byte[] auditoriesCertificate(Informe inf, Entregable en) {
 		// variable data
 		String nivel;
-		
+
 		// document instance
 		Document document = new Document();
 
@@ -91,10 +94,10 @@ public class GeneratePdfCertificado {
 
 			if (inf.getDatoComunId().getCalificacionFinal() >= 75) {
 				nivel = "SI";
-			}else {
+			} else {
 				nivel = "NO";
 			}
-			
+
 			hcellCal = new PdfPCell(new Phrase(nivel, fontCal));
 			hcellCal.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tDataCal.addCell(hcellCal);
@@ -112,6 +115,19 @@ public class GeneratePdfCertificado {
 			hcellTitle.setHorizontalAlignment(Element.ALIGN_CENTER);
 			tTitle.addCell(hcellTitle);
 			// end title table
+
+			// picHead table
+			PdfPTable picHead = new PdfPTable(1);
+			picHead.setWidthPercentage(90);
+
+			Image image;
+			try {
+				image = Image.getInstance(en.getInforme());
+				picHead.addCell(image);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			// end picHead table
 
 			// header table
 			PdfPTable tHeader = new PdfPTable(1);
@@ -147,6 +163,8 @@ public class GeneratePdfCertificado {
 
 			// get document
 			document.open();
+			document.add(picHead);
+			document.add(new Phrase("-"));
 			document.add(tTitle);
 			document.add(new Phrase("-"));
 			document.add(tHeader);
@@ -156,7 +174,7 @@ public class GeneratePdfCertificado {
 			document.add(tDataCal);
 			document.add(new Phrase("-"));
 			Date date = new Date();
-			document.add(new Phrase("Periodo de Validez por un año a partir de: "+date.toString()));
+			document.add(new Phrase("Periodo de Validez por un año a partir de: " + date.toString()));
 			document.close();
 
 			// return document in bytes matrix
