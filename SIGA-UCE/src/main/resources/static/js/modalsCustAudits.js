@@ -50,14 +50,16 @@ $(document).ready(function () {
 
 
     });
-    $('.lookReport').on('click',function(event){
+    
+    $('.report').on('click',function(event){
 		event.preventDefault();
 		var href = $(this).attr('href');
-		$.get(href, function (informe, status) {
-        	$('.myFormReport #userId').val(user.userId);
+		$.get(href, function (msg, status) {
+			$('.modal-body').append('<p class="alert alert-success">'+Downloaded report+'</p>');
+		});
+		$('.myFormDowloadReport #exampleModal').modal({show:true});
             
 		 });
     });
-    
 
 });
