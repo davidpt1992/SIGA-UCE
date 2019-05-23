@@ -161,7 +161,7 @@ public class TableCustAuditsController {
 
 		return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/pdf"))
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"certficadoPrueba.pdf\"")
-				.body(new ByteArrayResource(reportDowloadService.reportDowloar(id)));
+				.body(new ByteArrayResource(reportDowloadService.reportDowloarCertificate(id)));
 	}
 
 	@GetMapping("/findCustAudits")

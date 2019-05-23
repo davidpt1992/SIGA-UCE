@@ -49,10 +49,11 @@
 								<span th:if="${contact.entregableId == null}">Audit not finished</span>
 								<span th:unless="${contact.entregableId == null}"><a
 								th:href="@{downloadFile/(id=${contact.informeId})}"><span
-									th:text="Dowload Report"></span></a>
+									th:text="Dowload_Reporte"></span></a>
 									<a
 								th:href="@{downloadFileCertificate/(id=${contact.informeId})}"><span
-									th:text="Dowload Certificate"></span></a></span> 
+									th:text="Dowload_Certificado"></span></a>
+									</span> 
 								
 							</td>
 							<td th:text="${contact.clienteId.nombreEmpresa}"></td>
