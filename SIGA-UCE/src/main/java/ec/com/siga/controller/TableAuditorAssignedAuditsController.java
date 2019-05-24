@@ -72,7 +72,7 @@ public class TableAuditorAssignedAuditsController {
 	@GetMapping("/tableAssignedAuditsH")
 	@ResponseBody
 	public ModelAndView showFormH(String usuario) {
-		ModelAndView mav = new ModelAndView("tableAssignedAudits");
+		ModelAndView mav = new ModelAndView("tableAuditAuditsHistory");
 		mav.addObject("contacts", auditorService.findAllAuditsHistory(usuario));
 		mav.addObject("usuario", usuario);
 		return mav;
@@ -84,6 +84,18 @@ public class TableAuditorAssignedAuditsController {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
 		auditorService.createCkeckList(id);  //crea las preguntas del cuestionario solicitado con el id de la solicitud
 		CheckList cl = auditorService.reply(id);   //consulta la primera pregunta del cuestionario 
+		mav.addObject("pregunta", cl);
+		mav.addObject("id", id);
+		mav.addObject("usuario", usuario);
+		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
+		return mav;
+	}
+	
+	@GetMapping("/startCheckFiles")
+	@ResponseBody
+	public ModelAndView startquestionnaireCheck(int id, String usuario) {
+		ModelAndView mav = new ModelAndView("questionnaireCheckFile");
+		CheckList cl = auditorService.replyUploadFile(id);
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);
 		mav.addObject("usuario", usuario);
@@ -116,6 +128,30 @@ public class TableAuditorAssignedAuditsController {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
 		String accion = "-";
 		CheckList cl = auditorService.replyPost(id, codigo, accion);
+		mav.addObject("pregunta", cl);
+		mav.addObject("id", id);
+		mav.addObject("username", usuario);
+		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
+		return mav;
+	}
+	
+	@PostMapping("/nextQuestionCheckFile")
+	public ModelAndView nextQuestCheck(int id, String usuario, String codigo) {
+		ModelAndView mav = new ModelAndView("questionnaireCheckFile");
+		String accion = "+";
+		CheckList cl = auditorService.replyPostUploadFile(id, codigo, accion);
+		mav.addObject("pregunta", cl);
+		mav.addObject("id", id);
+		mav.addObject("username", usuario);
+		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
+		return mav;
+	}
+
+	@PostMapping("/previousQuestionCheckFile")
+	public ModelAndView preQuestCheck(int id, String usuario, String codigo) {
+		ModelAndView mav = new ModelAndView("questionnaireCheckFile");
+		String accion = "-";
+		CheckList cl = auditorService.replyPostUploadFile(id, codigo, accion);
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);
 		mav.addObject("username", usuario);

@@ -1,0 +1,128 @@
+
+<!-- Custom modals create update delete -->
+<script th:src="@{/js/modalsCustAudits.js}"
+	src="../static/js/modalsCustAudits.js"></script>
+
+<body id="page-top">
+
+	<!-- DataTable Admin -->
+	<div class="card mb-3">
+		<div class="card-header">
+			<a>History of audits carried out</a>
+		</div>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered ">
+					<thead class="thead-light">
+						<tr>
+							<th>Actions</th>
+							<th>Company name</th>
+							<th>Questionnaire type</th>
+							<th>Status</th>
+							<th>Auditor</th>
+							<th>Qualification</th>
+							<th>Start date audit</th>
+							<th>End date audit</th>
+
+						</tr>
+					</thead>
+					<tfoot class="thead-light">
+						<tr>
+							<th>Actions</th>
+							<th>Company name</th>
+							<th>Questionnaire type</th>
+							<th>Status</th>
+							<th>Auditor</th>
+							<th>Qualification</th>
+							<th>Start date audit</th>
+							<th>End date audit</th>
+						</tr>
+					</tfoot>
+					<tbody>
+						<tr th:each="contact : ${contacts}">
+							<td>
+								<!-- <a th:href="@{dowloadReportCertificate/(id=${contact.informeId})}"
+								class="btn btn-outline-success fa fa-download report"
+								title="Download"></a> --> 
+								<span th:if="${contact.entregableId == null}">Audit not finished</span>
+								<span th:unless="${contact.entregableId == null}"><a
+								th:href="@{downloadFile/(id=${contact.informeId})}"><span
+									th:text="Dowload_Reporte"></span></a>
+									<a
+								th:href="@{downloadFileCertificate/(id=${contact.informeId})}"><span
+									th:text="Dowload_Certificado"></span></a>
+									</span> 
+								
+							</td>
+							<td th:text="${contact.clienteId.nombreEmpresa}"></td>
+							<td
+								th:text="${contact.datoComunId.solicitudAuditoriaId.tipoAuditoriaId.tipoAuditoria}"></td>
+							<td class="badge badge-pill badge-danger"
+								th:text="${contact.datoComunId.solicitudAuditoriaId.estadoAuditoriaId.estadoAuditoria}"></td>
+							<td
+								th:text="${contact.auditorId?.userId?.nombre+' '+contact.auditorId?.userId?.apellido}"></td>
+							<td th:text="${contact.datoComunId.calificacion}"></td>
+							<td
+								th:text="${contact.datoComunId.solicitudAuditoriaId.fechaInicio}"></td>
+							<td
+								th:text="${contact.datoComunId.solicitudAuditoriaId.fechaFinal}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="card-footer small text-muted">Updated yesterday at
+			11:59 PM</div>
+	</div>
+
+	<!-- add or edit solicitud auditoria Modal-->
+	<div class="myForm">
+		<form th:action="@{/saveCustAudits}" method="post">
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Request an
+								audit</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body"></div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<input type="submit" class="btn btn-primary" value="Request" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- dowload report-->
+	<div class="myFormDowloadReport">
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Downloaded
+							report</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<a class="btn btn-primary" th:href="@{/loginsuccess}">OK</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+

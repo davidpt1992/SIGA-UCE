@@ -75,6 +75,14 @@ $(document).ready(function () {
 	    });
     });
     
+    $('.audiCheckEvidence').on('click',function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$('.modal-body').load(href,function(){
+	        $('.myFormQuestionnaire #exampleModal').modal({show:true});
+	    });
+    });
+    
     $('.sendToCheck').on('click',function(event){
 		event.preventDefault();
 		var href = $(this).attr('href');
@@ -149,6 +157,46 @@ $(document).ready(function () {
 		$.ajax({
 			  type: "POST",
 			  url: "previousQuestionUploadFile",
+			  data: {
+					id: $('#id').val(),
+					usuario: $('#usuario').val(),
+					codigo: $('#codigo').val()
+				  },
+			  enctype: 'multipart/form-data',
+			  dataType: false,
+			  success: function(mav){
+				  $('.modal-body').html(mav ,function(){
+					  $('.myFormQuestionnaire #exampleModal').modal({show:true});
+				  });					  
+			  }  
+			});
+    });
+    
+    $('.nextCheckFile').on('click',function(event){
+		event.preventDefault();
+		$.ajax({
+			  type: "POST",
+			  url: "nextQuestionCheckFile",
+			  data: {
+					id: $('#id').val(),
+					usuario: $('#usuario').val(),
+					codigo: $('#codigo').val()
+				  },
+			  enctype: 'multipart/form-data',
+			  dataType: false,
+			  success: function(mav){
+				  $('.modal-body').html(mav ,function(){
+					  $('.myFormQuestionnaire #exampleModal').modal({show:true});
+				  });					  
+			  }
+			});		
+    });
+    
+    $('.previousCheckFile').on('click',function(event){
+		event.preventDefault();
+		$.ajax({
+			  type: "POST",
+			  url: "previousQuestionCheckFile",
 			  data: {
 					id: $('#id').val(),
 					usuario: $('#usuario').val(),

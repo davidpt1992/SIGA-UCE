@@ -21,4 +21,5 @@ public interface AuditorService {
 	public abstract String sendNonConformities(Integer informeId);
 	public abstract String sendToCheck(Integer informeId);
 	public abstract Integer firstQualification(Informe inf);
+	public abstract void finalQualification(Integer id);
 }

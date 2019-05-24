@@ -41,15 +41,15 @@
 					<tbody>
 						<tr th:each="contact : ${contacts}">
 							<td><a
-								th:href="@{genCertificateSecond/(id=${contact.informeId},usuario=${usuario})}"
+								th:href="@{genCertificateSecondPost/(id=${contact.informeId},usuario=${usuario})}"
 								class="btn btn-outline-primary fa fa-certificate genCertificate"
 								title="generate certificate" id="genCertificate"></a> <a
-								th:href="@{viewCust/(id=${contact.clienteId.clienteId})}"
+								th:href="@{startCheckFiles/(id=${contact.informeId})}"
 								class="btn btn-outline-info fa fa-check audiCheckEvidence"
-								title="check evidence"></a> <a
+								title="check evidence"></a> <!-- <a
 								th:href="@{sendNC/(id=${contact.informeId},usuario=${usuario})}"
 								class="btn btn-outline-secondary fa fa-reply backCust"
-								title="back to customer"></a></td>
+								title="back to customer"></a> --></td>
 
 							<td th:text="${contact.clienteId.nombreEmpresa}"></td>
 							<td
