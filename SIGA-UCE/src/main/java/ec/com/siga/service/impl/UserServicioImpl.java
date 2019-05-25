@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import ec.com.siga.entity.BackOffice;
 import ec.com.siga.entity.RoleSys;
 import ec.com.siga.entity.User;
+import ec.com.siga.repository.BackRepository;
 import ec.com.siga.repository.RoleSysJpaRepository;
 import ec.com.siga.repository.UserJpaRepository;
 import ec.com.siga.service.EncryptKey;
@@ -54,11 +56,6 @@ public class UserServicioImpl implements UserServicio {
 	@Override
 	public List<User> findAllAdmin() {
 		return userRepository.findAllByRoleId(roleSysRepository.findById(4).get());
-	}
-
-	@Override
-	public List<User> findAllBack() {
-		return userRepository.findAllByRoleId(roleSysRepository.findById(3).get());
 	}
 
 	@Override

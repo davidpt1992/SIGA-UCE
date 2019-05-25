@@ -7,7 +7,12 @@
 			<div class="col-md-6">
 
 				<div class="form-label-group">
-					<input type="hidden" id="userId" class="form-control" th:value="${admin?.userId}"
+					<input type="hidden" id="backOfficeId" class="form-control" th:value="${back?.backOfficeId}"
+						placeholder="Id" required="required" autofocus="autofocus"
+						name="backOfficeId"> <label for="backOfficeId"></label>
+				</div>
+				<div class="form-label-group">
+					<input type="hidden" id="userId" class="form-control" th:value="${back?.userId?.userId}"
 						placeholder="Id" required="required" autofocus="autofocus"
 						name="userId"> <label for="userId"></label>
 				</div>
@@ -18,37 +23,44 @@
 				</div>
 				
 				<div class="form-label-group">
-					<input type="text" id="firstName" class="form-control" th:value="${admin?.nombre}"
+					<input type="text" id="firstName" class="form-control" th:value="${back?.userId?.nombre}"
 						placeholder="First name" required="required" autofocus="autofocus"
 						name="nombre"> <label for="firstName">First name</label>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="form-label-group">
-					<input type="text" id="lastName" class="form-control" th:value="${admin?.apellido}"
+					<input type="text" id="lastName" class="form-control" th:value="${back?.userId?.apellido}"
 						placeholder="Last name" required="required" name="apellido">
 					<label for="lastName">Last name</label>
 				</div>
 			</div>
 		</div>
 	</div>
+		<div class="form-group">
+		<div class="form-label-group">
+			<input type="text" id="cedula" class="form-control" th:value="${back?.cedula}"
+				placeholder="I.D." name="cedula"> <label
+				for="cedula">I.D.</label>
+		</div>
+	</div>
 	<div class="form-group">
 		<div class="form-label-group">
 			<input type="text" readonly id="role" class="form-control"
-				value="ADMINISTRATOR" placeholder="Role" name="role"> <label
+				value="BACK-OFFICE" placeholder="Role" name="role"> <label
 				for="role">Role</label>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="form-label-group">
-			<input type="email" id="inputEmail" class="form-control" th:value="${admin?.correoElectronico}"
+			<input type="email" id="inputEmail" class="form-control" th:value="${back?.userId?.correoElectronico}"
 				placeholder="Email address" name="correoElectronico"> <label
 				for="inputEmail">Email address</label>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="form-label-group">
-			<input type="text" id="inputAddress" class="form-control" th:value="${admin?.direccion}"
+			<input type="text" id="inputAddress" class="form-control" th:value="${back?.userId?.direccion}"
 				placeholder="Address"  name="direccion"> <label for="inputAddress">Address</label>
 		</div>
 	</div>
@@ -56,14 +68,14 @@
 		<div class="form-row">
 			<div class="col-md-6">
 				<div class="form-label-group">
-					<input type="number" id="inputPhone1" class="form-control" th:value="${admin?.numeroTelefono1}"
+					<input type="number" id="inputPhone1" class="form-control" th:value="${back?.userId?.numeroTelefono1}"
 						placeholder="Phone 1" required="required" name="numeroTelefono1">
 					<label for="inputPhone1">Phone 1</label>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="form-label-group">
-					<input type="number" id="inputPhone2" class="form-control" th:value="${admin?.numeroTelefono2}"
+					<input type="number" id="inputPhone2" class="form-control" th:value="${back?.userId?.numeroTelefono2}"
 						placeholder="Phone 2" required="required" name="numeroTelefono2">
 					<label for="inputPhone2">Phone 2</label>
 				</div>
@@ -74,7 +86,7 @@
 		<div class="form-row">
 			<div class="col-md-6">
 				<div class="form-label-group">
-					<input type="text" id="inputUsername" class="form-control" th:value="${admin?.usuario}"
+					<input type="text" id="inputUsername" class="form-control" th:value="${back?.userId?.usuario}"
 						placeholder="User Name" required="required" name="usuario">
 					<label for="inputUsername">User Name</label>
 				</div>
@@ -91,7 +103,7 @@
 	<div class="col-auto my-6">
 		<div class="form-group">
 			<label>Enabled</label> <select class="form-control" id="enabled"
-				name="enabled" th:value="${admin?.enabled}">
+				name="enabled" th:value="${back?.userId?.enabled}">
 				<option value="0" disabled selected>Select</option>
 				<option value="true">true</option>
 				<option value="false">false</option>

@@ -141,10 +141,13 @@ public class TableCustAuditsController {
 		return mav;
 	}
 
-	@GetMapping("/dowloadReportCertificate")
+	@GetMapping("/downloadFileToCheck")
 	@ResponseBody
-	public String dowloadReportCertificate(Integer id) {
-		return null;
+	public ResponseEntity<Resource> downloadFileToCheck(Integer id) {
+
+		return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/pdf"))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"fileEvidence.pdf\"")
+				.body(new ByteArrayResource(reportDowloadService.fileDowloarToCheck(id)));
 	}
 
 	@GetMapping("/downloadFile")
@@ -155,6 +158,7 @@ public class TableCustAuditsController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"reportePrueba.pdf\"")
 				.body(new ByteArrayResource(reportDowloadService.reportDowloar(id)));
 	}
+	
 	@GetMapping("/downloadFileCertificate")
 	@ResponseBody
 	public ResponseEntity<Resource> downloadFileCertificate(Integer id) {

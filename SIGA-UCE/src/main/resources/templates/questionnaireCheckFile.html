@@ -35,18 +35,24 @@
 							id="inlineRadio2" value="False"> <label
 							class="form-check-label" for="inlineRadio2">NO</label>
 					</div>
-					<br/>
-					<p class="text-danger">response stored as <span th:if="${pregunta.datoEspecificoId?.respuesta}">YES</span> <span 
-						th:unless="${pregunta.datoEspecificoId?.respuesta}">NO</span></p>
+					<br />
+					<p class="text-danger">
+						response stored as <span
+							th:if="${pregunta.datoEspecificoId?.respuesta}">YES</span> <span
+							th:unless="${pregunta.datoEspecificoId?.respuesta}">NO</span>
+					</p>
 				</div>
 			</div>
 
 			<!-- <form> -->
 			<div class="form-group mb-3">
-				<label for="foto">Choose Pic...</label> <input type="file"
-					class="form-control-file" id="foto" name="foto">
+				<span th:if="${pregunta.datoEspecificoId?.fotoId == null}">no file</span> 
+				<span th:unless="${pregunta.datoEspecificoId?.fotoId == null}"><a
+					th:href="@{downloadFileToCheck/(id=${pregunta.checkListId})}"><span
+						th:text="Dowload_File_To_Check"></span></a> </span>
 			</div>
 			<!-- </form> -->
+
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text">Evidence</span>
@@ -60,8 +66,10 @@
 			</div>
 
 			<div class="input-group mb-3">
-				<button class="btn btn-lg btn-secondary fa fa-angle-left previousCheckFile">Previous</button>
-				<button class="btn btn-lg btn-primary fa fa-angle-right nextCheckFile">Next</button>
+				<button
+					class="btn btn-lg btn-secondary fa fa-angle-left previousCheckFile">Previous</button>
+				<button
+					class="btn btn-lg btn-primary fa fa-angle-right nextCheckFile">Next</button>
 
 
 			</div>

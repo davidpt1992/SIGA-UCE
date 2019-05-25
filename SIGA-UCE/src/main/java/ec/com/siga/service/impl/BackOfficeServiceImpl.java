@@ -9,16 +9,19 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import ec.com.siga.entity.Auditor;
+import ec.com.siga.entity.BackOffice;
 import ec.com.siga.entity.CheckList;
 import ec.com.siga.entity.DatoComun;
 import ec.com.siga.entity.Informe;
 import ec.com.siga.entity.SolicitudAuditoria;
 import ec.com.siga.model.SolucitudAuditoriaString;
 import ec.com.siga.repository.AuditorRepository;
+import ec.com.siga.repository.BackRepository;
 import ec.com.siga.repository.CheckListRepository;
 import ec.com.siga.repository.DatoComunRepository;
 import ec.com.siga.repository.EstadoAuditRepository;
 import ec.com.siga.repository.InformeRepository;
+import ec.com.siga.repository.RoleSysJpaRepository;
 import ec.com.siga.repository.SolicitudAuditoriaRepository;
 import ec.com.siga.service.BackOfficeService;
 import ec.com.siga.service.InformeService;
@@ -29,6 +32,14 @@ public class BackOfficeServiceImpl implements BackOfficeService {
 	@Autowired
 	@Qualifier("auditorRepository")
 	private AuditorRepository auditorRepository;
+	
+	@Autowired
+	@Qualifier("backRepository")
+	private BackRepository backRepository;
+	
+	@Autowired
+	@Qualifier("roleSysRepository")
+	private RoleSysJpaRepository roleSysRepository;
 	
 	@Autowired
 	@Qualifier("estadoAuditRepository")
@@ -81,6 +92,22 @@ public class BackOfficeServiceImpl implements BackOfficeService {
 	@Override
 	public List<CheckList> findAllCheckList(SolicitudAuditoria sa) {
 		return checkListRepository.findAllBySolicitudAuditoriaId(sa);
+	}
+
+	@Override
+	public List<BackOffice> findAllBack() {
+		return backRepository.findAll();
+	}
+
+	@Override
+	public void saveBack(BackOffice back) {
+		backRepository.save(back);
+		
+	}
+
+	@Override
+	public BackOffice findBack(Integer id) {
+		return backRepository.findById(id).get();
 	}
 	
 		

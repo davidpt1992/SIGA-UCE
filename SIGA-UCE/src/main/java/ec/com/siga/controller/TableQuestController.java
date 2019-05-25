@@ -92,13 +92,13 @@ public class TableQuestController {
 
 	@GetMapping("/editQuest")
 	public String showEditAdminForm() {
-		return "editAdmin";
+		return "editQuest";
 	}
 
 	@PostMapping("/saveQuest")
-	public String saveAdmin(User admin) {
-		// questServicio.saveAdmin(admin);
-		return "redirect:/dashboardAdmin";
+	public String saveAdmin(String preguntas, String taId, String secId) {
+		questServicio.saveQuest(preguntas, taId, secId);
+		return "dashboardAdmin";
 	}
 
 	@GetMapping("/findQuest")

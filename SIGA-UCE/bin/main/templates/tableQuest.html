@@ -11,9 +11,7 @@
 	<div class="card mb-3">
 
 		<div class="card-header">
-			<i class="fas fa-table"> Data Questionnaires</i> <br /> <a><button
-					class="btn btn-secondary fa fa-plus-circle nBtn">New
-					Question</button></a>
+			<i class="fas fa-table"> Data Questionnaires</i>
 		</div>
 
 		<div class="card-body">
@@ -38,11 +36,13 @@
 
 			<!-- Choose Section-->
 			<label>Section</label>
-			<div class="form-label-group section">
-				<select class="form-control" id="seccion" required="required">
+			<div class="form-label-group" >
+				<select class="form-control seccion" required="required" disabled id="section">
 				</select>
 			</div>
-
+			<br /> <a><button
+					class="btn btn-secondary fa fa-plus-circle nBtn" disabled id="newQuest">New
+					Question</button></a>
 			<div class="table-responsive">
 				<table class="table table-bordered tQuestions">
 					<thead class="thead-light">
@@ -70,9 +70,9 @@
 
 
 
-	<!-- add or editAdmin Modal-->
+	<!-- add or editQuest Modal-->
 	<div class="myForm">
-		<form th:action="@{/saveAdmin}" method="post">
+		<form th:action="@{/saveQuest}" method="post">
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">

@@ -29,26 +29,25 @@ public class TableAdminController {
 	
 	@GetMapping("/editAdmin")
 	@ResponseBody
-	public ModelAndView showEditAdminForm(String username) {
+	public ModelAndView showEditAdminForm(Integer id, String username) {
 		ModelAndView mav = new ModelAndView("editAdmin");
+		if (id != null) {
+			mav.addObject("admin", userServicio.findAdmin(id));	
+		}
 		mav.addObject("username", username);
 		return mav;
 	}
 	
 	@PostMapping("/saveAdmin")
-	public ModelAndView saveAdmin(User admin, String user) {
+	public ModelAndView saveAdmin(User admin, String username) {
 		ModelAndView mav = new ModelAndView("dashboardAdmin");
 		admin.setRoleId(userServicio.findRoleById(4));
 		userServicio.saveUser(admin);
-		mav.addObject("username", user);
+		mav.addObject("username", username);
 		return mav;
 	}
 
-	@GetMapping("/findAdmin")
-	@ResponseBody
-	public User findOne(Integer id) {
-	return userServicio.findAdmin(id);
-	}
+
 	
 	@GetMapping("/cancelAdmin")
 	public String cancel() {
@@ -56,9 +55,9 @@ public class TableAdminController {
 	}
 	
 	@GetMapping("/deleteAdmin")
-    public String deleteCountry(int adminId) {
+    public String deleteCountry(Integer adminId, String username) {
 		userServicio.deletAdmin(adminId);
-        return "dashboardAdmin";
+		return "dashboardAdmin";
     }
 	
 }

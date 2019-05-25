@@ -180,15 +180,21 @@ public class AuditorServiceImpl implements AuditorService {
 	public void saveReply(MultipartFile f, String evidencia, boolean respuesta, String codigo) {
 
 		Foto foto = new Foto();
+		DatoEspecifico de = new DatoEspecifico();
 		try {
-			foto.setFoto(f.getBytes());
+			if (f.isEmpty()) {
+				
+			}else {
+				foto.setFoto(f.getBytes());
+				fotoRepository.save(foto);
+				de.setFotoId(foto);
+			}
+			
 			// foto.setFileName(Base64.encodeBase64String(f.getBytes()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		fotoRepository.save(foto);
-		DatoEspecifico de = new DatoEspecifico();
-		de.setFotoId(foto);
+		
 		de.setEvidencia(evidencia);
 		de.setRespuesta(respuesta);
 		dEspecificoRepository.save(de);

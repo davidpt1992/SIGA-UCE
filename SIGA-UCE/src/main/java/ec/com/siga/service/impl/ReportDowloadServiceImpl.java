@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import ec.com.siga.entity.CheckList;
 import ec.com.siga.entity.Informe;
 import ec.com.siga.repository.CheckListRepository;
 import ec.com.siga.repository.EntregableRepository;
@@ -35,6 +36,12 @@ public class ReportDowloadServiceImpl implements ReportDowloadService {
 	public byte[] reportDowloarCertificate(Integer informeId) {
 		Informe inf = informeRepository.findById(informeId).get();
 		return inf.getEntregableId().getCertificado();
+	}
+
+	@Override
+	public byte[] fileDowloarToCheck(Integer id) {
+		CheckList cl = checkListRepository.findById(id).get();
+		return cl.getDatoEspecificoId().getFotoId().getFoto();
 	}
 
 }

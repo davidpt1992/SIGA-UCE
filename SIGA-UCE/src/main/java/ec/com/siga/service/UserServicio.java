@@ -12,7 +12,6 @@ public interface UserServicio {
 	public abstract void saveUser(User admin);
 	public abstract void deletAdmin(int adminId);
 	public abstract List<User> findAllAdmin();
-	public abstract List<User> findAllBack();
 	public abstract List<User> findAllAudi();
 	public abstract List<User> findAllCust();
 	public abstract List<RoleSys> findAllRole();

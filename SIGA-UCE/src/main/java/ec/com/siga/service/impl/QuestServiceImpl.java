@@ -24,7 +24,7 @@ public class QuestServiceImpl implements QuestService {
 	@Autowired
 	@Qualifier("tipoAudiRepository")
 	private TipoAudiRepository tipoAudiRepository;
-	
+
 	@Autowired
 	@Qualifier("sectionRepository")
 	private SectionRepository sectionRepository;
@@ -51,6 +51,17 @@ public class QuestServiceImpl implements QuestService {
 		TipoAuditoria tAu = tipoAudiRepository.findById(tipoAuditoria).get();
 		Seccion secc = sectionRepository.findById(seccion).get();
 		return questRepository.findAllByTipoAuditoriaIdAndSeccionId(tAu, secc);
+	}
+
+	@Override
+	public void saveQuest(String pregunta, String taId, String sect) {
+		TipoAuditoria ta = tipoAudiRepository.findById(Integer.valueOf(taId)).get();
+		Seccion sec = sectionRepository.findById(Integer.valueOf(sect)).get();
+		Preguntas pre = new Preguntas();
+		pre.setTipoAuditoriaId(ta);
+		pre.setSeccionId(sec);
+		pre.setPreguntas(pregunta);
+		questRepository.save(pre);
 	}
 
 }

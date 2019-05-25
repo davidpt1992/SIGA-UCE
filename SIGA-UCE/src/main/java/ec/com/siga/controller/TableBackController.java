@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import ec.com.siga.entity.BackOffice;
 import ec.com.siga.entity.User;
+import ec.com.siga.service.BackOfficeService;
 import ec.com.siga.service.UserServicio;
 
 @Controller
@@ -17,23 +19,38 @@ public class TableBackController {
 	@Autowired
 	@Qualifier("userServicio")
 	private UserServicio userServicio;
+	
+	@Autowired
+	@Qualifier("backOfficeService")
+	private BackOfficeService backOfficeService;
 
 	@GetMapping("/tableBack")
 	public ModelAndView showForm() {
 		ModelAndView mav = new ModelAndView("tableBack");
-		mav.addObject("contacts", userServicio.findAllBack());
+		mav.addObject("contacts", backOfficeService.findAllBack());
 		return mav;
 	}
 	
 	@GetMapping("/editBack")
-	public String showEditAdminForm() {
-		return "editAdmin";
+	@ResponseBody
+	public ModelAndView showEditAdminForm(Integer backId, String username) {
+		ModelAndView mav = new ModelAndView("editBack");
+		if (backId != null) {
+			mav.addObject("back", backOfficeService.findBack(backId));	
+		}
+		mav.addObject("username", username);
+		return mav;
 	}
 	
 	@PostMapping("/saveBack")
-	public String saveAdmin(User admin) {
-		userServicio.saveUser(admin);
-		return "redirect:/dashboardAdmin";
+	public ModelAndView saveAdmin(BackOffice back, String username) {
+		ModelAndView mav = new ModelAndView("dashboardAdmin");
+		User user = back.getUserId();
+		user.setRoleId(userServicio.findRoleById(3));
+		back.setUserId(user);
+		backOfficeService.saveBack(back);
+		mav.addObject("username", username);
+		return mav;
 	}
 
 	@GetMapping("/findBack")
