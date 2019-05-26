@@ -36,7 +36,7 @@ $(document).ready(function () {
         } else {
 
         	$('.modal-body').load(href,function(){
-		        $('.myForm #exampleModal').modal({show:true});
+		        $('.myForm #exampleModalRequest').modal({show:true});
 		    });
         }
 
@@ -51,7 +51,7 @@ $(document).ready(function () {
 
     });
     
-    $('.report').on('click',function(event){
+/*    $('.report').on('click',function(event){
 		event.preventDefault();
 		var href = $(this).attr('href');
 		$.get(href, function (msg, status) {
@@ -60,6 +60,6 @@ $(document).ready(function () {
 		$('.myFormDowloadReport #exampleModal').modal({show:true});
             
 		 });
-    });
+    });*/
 
 });
