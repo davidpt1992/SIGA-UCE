@@ -30,7 +30,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
-	//private static final Log LOG = LogFactory.getLog(AuthenticationController.class);
+	private static final String[] PUBLIC_MATCHERS = {
+			"/movil/**"
+	};
 
 	@Autowired
 	@Qualifier("userServiceImpl")
@@ -43,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers("/", "/home", "/css/*", "/scss/*", "/imgs/*", "/js/*", "/register", "/vendor/**", "/registerCust")
+		http.csrf().disable().authorizeRequests().antMatchers("/", "/home", "/css/*", "/scss/*", "/imgs/*", "/js/*", "/register", "/vendor/**", "/registerCust" ,"/movil/**")
 				.permitAll()
 				.anyRequest().authenticated()
 				.and()

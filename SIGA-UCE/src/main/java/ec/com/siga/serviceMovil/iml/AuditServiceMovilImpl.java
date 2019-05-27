@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import ec.com.siga.entity.Informe;
 import ec.com.siga.model.AuditDTO;
 import ec.com.siga.repository.AuditorRepository;
-import ec.com.siga.repository.CustRepository;
 import ec.com.siga.repository.DatoComunRepository;
 import ec.com.siga.repository.EstadoAuditRepository;
 import ec.com.siga.repository.InformeRepository;
@@ -60,29 +59,28 @@ public class AuditServiceMovilImpl implements AuditServiceMovil {
 	public List<AuditDTO> findAllAudits() {
 		List<Informe> infs = informeRepository.findByAuditorId(auditorRepository.findByUserId(userRepository.findByUsuario("WCUASAPUD")));
 		List<AuditDTO> audits = new ArrayList<AuditDTO>();
-		Informe inf = new Informe();
-		AuditDTO audit = new AuditDTO();
 		
-		for (int i = 0; i < infs.size(); i++) {
-		inf = infs.get(i);
-		audit.setId_informe(String.valueOf(inf.getInformeId()));
-		audit.setId_cliente(String.valueOf(inf.getClienteId().getClienteId()));
-		audit.setLatitud(inf.getClienteId().getLatitud());
-		audit.setLongitud(inf.getClienteId().getLongitud());
-		audit.setEmpresa(inf.getClienteId().getNombreEmpresa());
-		audit.setNombreApellido(inf.getClienteId().getUserId().getNombre()+" "+inf.getClienteId().getUserId().getApellido());
-		audit.setCorreo(inf.getClienteId().getUserId().getCorreoElectronico());
-		audit.setDireccion(inf.getClienteId().getUserId().getDireccion());
-		audit.setTelf1(String.valueOf(inf.getClienteId().getUserId().getNumeroTelefono1()));
-		audit.setTelf2(String.valueOf(inf.getClienteId().getUserId().getNumeroTelefono2()));
-		audit.setFechaIni(String.valueOf(inf.getDatoComunId().getSolicitudAuditoriaId().getFechaInicio()));
-		audit.setFechaFin(String.valueOf(inf.getDatoComunId().getSolicitudAuditoriaId().getFechaFinal()));
-		audit.setHoraIni(String.valueOf(inf.getDatoComunId().getHoraInicio()));
-		audit.setHoraFin(String.valueOf(inf.getDatoComunId().getHoraFin()));
-		audit.setId_estado(String.valueOf(inf.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoriaId()));
-		audit.setId_estado(String.valueOf(inf.getDatoComunId().getSolicitudAuditoriaId().getSolicitudAuditoriaId()));
-		audits.set(i, audit);
+		for (Informe inf : infs) {
+			AuditDTO audit = new AuditDTO();
+			audit.setId_informe(String.valueOf(inf.getInformeId()));
+			audit.setId_cliente(String.valueOf(inf.getClienteId().getClienteId()));
+			audit.setLatitud(inf.getClienteId().getLatitud());
+			audit.setLongitud(inf.getClienteId().getLongitud());
+			audit.setEmpresa(inf.getClienteId().getNombreEmpresa());
+			audit.setNombreApellido(inf.getClienteId().getUserId().getNombre()+" "+inf.getClienteId().getUserId().getApellido());
+			audit.setCorreo(inf.getClienteId().getUserId().getCorreoElectronico());
+			audit.setDireccion(inf.getClienteId().getUserId().getDireccion());
+			audit.setTelf1(String.valueOf(inf.getClienteId().getUserId().getNumeroTelefono1()));
+			audit.setTelf2(String.valueOf(inf.getClienteId().getUserId().getNumeroTelefono2()));
+			audit.setFechaIni(String.valueOf(inf.getDatoComunId().getSolicitudAuditoriaId().getFechaInicio()));
+			audit.setFechaFin(String.valueOf(inf.getDatoComunId().getSolicitudAuditoriaId().getFechaFinal()));
+			audit.setHoraIni(String.valueOf(inf.getDatoComunId().getHoraInicio()));
+			audit.setHoraFin(String.valueOf(inf.getDatoComunId().getHoraFin()));
+			audit.setId_estado(String.valueOf(inf.getDatoComunId().getSolicitudAuditoriaId().getEstadoAuditoriaId().getEstadoAuditoria()));
+			audit.setId_solicitud(String.valueOf(inf.getDatoComunId().getSolicitudAuditoriaId().getSolicitudAuditoriaId()));
+			audits.add(audit);
 		}
+		
 		return audits;
 	}
 
