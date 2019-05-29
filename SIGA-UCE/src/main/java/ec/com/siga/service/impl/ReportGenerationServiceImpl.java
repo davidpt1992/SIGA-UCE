@@ -34,10 +34,16 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
 	@Qualifier("entregableRepository")
 	private EntregableRepository entregableRepository;
 	
+	/**
+	 * 
+	 */
 	@Autowired
 	@Qualifier("estadoAuditRepository")
 	private EstadoAuditRepository estadoAuditRepository;
 
+	/**
+	 * @param informeId id informe
+	 */	
 	@Override
 	public String reportGeneration(Integer informeId) {
 		Informe inf = informeRepository.findById(informeId).get();

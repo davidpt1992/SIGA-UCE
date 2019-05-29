@@ -21,6 +21,8 @@
 			</div>
 
 			<div class="input-group mb-3">
+				<h6 class="text-center text-danger">Number Question:</h6>
+				<h3 class="text-center text-danger" th:text="${numPre}"></h3>
 				<h3 class="text-center" th:text="${pregunta.preguntasId.preguntas}"></h3>
 			</div>
 			<div class="input-group mb-3" required>
@@ -35,9 +37,12 @@
 							id="inlineRadio2" value="False"> <label
 							class="form-check-label" for="inlineRadio2">NO</label>
 					</div>
-					<br/>
-					<p class="text-danger">response stored as <span th:if="${pregunta.datoEspecificoId?.respuesta}">YES</span> <span 
-						th:unless="${pregunta.datoEspecificoId?.respuesta}">NO</span></p>
+					<br />
+					<p class="text-danger">
+						response stored as <span
+							th:if="${pregunta.datoEspecificoId?.respuesta}">YES</span> <span
+							th:unless="${pregunta.datoEspecificoId?.respuesta}">NO</span>
+					</p>
 				</div>
 			</div>
 

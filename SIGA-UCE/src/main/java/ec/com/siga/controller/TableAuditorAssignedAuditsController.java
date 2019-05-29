@@ -41,8 +41,6 @@ public class TableAuditorAssignedAuditsController {
 	@Autowired
 	@Qualifier("custService")
 	private CustService custService;
-	
-	
 
 	@GetMapping("/tableAssignedAudits")
 	@ResponseBody
@@ -52,7 +50,7 @@ public class TableAuditorAssignedAuditsController {
 		mav.addObject("usuario", usuario);
 		return mav;
 	}
-	
+
 	@GetMapping("/tableAuditsSendNC")
 	@ResponseBody
 	public ModelAndView showFormNoNC(String usuario) {
@@ -61,7 +59,7 @@ public class TableAuditorAssignedAuditsController {
 		mav.addObject("usuario", usuario);
 		return mav;
 	}
-	
+
 	@GetMapping("/tableAssignedAuditsCheck")
 	@ResponseBody
 	public ModelAndView showFormCheck(String usuario) {
@@ -70,7 +68,7 @@ public class TableAuditorAssignedAuditsController {
 		mav.addObject("usuario", usuario);
 		return mav;
 	}
-	
+
 	@GetMapping("/tableAssignedAuditsH")
 	@ResponseBody
 	public ModelAndView showFormH(String usuario) {
@@ -84,15 +82,21 @@ public class TableAuditorAssignedAuditsController {
 	@ResponseBody
 	public ModelAndView startquestionnaire1(int id, String usuario) {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
-		auditorService.createCkeckList(id);  //crea las preguntas del cuestionario solicitado con el id de la solicitud
-		CheckList cl = auditorService.reply(id);   //consulta la primera pregunta del cuestionario 
+		auditorService.createCkeckList(id); // crea las preguntas del cuestionario solicitado con el id de la solicitud
+		CheckList cl = auditorService.reply(id); // consulta la primera pregunta del cuestionario
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);
 		mav.addObject("usuario", usuario);
 		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
+
+		String numPre = String.valueOf(cl.getCodigo());
+		int indexString = numPre.length();
+		String numPreAux = numPre.substring(indexString - 2);
+		mav.addObject("numPre", numPreAux);
+
 		return mav;
 	}
-	
+
 	@GetMapping("/startCheckFiles")
 	@ResponseBody
 	public ModelAndView startquestionnaireCheck(int id, String usuario) {
@@ -115,10 +119,10 @@ public class TableAuditorAssignedAuditsController {
 		System.out.println(foto);
 		System.out.println(evidencia);
 		System.out.println(respuesta);
-		auditorService.saveReply(foto, evidencia, respuesta, codigo);		
+		auditorService.saveReply(foto, evidencia, respuesta, codigo);
 		return mav;
 	}
-	
+
 	@PostMapping("/nextQuestion")
 	public ModelAndView nextQuest(int id, String usuario, String codigo) {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
@@ -128,6 +132,12 @@ public class TableAuditorAssignedAuditsController {
 		mav.addObject("id", id);
 		mav.addObject("username", usuario);
 		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
+		
+		String numPre = String.valueOf(cl.getCodigo());
+		int indexString = numPre.length();
+		String numPreAux = numPre.substring(indexString - 2);
+		mav.addObject("numPre", numPreAux);
+		
 		return mav;
 	}
 
@@ -140,9 +150,15 @@ public class TableAuditorAssignedAuditsController {
 		mav.addObject("id", id);
 		mav.addObject("username", usuario);
 		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
+		
+		String numPre = String.valueOf(cl.getCodigo());
+		int indexString = numPre.length();
+		String numPreAux = numPre.substring(indexString - 2);
+		mav.addObject("numPre", numPreAux);
+		
 		return mav;
 	}
-	
+
 	@PostMapping("/nextQuestionCheckFile")
 	public ModelAndView nextQuestCheck(int id, String usuario, String codigo) {
 		ModelAndView mav = new ModelAndView("questionnaireCheckFile");
@@ -166,7 +182,7 @@ public class TableAuditorAssignedAuditsController {
 		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
 		return mav;
 	}
-	
+
 	@GetMapping("/sendNC")
 	@ResponseBody
 	public String sendNonConformities(Integer id, String usuario) {
@@ -187,7 +203,7 @@ public class TableAuditorAssignedAuditsController {
 	@PostMapping("/saveAssignedAudits")
 	public ModelAndView saveAdmin(int informeId, String usuario, String auditorId) throws Exception {
 		ModelAndView mav = new ModelAndView("/dashboardBack");
-		//backOfficeService.saveInforme(informeId, auditorId, sa);
+		// backOfficeService.saveInforme(informeId, auditorId, sa);
 		mav.addObject("username", usuario);
 		return mav;
 	}
@@ -206,7 +222,7 @@ public class TableAuditorAssignedAuditsController {
 	@GetMapping("/deleteAssignedAudits")
 	public void deleteCountry(Integer adminId) {
 		informeServicio.deleteReport(adminId);
-		
+
 	}
 
 	@GetMapping("/viewCust")
@@ -216,6 +232,5 @@ public class TableAuditorAssignedAuditsController {
 		mav.addObject("cliente", custService.findCustById(id));
 		return mav;
 	}
-	
 
 }
