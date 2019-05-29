@@ -91,7 +91,7 @@ public class TableAuditorAssignedAuditsController {
 
 		String numPre = String.valueOf(cl.getCodigo());
 		int indexString = numPre.length();
-		String numPreAux = numPre.substring(indexString - 2);
+		String numPreAux = (numPre.substring(indexString - 2))+"/30";
 		mav.addObject("numPre", numPreAux);
 
 		return mav;
@@ -135,7 +135,7 @@ public class TableAuditorAssignedAuditsController {
 		
 		String numPre = String.valueOf(cl.getCodigo());
 		int indexString = numPre.length();
-		String numPreAux = numPre.substring(indexString - 2);
+		String numPreAux = (numPre.substring(indexString - 2))+"/30";
 		mav.addObject("numPre", numPreAux);
 		
 		return mav;
@@ -153,7 +153,7 @@ public class TableAuditorAssignedAuditsController {
 		
 		String numPre = String.valueOf(cl.getCodigo());
 		int indexString = numPre.length();
-		String numPreAux = numPre.substring(indexString - 2);
+		String numPreAux = (numPre.substring(indexString - 2))+"/30";
 		mav.addObject("numPre", numPreAux);
 		
 		return mav;

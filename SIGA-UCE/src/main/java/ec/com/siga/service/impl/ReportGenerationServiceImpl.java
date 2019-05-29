@@ -10,6 +10,7 @@ import ec.com.siga.entity.CheckList;
 import ec.com.siga.entity.DatoComun;
 import ec.com.siga.entity.Entregable;
 import ec.com.siga.entity.Informe;
+import ec.com.siga.entity.Seccion;
 import ec.com.siga.entity.SolicitudAuditoria;
 import ec.com.siga.model.GeneratePdfCertificado;
 import ec.com.siga.model.GeneratePdfReport;
@@ -17,6 +18,7 @@ import ec.com.siga.repository.CheckListRepository;
 import ec.com.siga.repository.EntregableRepository;
 import ec.com.siga.repository.EstadoAuditRepository;
 import ec.com.siga.repository.InformeRepository;
+import ec.com.siga.repository.SectionRepository;
 import ec.com.siga.service.ReportGenerationService;
 
 @Service("reportGenerationService")
@@ -33,6 +35,10 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
 	@Autowired
 	@Qualifier("entregableRepository")
 	private EntregableRepository entregableRepository;
+	
+	@Autowired
+	@Qualifier("sectionRepository")
+	private SectionRepository sectionRepository;
 	
 	/**
 	 * 
@@ -56,10 +62,11 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
 		
 		List<CheckList> cl = checkListRepository
 				.findAllBySolicitudAuditoriaId(inf.getDatoComunId().getSolicitudAuditoriaId());
+		List<Seccion> secciones = sectionRepository.findAll();
 		Entregable en = entregableRepository.findById(1).get();
 
 		Entregable ent = new Entregable();
-		ent.setInforme(GeneratePdfReport.auditoriesReport(inf, cl, en));
+		ent.setInforme(GeneratePdfReport.auditoriesReport(inf, cl, en, secciones));
 		ent.setCertificado(GeneratePdfCertificado.auditoriesCertificate(inf, en));
 		entregableRepository.save(ent);
 
@@ -80,10 +87,11 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
 		
 		List<CheckList> cl = checkListRepository
 				.findAllBySolicitudAuditoriaId(inf.getDatoComunId().getSolicitudAuditoriaId());
+		List<Seccion> secciones = sectionRepository.findAll();
 		Entregable en = entregableRepository.findById(1).get();
 
 		Entregable ent = new Entregable();
-		ent.setInforme(GeneratePdfReport.auditoriesReport(inf, cl, en));
+		ent.setInforme(GeneratePdfReport.auditoriesReport(inf, cl, en, secciones));
 		ent.setCertificado(GeneratePdfCertificado.auditoriesCertificate(inf, en));
 		entregableRepository.save(ent);
 

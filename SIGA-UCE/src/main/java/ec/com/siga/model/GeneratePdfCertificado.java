@@ -107,7 +107,7 @@ public class GeneratePdfCertificado {
 			PdfPTable tTitle = new PdfPTable(1);
 			tTitle.setWidthPercentage(90);
 
-			Font fontTitle = new Font(Font.FontFamily.TIMES_ROMAN, 36, Font.BOLD, BaseColor.ORANGE);
+			Font fontTitle = new Font(Font.FontFamily.TIMES_ROMAN, 36, Font.BOLD, BaseColor.BLUE);
 
 			PdfPCell hcellTitle;
 
