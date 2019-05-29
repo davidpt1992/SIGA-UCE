@@ -98,11 +98,18 @@ public class GeneratePdfReport {
 				tData.addCell(cell);
 
 				try {
-					Image image = Image.getInstance(pregunta.getDatoEspecificoId().getFotoId().getFoto());
-					tData.addCell(image);
+					if (pregunta.getDatoEspecificoId().getFotoId()!=null) {
+						Image image = Image.getInstance(pregunta.getDatoEspecificoId().getFotoId().getFoto());
+						
+						tData.addCell(image);
+					}
+					else {
+						tData.addCell("N/A");
+					}
+									
 				} catch (IOException e) {
 					e.printStackTrace();
-					cell = new PdfPCell(new Phrase("NA", replyFont));
+					cell = new PdfPCell(new Phrase("N/A", replyFont));
 					cell.setPaddingLeft(5);
 					cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 					cell.setHorizontalAlignment(Element.ALIGN_LEFT);

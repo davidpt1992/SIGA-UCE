@@ -4,13 +4,18 @@ package ec.com.siga.serviceMovil.iml;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import ec.com.siga.entity.CheckList;
 import ec.com.siga.entity.Informe;
+import ec.com.siga.entity.SolicitudAuditoria;
 import ec.com.siga.model.AuditDTO;
+import ec.com.siga.model.QuestionDTO;
 import ec.com.siga.repository.AuditorRepository;
+import ec.com.siga.repository.CheckListRepository;
 import ec.com.siga.repository.DatoComunRepository;
 import ec.com.siga.repository.EstadoAuditRepository;
 import ec.com.siga.repository.InformeRepository;
@@ -54,6 +59,10 @@ public class AuditServiceMovilImpl implements AuditServiceMovil {
 	@Autowired
 	@Qualifier("informeRepository")
 	private InformeRepository informeRepository;
+	
+	@Autowired
+	@Qualifier("checkListRepository")
+	private CheckListRepository checkListRepository;
 
 	@Override
 	public List<AuditDTO> findAllAudits() {
@@ -82,6 +91,56 @@ public class AuditServiceMovilImpl implements AuditServiceMovil {
 		}
 		
 		return audits;
+	}
+	
+	@Override
+	public QuestionDTO replyMovil(Integer id) {
+		SolicitudAuditoria sa = solicitudAuditoriaRepository.findById(id).get();
+		List<CheckList> primerChekList = checkListRepository.findAllBySolicitudAuditoriaId(sa);
+		CheckList ckl = primerChekList.get(0);
+		QuestionDTO quest = new QuestionDTO();
+		
+		quest.setId_checklist(String.valueOf(ckl.getCheckListId()));
+		quest.setCodigo(String.valueOf(ckl.getCodigo()));
+		quest.setId_solicitud(String.valueOf(ckl.getSolicitudAuditoriaId().getSolicitudAuditoriaId()));
+		quest.setId_pregunta(String.valueOf(ckl.getPreguntasId().getPreguntasId()));
+		quest.setPregunta(ckl.getPreguntasId().getPreguntas());
+		if (ckl.getDatoEspecificoId() != null) {
+			quest.setId_despecifico(String.valueOf(ckl.getDatoEspecificoId().getDatoEspecificoId()));
+			quest.setEvidencia(String.valueOf(ckl.getDatoEspecificoId().getEvidencia()));
+			quest.setRespuesta(String.valueOf(ckl.getDatoEspecificoId().isRespuesta()));
+			if (ckl.getDatoEspecificoId().getFotoId() != null) {
+				quest.setId_foto(String.valueOf(ckl.getDatoEspecificoId().getFotoId().getFotoId()));
+				quest.setFoto(Base64.encodeBase64String(ckl.getDatoEspecificoId().getFotoId().getFoto()));
+			}
+		}
+		
+		return quest;
+	}
+	
+	@Override
+	public QuestionDTO replyPostMovil(String codigo) {
+		int cod = Integer.valueOf(codigo);
+		//problema de null
+		CheckList ckl = checkListRepository.findByCodigo(cod + 1);
+		QuestionDTO quest = new QuestionDTO();
+		
+		quest.setId_checklist(String.valueOf(ckl.getCheckListId()));
+		quest.setCodigo(String.valueOf(ckl.getCodigo()));
+		quest.setId_solicitud(String.valueOf(ckl.getSolicitudAuditoriaId().getSolicitudAuditoriaId()));
+		quest.setId_pregunta(String.valueOf(ckl.getPreguntasId().getPreguntasId()));
+		quest.setPregunta(ckl.getPreguntasId().getPreguntas());
+		if (ckl.getDatoEspecificoId() != null) {
+			quest.setId_despecifico(String.valueOf(ckl.getDatoEspecificoId().getDatoEspecificoId()));
+			quest.setEvidencia(String.valueOf(ckl.getDatoEspecificoId().getEvidencia()));
+			quest.setRespuesta(String.valueOf(ckl.getDatoEspecificoId().isRespuesta()));
+			if (ckl.getDatoEspecificoId().getFotoId() != null) {
+				quest.setId_foto(String.valueOf(ckl.getDatoEspecificoId().getFotoId().getFotoId()));
+				quest.setFoto(Base64.encodeBase64String(ckl.getDatoEspecificoId().getFotoId().getFoto()));
+			}
+		}
+		
+		return quest;
 	}
 
 

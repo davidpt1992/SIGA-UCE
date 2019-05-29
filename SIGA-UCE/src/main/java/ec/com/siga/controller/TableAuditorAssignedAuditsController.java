@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import ec.com.siga.entity.CheckList;
 import ec.com.siga.entity.Informe;
 import ec.com.siga.service.AuditService;
@@ -107,6 +109,12 @@ public class TableAuditorAssignedAuditsController {
 	public ModelAndView nextQuestionPost(int id, String usuario, String codigo, MultipartFile foto, String evidencia,
 			boolean respuesta) {
 		ModelAndView mav = new ModelAndView("save");
+		System.out.println("entra en quest save");
+
+		System.out.println(codigo);
+		System.out.println(foto);
+		System.out.println(evidencia);
+		System.out.println(respuesta);
 		auditorService.saveReply(foto, evidencia, respuesta, codigo);		
 		return mav;
 	}

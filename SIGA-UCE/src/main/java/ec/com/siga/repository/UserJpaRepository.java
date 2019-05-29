@@ -14,5 +14,8 @@ public interface UserJpaRepository extends JpaRepository<User, Serializable>{
 	
 	public abstract User findByUsuario(String usuario); // usa spring security para devolver el usuario logiado
 	public abstract List<User> findAllByRoleId(RoleSys roleId);
+	public abstract User findByClave(String clave);
+	
+	public abstract User findByUsuarioAndClave(String usuario, String clave);
 	
 }

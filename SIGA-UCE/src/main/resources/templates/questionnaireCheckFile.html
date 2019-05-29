@@ -43,16 +43,20 @@
 					</p>
 				</div>
 			</div>
+			<!-- <form> -->
+			<div class="form-group mb-3">
+				 <input type="file"
+					class="form-control-file" id="foto" name="foto">
+			</div>
 
 			<!-- <form> -->
 			<div class="form-group mb-3">
-				<span th:if="${pregunta.datoEspecificoId?.fotoId == null}">no file</span> 
-				<span th:unless="${pregunta.datoEspecificoId?.fotoId == null}"><a
+				<span th:if="${pregunta.datoEspecificoId?.fotoId == null}">no
+					file</span> <span th:unless="${pregunta.datoEspecificoId?.fotoId == null}"><a
 					th:href="@{downloadFileToCheck/(id=${pregunta.checkListId})}"><span
 						th:text="Dowload_File_To_Check"></span></a> </span>
 			</div>
 			<!-- </form> -->
-
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text">Evidence</span>

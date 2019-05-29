@@ -178,13 +178,19 @@ public class AuditorServiceImpl implements AuditorService {
 
 	@Override
 	public void saveReply(MultipartFile f, String evidencia, boolean respuesta, String codigo) {
-
+		System.out.println("entra en saveReply");
+		System.out.println(codigo);
+		System.out.println(f);
+		System.out.println(evidencia);
+		System.out.println(respuesta);
+		
 		Foto foto = new Foto();
 		DatoEspecifico de = new DatoEspecifico();
 		try {
 			if (f.isEmpty()) {
-				
+				System.out.println("entra a no hacer nada");
 			}else {
+				System.out.println("entra a guardar foto");
 				foto.setFoto(f.getBytes());
 				fotoRepository.save(foto);
 				de.setFotoId(foto);
@@ -192,13 +198,17 @@ public class AuditorServiceImpl implements AuditorService {
 			
 			// foto.setFileName(Base64.encodeBase64String(f.getBytes()));
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("guardar catch");
 		}
-		
+		System.out.println("guardar 1");
 		de.setEvidencia(evidencia);
+		System.out.println("guardar 2");
 		de.setRespuesta(respuesta);
+		System.out.println("guardar 3");
 		dEspecificoRepository.save(de);
+		System.out.println("guardar 4");
 		CheckList cl = checkListRepository.findByCodigo(Integer.parseInt(codigo));
+		System.out.println(cl.getCodigo());
 		cl.setDatoEspecificoId(de);
 		checkListRepository.save(cl);
 	}
