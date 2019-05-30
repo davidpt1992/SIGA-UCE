@@ -83,7 +83,26 @@ public class TableAuditorAssignedAuditsController {
 	public ModelAndView startquestionnaire1(int id, String usuario) {
 		ModelAndView mav = new ModelAndView("questionnaireForm");
 		auditorService.createCkeckList(id); // crea las preguntas del cuestionario solicitado con el id de la solicitud
-		CheckList cl = auditorService.reply(id); // consulta la primera pregunta del cuestionario
+		CheckList cl = auditorService.reply(id);// consulta la primera pregunta del cuestionario
+
+		String tpreg="";
+		switch (cl.getSolicitudAuditoriaId().getTipoAuditoriaId().getTipoAuditoriaId()) {
+		case 1:
+			tpreg = "30";
+			break;
+		case 2:
+			tpreg = "37";
+			break;
+		case 3:
+			tpreg = "36";
+			break;
+		case 4:
+			tpreg = "35";
+			break;
+		default:
+			break;
+		}
+
 		mav.addObject("pregunta", cl);
 		mav.addObject("id", id);
 		mav.addObject("usuario", usuario);
@@ -91,7 +110,7 @@ public class TableAuditorAssignedAuditsController {
 
 		String numPre = String.valueOf(cl.getCodigo());
 		int indexString = numPre.length();
-		String numPreAux = (numPre.substring(indexString - 2))+"/30";
+		String numPreAux = (numPre.substring(indexString - 2)) + "/" + tpreg;
 		mav.addObject("numPre", numPreAux);
 
 		return mav;
@@ -133,11 +152,29 @@ public class TableAuditorAssignedAuditsController {
 		mav.addObject("username", usuario);
 		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
 		
+		String tpreg="";
+		switch (cl.getSolicitudAuditoriaId().getTipoAuditoriaId().getTipoAuditoriaId()) {
+		case 1:
+			tpreg = "30";
+			break;
+		case 2:
+			tpreg = "37";
+			break;
+		case 3:
+			tpreg = "36";
+			break;
+		case 4:
+			tpreg = "35";
+			break;
+		default:
+			break;
+		}
+
 		String numPre = String.valueOf(cl.getCodigo());
 		int indexString = numPre.length();
-		String numPreAux = (numPre.substring(indexString - 2))+"/30";
+		String numPreAux = (numPre.substring(indexString - 2)) + "/" + tpreg;
 		mav.addObject("numPre", numPreAux);
-		
+
 		return mav;
 	}
 
@@ -151,11 +188,29 @@ public class TableAuditorAssignedAuditsController {
 		mav.addObject("username", usuario);
 		mav.addObject("codigoString", String.valueOf(cl.getCodigo()));
 		
+		String tpreg="";
+		switch (cl.getSolicitudAuditoriaId().getTipoAuditoriaId().getTipoAuditoriaId()) {
+		case 1:
+			tpreg = "30";
+			break;
+		case 2:
+			tpreg = "37";
+			break;
+		case 3:
+			tpreg = "36";
+			break;
+		case 4:
+			tpreg = "35";
+			break;
+		default:
+			break;
+		}
+
 		String numPre = String.valueOf(cl.getCodigo());
 		int indexString = numPre.length();
-		String numPreAux = (numPre.substring(indexString - 2))+"/30";
+		String numPreAux = (numPre.substring(indexString - 2)) + "/" + tpreg;
 		mav.addObject("numPre", numPreAux);
-		
+
 		return mav;
 	}
 

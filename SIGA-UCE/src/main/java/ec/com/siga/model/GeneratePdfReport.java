@@ -347,7 +347,7 @@ public class GeneratePdfReport {
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 				sec = new PdfPCell(new Phrase(
-						"Tomar en consideración que la emrepresadebe actualizar en la Superintendicia de compañias el representante legal asi como actulizar los estatus en el caso que aplique",
+						"Tomar en consideración que la empresa debe tener respaldos de sus contratos, así como de sus facturas para sustentar su experiencia en la línea que trabaja, así mismo controlar a sus proveedores subcontratados.",
 						secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
@@ -357,7 +357,7 @@ public class GeneratePdfReport {
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 				sec = new PdfPCell(new Phrase(
-						"Tomar en consideración que la empresa debe tener respaldos de sus contratos, así como de sus facturas para sustentar su experiencia en la línea que trabaja, así mismo controlar a sus proveedores subcontratados.",
+						"Tomar en consideración que la empresa debe tener respaldos de sus contratos que mantiene con sus clientes o sus proveedores",
 						secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
@@ -366,7 +366,7 @@ public class GeneratePdfReport {
 				sec = new PdfPCell(new Phrase("Oportunidades de mejora sección Información Legal", tituloSecFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
-				sec = new PdfPCell(new Phrase("falla seccion 3   ", secFont));
+				sec = new PdfPCell(new Phrase("Tomar en consideración que la empresa debe tener el ruc actualizado asi como las sucursales que se declara que la empresa tiene, finalmente señalar los principales socios y accionistas a traves de la super de compañías ", secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 			}
@@ -375,7 +375,7 @@ public class GeneratePdfReport {
 						new Phrase("Oportunidades de mejora sección Calificación De Riesgo Financiero", tituloSecFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
-				sec = new PdfPCell(new Phrase("falla seccion 4   ", secFont));
+				sec = new PdfPCell(new Phrase("Tomar en consideración que la empresa debe actualzair su buró de credito a traves de la super intendencia de bancos", secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 			}
@@ -383,7 +383,7 @@ public class GeneratePdfReport {
 				sec = new PdfPCell(new Phrase("Oportunidades de mejora sección Gestión De Servicio", tituloSecFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
-				sec = new PdfPCell(new Phrase("falla seccion 5   ", secFont));
+				sec = new PdfPCell(new Phrase("Tomar en consideración que la empresa podria implementar indicadores de gestion para la trazabilidad de su producto o servicios", secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 			}
@@ -392,7 +392,7 @@ public class GeneratePdfReport {
 						new Phrase("Oportunidades de mejora sección Instalaciones De La Empresa", tituloSecFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
-				sec = new PdfPCell(new Phrase("falla seccion 6  ", secFont));
+				sec = new PdfPCell(new Phrase("Tomar en consideración que la empresa deberia someterse a una inspección por el cuerpo de bomberos con el fin de mantener una inspección de los lugares con potencial riesgo", secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 			}
@@ -400,7 +400,7 @@ public class GeneratePdfReport {
 				sec = new PdfPCell(new Phrase("Oportunidades de mejora sección Maquinarias Y Equipos", tituloSecFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
-				sec = new PdfPCell(new Phrase("falla seccion 7   ", secFont));
+				sec = new PdfPCell(new Phrase("Tomar en consideración que la empresa podria mantener un control de sus inventario para mantener una trazabilidad de sus equipos, en el caso de equipos de computo deben tener las licencias correspondientes.", secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 			}
@@ -408,7 +408,7 @@ public class GeneratePdfReport {
 				sec = new PdfPCell(new Phrase("Oportunidades de mejora sección Personal", tituloSecFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
-				sec = new PdfPCell(new Phrase("falla seccion 8  ", secFont));
+				sec = new PdfPCell(new Phrase("Tomar en consideración que la empresa deberia manter las planillas de pago al día de sus aportaciones al seguro social, de la misma manera la empresa podria desarrollar un mecanismo para evaluar y hacer seguimiento a sus empelados", secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 			}
@@ -417,7 +417,7 @@ public class GeneratePdfReport {
 						new Phrase("Oportunidades de mejora sección Sistemas De Comunicación", tituloSecFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
-				sec = new PdfPCell(new Phrase("falla seccion 9   ", secFont));
+				sec = new PdfPCell(new Phrase("Tomar en consideración que la empresa debería tener un correo institucional para evitar correo spam asi mismo mantener un contrato fortmal para sus sistemas de comunicación como son internet o telefonía fija.", secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 			}
@@ -425,7 +425,7 @@ public class GeneratePdfReport {
 				sec = new PdfPCell(new Phrase("Oportunidades de mejora sección Calidad", tituloSecFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
-				sec = new PdfPCell(new Phrase("falla seccion 10   ", secFont));
+				sec = new PdfPCell(new Phrase("Tomar en consideración que la empresa podria tener un mecacnismo para evaluar a sus proveedores y clientes, se podria realizar encuestas de satisfacción.", secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 			}
@@ -433,7 +433,7 @@ public class GeneratePdfReport {
 				sec = new PdfPCell(new Phrase("Oportunidades de mejora sección Comercial", tituloSecFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
-				sec = new PdfPCell(new Phrase("falla seccion 11   ", secFont));
+				sec = new PdfPCell(new Phrase("Tomar en consideración que la empresa podría llevar registros de sus servicio post venta,  así como de su servicio de garantía.", secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 			}
@@ -442,7 +442,7 @@ public class GeneratePdfReport {
 						new Phrase("Oportunidades de mejora sección Salud Y Seguridad Ocupacional", tituloSecFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
-				sec = new PdfPCell(new Phrase("falla seccion 12   ", secFont));
+				sec = new PdfPCell(new Phrase("Tomar en consideración que la empresa debería un somertese a un plan minimo de trabajo según aplique sus riesgo catalogado en el ministerio de trabajo.", secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 			}
@@ -450,7 +450,7 @@ public class GeneratePdfReport {
 				sec = new PdfPCell(new Phrase("Oportunidades de mejora sección Medio Ambiente", tituloSecFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
-				sec = new PdfPCell(new Phrase("falla seccion 13   ", secFont));
+				sec = new PdfPCell(new Phrase("Tomar en consideración que la empresa debería tener una clasificación según el minisiterio de medio ambiente con el cual la empresa deberia tener buenas practicas de disposicion de desechos peligrosos y no peligrosos.", secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 			}
@@ -458,7 +458,7 @@ public class GeneratePdfReport {
 				sec = new PdfPCell(new Phrase("Oportunidades de mejora sección Responsabilidad Social", tituloSecFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
-				sec = new PdfPCell(new Phrase("falla seccion 14  ", secFont));
+				sec = new PdfPCell(new Phrase("Tomar en consideración que la empresa debería fomentar las buenas prácticas de resposanbilidad social fomentadas por la OIT, Con el fin de que la organziacipon fomente la no discriminación por raza, etnia o creencia.", secFont));
 				sec.setHorizontalAlignment(Element.ALIGN_LEFT);
 				tSuge.addCell(sec);
 			}
